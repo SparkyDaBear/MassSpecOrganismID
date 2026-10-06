@@ -29,6 +29,8 @@ The pipeline has two stages, run as two separate Python scripts:
 | `assets/casanovo_gpu.config` | Casanovo 5.x-compatible GPU config — only use if your `casanovo_env` has casanovo 5.x, not 4.3.0 |
 | `assets/cascadia.ckpt` | Pretrained Cascadia model checkpoint — **not in git**, fetched by `setup.sh` |
 | `data/FASTA/UniversalContaminats.fasta` | Contaminant FASTA used to filter de novo peptides |
+| `data/taxid_prediction.csv` | Full benchmark: predicted vs. ground-truth taxid for 4,114 raw files across 1,324 PXDs |
+| `data/organism_id_failure_cohorts.csv` | The non-perfect subset of the above (1,203 rows / 452 PXDs), categorized by failure mode — **start here** to pick PXDs to test/tune on (see dedicated section below) |
 | `conda_envs/` | `.yml` definitions for the three conda environments this pipeline needs |
 | `src/setup.sh` | One-shot bootstrap: submodules, patch, conda envs, `peptonizer` install, large-asset downloads |
 
@@ -324,3 +326,70 @@ Top-level, under `--output_dir` (and `--results_base_dir/<PXD>/`):
 `OrganismID.py` checks `--results_base_dir/<PXD>/organism_results/` for a prior completed run **before** doing
 any work; if found, it's copied straight to `--output_dir` and the run exits immediately (see `cached: true` in
 `--status_file`'s output). Delete that directory (or point `--results_base_dir` elsewhere) to force a fresh run.
+
+## Picking PXDs to test and tune the pipeline on
+
+`data/organism_id_failure_cohorts.csv` and its parent dataset `data/taxid_prediction.csv` come from a prior
+benchmark run of this pipeline across **1,324 real PRIDE PXDs** with known ground-truth organisms, evaluated
+file-by-file. They are the fastest way to find a PXD with a known expected answer, rather than guessing blind —
+whether you want an easy sanity check or a specific known failure mode to debug.
+
+### `data/taxid_prediction.csv` — the full benchmark (4,114 rows)
+
+One row per raw file actually processed, regardless of outcome.
+
+| Column | Description |
+|---|---|
+| `pxd` | PRIDE accession. |
+| `raw_file` | The specific raw-file-derived sample name within that PXD (not a literal filename — matches the `<PXD>_<stem>` naming used in `OrganismID.py`'s output directories). |
+| `result_file_path` | Path to the `peptonizer_result.csv` this row was scored from, relative to that benchmark run's output root. |
+| `peptonizer_threshold`, `peptonizer_top_n`, `peptonizer_call_rule` | Evaluation methodology: predictions were taken as the top `peptonizer_top_n` taxa from `peptonizer_result.csv` (`peptonizer_top_n` = number of ground-truth taxids for that file — the `"best (top N; ground-truth count)"` rule), **not** a fixed score cutoff. |
+| `n_ground_truth`, `ground_truth_taxids` | How many organisms were actually in the sample, and their taxid(s) (`;`-separated when more than one, e.g. `"562; 9606"`). |
+| `n_predicted`, `predicted_taxids` | What the pipeline predicted, same format. |
+| `tp`, `fp`, `fn`, `recall`, `precision`, `f1`, `balanced_accuracy` | Standard set-overlap metrics between predicted and ground-truth taxids for that file. |
+| `n_scored_taxa` | How many candidate taxa Peptonizer2000 assigned a nonzero score to for this file — a rough proxy for how much peptide evidence was available. |
+
+`f1 == 1.0` (2,911 of 4,114 rows) means a perfect call — a good source of "known good" PXDs for a quick smoke
+test or a regression check that a change hasn't broken anything. `f1 < 1.0` (1,203 rows) is exactly the set
+exported into `organism_id_failure_cohorts.csv` below, with failure-mode analysis added.
+
+### `data/organism_id_failure_cohorts.csv` — the non-perfect subset, categorized (1,203 rows / 452 PXDs)
+
+Same `pxd`/`raw_file`/`f1`/`ground_truth_taxids`/`predicted_taxids`/`n_ground_truth`/`n_scored_taxa` columns as
+above, plus:
+
+| Column | Values | Meaning |
+|---|---|---|
+| `cohort` | `classified` (943 rows) / `unresolved` (260 rows) | Whether this failure has been attributed to a known, recurring cause (`classified`) or has no identified explanation (`unresolved`). `unresolved` rows always have `f1 == 0.0` and both other columns below set to `none` — these are the most interesting rows to investigate if you're trying to actually improve the pipeline, since there's no known confound to explain away the miss. |
+| `exclusion_reasons` | `none`, `ecoli_expression_host_non_ecoli_poi`, `multi_organism_mapping`, or both | A data-quality caveat suggesting the "ground truth" label itself is questionable for this file, independent of whether the pipeline's answer was reasonable. |
+| `subset_tags` | `none`, `highscore_competition`, `low_maximum_peptonizer_score`, `multi_organism_mapping`, `ecoli_expression_host_non_ecoli_poi` (`;`-separated combinations) | One or more tags describing *why* the call likely went wrong — see below. |
+
+Tag meanings, with what to expect in `ground_truth_taxids`/`predicted_taxids`/`n_scored_taxa` for each:
+
+- **`highscore_competition`** (437 rows, the most common) — a closely related organism out-scored the true one
+  (e.g. ground truth `4530`, predicted `4565` — two closely related species whose tryptic peptides overlap
+  heavily). The pipeline's answer is plausible and close, just not an exact taxid match. Good cases for
+  evaluating whether a scoring/taxid-block change improves discrimination between close relatives.
+- **`low_maximum_peptonizer_score`** (153 rows) — `n_scored_taxa` is unusually low (median 8, vs. ~22 for
+  everything else), meaning little peptide evidence was available at all, so even the "best" prediction was
+  low-confidence. Good cases for testing whether loosening `--min_peptides_for_peptonizer` or the de novo
+  threshold recovers more signal.
+- **`multi_organism_mapping`** (199 rows) — `ground_truth_taxids` genuinely lists more than one organism (e.g.
+  `"562; 9606"`); a single top-N call can only partially overlap by construction. Good cases for testing
+  multi-organism handling specifically.
+- **`ecoli_expression_host_non_ecoli_poi`** (247 rows) — a recombinant protein expressed in *E. coli*, where the
+  bulk proteomic background is dominated by the *E. coli* expression host, but the "true" label is the protein
+  of interest's actual source organism. The pipeline correctly detects the dominant background organism; the
+  ground-truth label itself is arguably the wrong target here. Not very useful for tuning organism-ID accuracy
+  (the data doesn't actually support resolving the labeled target), but good for testing contaminant handling.
+
+### Suggested workflow
+
+1. **Smoke test / regression check**: pick any PXD with `f1 == 1.0` in `taxid_prediction.csv` — the pipeline
+   should still call it correctly after your change.
+2. **Targeted debugging**: filter `organism_id_failure_cohorts.csv` to `cohort == 'unresolved'` for failures with
+   no known confound, or to a specific `subset_tags` value to probe one failure mode at a time.
+3. **Run it**: take the `pxd` value and feed it straight into Stage 1/Stage 2 as described above — e.g.
+   `--PXD PXD000357` — then compare your `peptonizer_result.csv` against that row's `ground_truth_taxids`.
+   `raw_file` tells you which specific file within a multi-file PXD was scored, matching `OrganismID.py`'s
+   `<PXD>_<raw-file-stem>` output directory naming.
