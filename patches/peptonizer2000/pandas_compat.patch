@@ -1,0 +1,53 @@
+diff --git a/peptonizer/peptonizer/extract_taxon_scores.py b/peptonizer/peptonizer/extract_taxon_scores.py
+index c7c20cc..569de59 100644
+--- a/peptonizer/peptonizer/extract_taxon_scores.py
++++ b/peptonizer/peptonizer/extract_taxon_scores.py
+@@ -20,10 +20,11 @@ def parse_taxon_scores(csv_content: str) -> Dict[int, float]:
+ 
+     # read csv using pandas
+     ids = pd.read_csv(StringIO(csv_content), names=["ID", "score", "type"])
+-    tax_ids = ids.loc[ids["type"] == "taxon"]
+-    tax_ids = tax_ids.dropna()
++    tax_ids = ids.loc[ids["type"] == "taxon"].dropna().copy()
+ 
+-    tax_ids.loc[:, "score"] = pd.to_numeric(tax_ids["score"], downcast="float")
++    # Avoid Arrow-backed string dtype assignment errors by replacing the column.
++    tax_ids["score"] = pd.to_numeric(tax_ids["score"], errors="coerce", downcast="float")
++    tax_ids = tax_ids.dropna(subset=["score"])
+     tax_ids = tax_ids.sort_values("score")
+ 
+     scores = tax_ids["score"].to_list()
+@@ -79,10 +80,11 @@ def clean_csv(csv_content: str) -> str:
+ 
+     # read csv using pandas
+     ids = pd.read_csv(StringIO(csv_content), names=["ID", "score", "type"])
+-    tax_ids = ids.loc[ids["type"] == "taxon"]
+-    tax_ids = tax_ids.dropna()
++    tax_ids = ids.loc[ids["type"] == "taxon"].dropna().copy()
+ 
+-    tax_ids.loc[:, "score"] = pd.to_numeric(tax_ids["score"], downcast="float")
++    # Avoid Arrow-backed string dtype assignment errors by replacing the column.
++    tax_ids["score"] = pd.to_numeric(tax_ids["score"], errors="coerce", downcast="float")
++    tax_ids = tax_ids.dropna(subset=["score"])
+     tax_ids = tax_ids.sort_values("score")
+ 
+     scores = tax_ids["score"].to_list()
+diff --git a/peptonizer/peptonizer/plot_results.py b/peptonizer/peptonizer/plot_results.py
+index c7e1bcb..2a6f63c 100644
+--- a/peptonizer/peptonizer/plot_results.py
++++ b/peptonizer/peptonizer/plot_results.py
+@@ -15,10 +15,11 @@ def plot_peptonizer_results(input_file: str, output_file: str, number_of_taxa: i
+ 
+     # read csv using pandas
+     ids = pd.read_csv(input_file, names=["ID", "score", "type"])
+-    tax_ids = ids.loc[ids["type"] == "taxon"]
+-    tax_ids = tax_ids.dropna()
++    tax_ids = ids.loc[ids["type"] == "taxon"].dropna().copy()
+ 
+-    tax_ids.loc[:, "score"] = pd.to_numeric(tax_ids["score"], downcast="float")
++    # Avoid Arrow-backed string dtype assignment errors by replacing the column.
++    tax_ids["score"] = pd.to_numeric(tax_ids["score"], errors="coerce", downcast="float")
++    tax_ids = tax_ids.dropna(subset=["score"])
+     tax_ids = tax_ids.sort_values("score")
+     taxa_check = tax_ids.ID.tolist()
+ 

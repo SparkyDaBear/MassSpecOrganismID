@@ -1,0 +1,1204 @@
+pxd,raw_file,f1,ground_truth_taxids,predicted_taxids,n_ground_truth,n_scored_taxa,cohort,exclusion_reasons,subset_tags
+PXD000357,PXD000357_rep2-erk,0.0,9606,10090,1,9,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD001046,PXD001046_P13003_1,0.0,4530,4565,1,23,classified,none,highscore_competition
+PXD001046,PXD001046_P13003_2,0.0,4530,4565,1,24,classified,none,highscore_competition
+PXD001118,PXD001118_1HCD_Histone,0.0,9606,10090,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD001587,PXD001587_140120_Lysate90min_38,0.5,562; 9606,9606; 9913,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD002030,PXD002030_EAA20140124_01,0.0,5691,9913,1,21,classified,none,highscore_competition
+PXD002030,PXD002030_EAA20140124_03,0.0,5691,9913,1,21,classified,none,highscore_competition
+PXD002030,PXD002030_EAA20140124_02,0.0,5691,9913,1,21,classified,none,highscore_competition
+PXD002030,PXD002030_EAA20140124_04,0.0,5691,9913,1,21,classified,none,highscore_competition
+PXD002278,PXD002278_Submission_Bacteriophage_EcoRp10phage_20130828,0.0,1519788,562,1,10,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD002996,PXD002996_R13_8,0.0,430615,9606,1,20,unresolved,none,none
+PXD002996,PXD002996_R13_24,0.0,430615,9606,1,18,unresolved,none,none
+PXD002996,PXD002996_R13_48,0.0,430615,9606,1,21,unresolved,none,none
+PXD002996,PXD002996_R13_192,0.0,430615,9606,1,14,unresolved,none,none
+PXD003139,PXD003139_20151016_Acaryo_02,0.0,329726,4565,1,30,classified,none,highscore_competition
+PXD003139,PXD003139_20151016_Acaryo_01,0.0,329726,9606,1,30,classified,none,highscore_competition
+PXD003149,PXD003149_20150929_SH_I1,0.0,1111708,9606,1,25,classified,none,highscore_competition
+PXD003149,PXD003149_20150929_SH_I3,0.0,1111708,9606,1,29,unresolved,none,none
+PXD003149,PXD003149_20150929_SH_I2,0.0,1111708,9606,1,27,classified,none,highscore_competition
+PXD003293,PXD003293_EMT-ITRAQ-15-2,0.0,9606,10090,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD003403,PXD003403_OH_Try_1,0.0,8665,9031,1,10,classified,none,low_maximum_peptonizer_score
+PXD003403,PXD003403_OH_Try_3,0.0,8665,9606,1,10,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD003403,PXD003403_OH_Try_2,0.0,8665,9031,1,10,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD004006,PXD004006_Conrad3,0.0,4513,4565,1,20,unresolved,none,none
+PXD004006,PXD004006_Conrad2,0.0,4513,4565,1,20,unresolved,none,none
+PXD004006,PXD004006_Lacey1,0.0,4513,4565,1,20,unresolved,none,none
+PXD004006,PXD004006_Conrad1,0.0,4513,4565,1,20,unresolved,none,none
+PXD004006,PXD004006_Lacey2,0.0,4513,4565,1,20,unresolved,none,none
+PXD004006,PXD004006_Lacey3,0.0,4513,4565,1,20,unresolved,none,none
+PXD004086,PXD004086_HJMZ_20140414_PAK4_IP_iTRAQ8_4of10ul_2h,0.0,9606,9913,1,10,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD004086,PXD004086_PAK4_IP_Whole-cell_3of10_4h_iTRAQ,0.0,9606,10090,1,9,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD004086,PXD004086_HJMZ_20140414_PAK4_IP_iTRAQ8_4of10ul_4h,0.0,9606,9913,1,10,classified,none,low_maximum_peptonizer_score
+PXD004267,PXD004267_PH04,0.0,3702,9606,1,5,unresolved,none,none
+PXD004267,PXD004267_PH02,0.0,3702,9606,1,12,classified,none,highscore_competition
+PXD004267,PXD004267_PH04-,0.0,3702,9606,1,11,unresolved,none,none
+PXD004286,PXD004286_ChREBP-M,0.0,10090,9606,1,29,classified,none,highscore_competition
+PXD004286,PXD004286_ChREBP-L,0.0,10090,9606,1,29,classified,none,highscore_competition
+PXD004545,PXD004545_Thakur_070314_GSS_PFC8PLEX_SCX1__031114_15ul_90min_rep2,0.0,10090,9913,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD004891,PXD004891_TbRI,0.0,10090,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD004891,PXD004891_IgG,0.0,10090,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD005245,PXD005245_GBM-2Da1,0.0,9606,10090,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD005471,PXD005471_20160803_SJW_Phospho_iTraq,0.0,4530,3702,1,4,unresolved,none,none
+PXD005471,PXD005471_20160803_SJW_Phospho_iTraq_R2,0.0,4530,4565,1,4,unresolved,none,none
+PXD005550,PXD005550_R1_FeNTA_Phos,0.0,9606,9913,1,17,classified,none,highscore_competition
+PXD005550,PXD005550_R1_TiO2_Phos,0.0,9606,10116,1,12,classified,none,low_maximum_peptonizer_score
+PXD005550,PXD005550_R2_TiO2_Phos,0.0,9606,10090,1,11,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD005550,PXD005550_R3_FeNTA_Phos_rpt,0.0,9606,10090,1,20,classified,none,highscore_competition
+PXD005550,PXD005550_R3_TiO2_Phos,0.0,9606,10116,1,11,classified,none,low_maximum_peptonizer_score
+PXD005550,PXD005550_R2_FeNTA_Phos,0.0,9606,9913,1,19,classified,none,highscore_competition
+PXD005565,PXD005565_cwq_mix2-2_726,0.0,4932,4565,1,14,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD005699,PXD005699_Sample_A,0.0,5061,9606,1,2,classified,none,low_maximum_peptonizer_score
+PXD005699,PXD005699_Sample_B,0.0,5061,4565,1,7,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD005776,PXD005776_Q20518_Mix24X,0.0,1208660; 1219071; 160488; 198215; 218493; 226900; 246200; 266940; 314256; 319795; 375451; 388399; 391619; 391624; 392499; 396513; 527031; 546414; 643867; 693977; 703612; 762903; 867900; 89187,105841; 1280; 1492; 1547; 1590; 216816; 2246; 3055; 33035; 3702; 4565; 4932; 5476; 562; 5691; 6239; 7227; 7955; 818; 8355; 9031; 9606; 9796; 9823,24,30,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD005776,PXD005776_Q20516_Mix24X,0.0,1208660; 1219071; 160488; 198215; 218493; 226900; 246200; 266940; 314256; 319795; 375451; 388399; 391619; 391624; 392499; 396513; 527031; 546414; 643867; 693977; 703612; 762903; 867900; 89187,10116; 105841; 1280; 1492; 1547; 1590; 216816; 2246; 3055; 33035; 3702; 4565; 4932; 5476; 562; 5691; 7227; 7955; 818; 8355; 9031; 9606; 9823; 9913,24,30,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD006087,PXD006087_LD-CS-141106_HaughyN_IlBeta,0.0,10090,9913,1,21,classified,none,highscore_competition
+PXD006156,PXD006156_RNF8-BirA-RAW,0.0,9606,9913,1,14,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD006156,PXD006156_NONO-KGG-RAW,0.0,9606,9913,1,14,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD006199,PXD006199_QE_20150109_COU_07,0.0,9606,10090,1,18,classified,none,highscore_competition
+PXD006199,PXD006199_QE_20150109_COU_06,0.0,9606,10090,1,20,unresolved,none,none
+PXD006391,PXD006391_HEK293_Flag-EGFP_Repl2,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD006472,PXD006472_2016_Jan_12_QE2_45,0.0,408172,9606,1,30,classified,none,highscore_competition
+PXD006472,PXD006472_2016_Jan_12_QE2_51,0.0,408172,9606,1,28,classified,none,highscore_competition
+PXD006472,PXD006472_2016_Jan_12_QE2_52,0.0,408172,9606,1,28,unresolved,none,none
+PXD006472,PXD006472_2016_Jan_12_QE2_47,0.0,408172,9606,1,28,unresolved,none,none
+PXD006541,PXD006541_Q20161115-13,0.0,9606,9913,1,22,classified,none,highscore_competition
+PXD006541,PXD006541_Q20151206-09,0.0,9606,9913,1,22,classified,none,highscore_competition
+PXD006541,PXD006541_Q20160130-11,0.0,9606,9913,1,19,classified,none,highscore_competition
+PXD006599,PXD006599_P16109_1,0.0,3847,10116,1,6,unresolved,none,none
+PXD006599,PXD006599_P16109_1_160529032804,0.0,3847,10116,1,6,classified,none,low_maximum_peptonizer_score
+PXD006599,PXD006599_P16109_1_160529075710,0.0,3847,10116,1,5,classified,none,low_maximum_peptonizer_score
+PXD006600,PXD006600_P16109_2_160529170450,0.0,3847,10116,1,4,classified,none,low_maximum_peptonizer_score
+PXD006688,PXD006688_2014_Sept_08_BeringSea08,0.0,408172,9606,1,30,classified,none,highscore_competition
+PXD006738,PXD006738_20170829_FSt_1_EV,0.0,9606,9913,1,22,classified,none,highscore_competition
+PXD006738,PXD006738_20160401,0.0,9606,9913,1,22,classified,none,highscore_competition
+PXD006738,PXD006738_20170829_FSt_4_Prot,0.0,9606,9913,1,22,classified,none,highscore_competition
+PXD006769,PXD006769_20151010_ErlotinibTumors_Exp1_TMT10,0.0,9606,9913,1,4,classified,none,low_maximum_peptonizer_score
+PXD006769,PXD006769_20151010_ErlotinibTumors_Exp2_TMT10,0.0,9606,9913,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD007628,PXD007628_QE004485SJ,0.5,10090; 5823,10090; 9606,2,4,classified,multi_organism_mapping,multi_organism_mapping
+PXD007628,PXD007628_QE003777TA,0.5,10090; 5823,10090; 9913,2,6,classified,multi_organism_mapping,multi_organism_mapping
+PXD007864,PXD007864_IgG_IP_1_DDA,0.0,562,10090,1,21,classified,none,highscore_competition
+PXD007932,PXD007932_P16087-2-2,0.0,106299,9606,1,9,unresolved,none,none
+PXD007978,PXD007978_1,0.0,1050258,9606,1,10,unresolved,none,none
+PXD007978,PXD007978_2,0.0,1050258,5833,1,7,unresolved,none,none
+PXD007978,PXD007978_3,0.0,1050258,5833,1,14,classified,none,highscore_competition
+PXD007978,PXD007978_Control,0.0,1050258,9606,1,8,unresolved,none,none
+PXD008108,PXD008108_yuechen_lerber_20170906_aCFIm25,0.0,9606,10090,1,17,unresolved,none,none
+PXD008108,PXD008108_yuechen_lerber_20170906_aWT,0.0,9606,10090,1,17,unresolved,none,none
+PXD008164,PXD008164_Controlsamplereplicate1AL_C_1,0.0,36329,9606,1,19,classified,none,highscore_competition
+PXD008164,PXD008164_Probesamplereplicate2AL_P4_3,0.0,36329,5833,1,21,classified,none,highscore_competition
+PXD008164,PXD008164_Probesamplereplicate1AL_P4_1,0.0,36329,5833,1,23,classified,none,highscore_competition
+PXD008164,PXD008164_Controlsamplereplicate2AL_C_3,0.0,36329,9606,1,20,classified,none,highscore_competition
+PXD008257,PXD008257_CJK_161122_WintherLarsen_ex1,0.0,8030,7955,1,20,classified,none,highscore_competition
+PXD008257,PXD008257_CJK_161122_WintherLarsen_ex3,0.0,8030,7955,1,21,classified,none,highscore_competition
+PXD008257,PXD008257_CJK_161122_WintherLarsen_ex4,0.0,8030,7955,1,21,classified,none,highscore_competition
+PXD008257,PXD008257_CJK_161122_WintherLarsen_ex2,0.0,8030,7955,1,21,classified,none,highscore_competition
+PXD008257,PXD008257_CJK_161122_WintherLarsen_ex5,0.0,8030,7955,1,22,classified,none,highscore_competition
+PXD008486,PXD008486_20170721_QE7_nLC11_MEM_COLLAB_GeoG_1229,0.5,8839; 9031; 9913; 9940,9031; 9606; 9823; 9913,4,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD008486,PXD008486_20170721_QE7_nLC11_MEM_COLLAB_GeoG_1230,0.25,8839; 9031; 9913; 9940,562; 9606; 9823; 9913,4,4,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD008486,PXD008486_20170721_QE7_nLC11_MEM_COLLAB_GeoG_1228,0.5,8839; 9031; 9913; 9940,9031; 9606; 9823; 9913,4,11,classified,multi_organism_mapping,multi_organism_mapping
+PXD008644,PXD008644_7550GI_N,0.0,930945,9606,1,15,unresolved,none,none
+PXD008644,PXD008644_7550GI_Y,0.0,930945,9606,1,15,unresolved,none,none
+PXD008690,PXD008690_AF019_lysarginase,0.0,741258,10090,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD008690,PXD008690_AF024_LysargiNase_1,0.0,741258,9606,1,2,classified,none,low_maximum_peptonizer_score
+PXD008690,PXD008690_AF024_trypsin,0.0,741258,9606,1,3,unresolved,none,none
+PXD008855,PXD008855_brcn_trp_upper,0.5,9606; 9913,9606; 9823,2,9,classified,multi_organism_mapping,multi_organism_mapping
+PXD009265,PXD009265_OR6_19022013_GM_SU_Ecoli_Mix1_DyfgM_fr21,0.4,36329; 562; 9606,562; 9913,3,2,classified,multi_organism_mapping,multi_organism_mapping
+PXD009265,PXD009265_Adult_Adrenalgland_Gel_Elite_49_f01,0.3333333333333333,36329; 562; 9606,9606; 9796; 9913,3,20,classified,multi_organism_mapping,multi_organism_mapping
+PXD009641,PXD009641_ID15073_01_E749_3008_120414,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD009641,PXD009641_ID15074_01_E749_3008_120414,0.0,9606,562,1,25,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD009650,PXD009650_QE846_MSQ1156_20171027_Hind_S4_DESALT,0.0,10090,9606,1,20,classified,none,highscore_competition
+PXD009650,PXD009650_QE846_MSQ1156_20171027_Hind_S1_DESALT,0.0,10090,9606,1,16,unresolved,none,none
+PXD009650,PXD009650_QE846_MSQ1156_20171027_Hind_S2_DESALT,0.0,10090,9606,1,19,classified,none,highscore_competition
+PXD009650,PXD009650_QE846_MSQ1156_20171027_Hind_S3_DESALT,0.0,10090,9606,1,16,unresolved,none,none
+PXD009650,PXD009650_QE846_MSQ1156_20171027_Hind_S5_DESALT,0.0,10090,9606,1,23,classified,none,highscore_competition
+PXD009650,PXD009650_QE846_MSQ1156_20171027_Hind_S6_DESALT,0.0,10090,9606,1,20,classified,none,highscore_competition
+PXD009807,PXD009807_150615_VRG2447_2,0.0,9606,10090,1,16,unresolved,none,none
+PXD010145,PXD010145_MOHA_UK_NP_0_1M_170904_180122130501,0.5,9606; 9825,9606; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD010145,PXD010145_MOHA_UK_NP_0_1M_170627_180122213007,0.5,9606; 9825,9606; 9823,2,13,classified,multi_organism_mapping,multi_organism_mapping
+PXD010145,PXD010145_MOHA_UK_NP_0_1M_171009_180122171734,0.5,9606; 9825,9606; 9823,2,22,classified,multi_organism_mapping,multi_organism_mapping
+PXD010285,PXD010285_NR4ulsur25_180215191328,0.0,353153,5691,1,7,classified,none,low_maximum_peptonizer_score
+PXD010285,PXD010285_NR4ulsur25,0.0,353153,5691,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD010285,PXD010285_NR1ulsur25ul,0.0,353153,5691,1,26,unresolved,none,none
+PXD010285,PXD010285_NR4ulsur25ul,0.0,353153,5691,1,28,classified,none,highscore_competition
+PXD010470,PXD010470_20160607_CO_0655SaWa_QBIC_R01_Q0655003AJ,0.0,90371,562,1,20,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD010470,PXD010470_20160607_CO_0655SaWa_QBIC_R02_Q0655004AR,0.0,90371,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD010548,PXD010548_Leslie-Band1,0.0,7227,4565,1,19,classified,none,highscore_competition
+PXD010739,PXD010739_0000_LIN_HILIC_07_100PER,0.0,3046,9606,1,2,classified,none,low_maximum_peptonizer_score
+PXD010739,PXD010739_0000_LIN_HILIC_04_100PER,0.0,3046,3055,1,1,classified,none,low_maximum_peptonizer_score
+PXD010739,PXD010739_0000_LIN_HILIC_08_100PER,0.0,3046,3702,1,3,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD010739,PXD010739_0000_LIN_HILIC_06_100PER,0.0,3046,3055,1,1,classified,none,low_maximum_peptonizer_score
+PXD010952,PXD010952_7196TQ_8,0.0,8839,9796,1,10,classified,none,low_maximum_peptonizer_score
+PXD010998,PXD010998_P15489_O_2,0.0,7091,7227,1,26,unresolved,none,none
+PXD010998,PXD010998_P15489_P_3,0.0,7091,7227,1,26,unresolved,none,none
+PXD010998,PXD010998_P15489_O_3,0.0,7091,7227,1,25,classified,none,highscore_competition
+PXD010998,PXD010998_P15489_P_1,0.0,7091,7227,1,26,classified,none,highscore_competition
+PXD010998,PXD010998_P15489_P_2,0.0,7091,7227,1,26,unresolved,none,none
+PXD010998,PXD010998_P15489_O_1_151126162207,0.0,7091,7227,1,26,unresolved,none,none
+PXD011035,PXD011035_180823_180409_AS_ChYa_S_23,0.0,3702,562,1,4,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011035,PXD011035_180823_180409_AS_ChYa_S_24,0.0,3702,562,1,2,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011035,PXD011035_180418_AS_ChYa_P-L4_S_14,0.0,3702,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011035,PXD011035_180418_AS_ChYa_P-L4_S_16,0.0,3702,562,1,18,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011035,PXD011035_180418_AS_ChYa_P-L4_S_15,0.0,3702,562,1,20,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011118,PXD011118_TMTWT_trypsinunenrichedHCDpdETD,0.23529411764705882,1351; 2242; 31646; 3702; 3708; 3715; 3818; 3827; 44689; 4513; 5476; 562; 6239; 7029; 7091; 7227; 7460; 7634; 7955; 8049; 85963; 9031; 9534; 9606; 9796; 9913,10090; 10116; 8355; 9031; 9606; 9796; 9823; 9913,26,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD011164,PXD011164_20131115_Velos1_VG_VF_FoxP3_2,0.0,10090,9606,1,21,classified,none,highscore_competition
+PXD011164,PXD011164_20131115_Velos1_VG_VF_FoxP3_1,0.0,10090,9606,1,25,classified,none,highscore_competition
+PXD011241,PXD011241_20141030_Elite_DaSu_NIH_R20_011014_MV2,0.0,9606,9913,1,21,classified,none,highscore_competition
+PXD011273,PXD011273_QEp16-5801_Murfin_F3_2,0.0,6945,10090,1,24,classified,none,highscore_competition
+PXD011273,PXD011273_QEp16-5797_Murfin_F3_1,0.0,6945,10090,1,23,classified,none,highscore_competition
+PXD011523,PXD011523_20150814_Q1_TC_colQ1-7_FI_Jorge_sirt2_v1,0.0,9606,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011523,PXD011523_20150814_Q1_TC_colQ1-7_FI_Jorge_sirt2_v3,0.0,9606,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011523,PXD011523_20150814_Q1_TC_colQ1-7_FI_Jorge_sirt2_v2,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011708,PXD011708_W1,0.0,31199,10116,1,26,classified,none,highscore_competition
+PXD011708,PXD011708_O1,0.0,31199,3702,1,24,unresolved,none,none
+PXD011708,PXD011708_O3,0.0,31199,4530,1,27,classified,none,highscore_competition
+PXD011708,PXD011708_W3,0.0,31199,7227,1,27,unresolved,none,none
+PXD011708,PXD011708_O2,0.0,31199,7227,1,27,classified,none,highscore_competition
+PXD011708,PXD011708_W2,0.0,31199,9606,1,27,classified,none,highscore_competition
+PXD011776,PXD011776_Serratia_ATCC13880_4,0.0,911022,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011776,PXD011776_Serratia_ATCC13880_1,0.0,911022,562,1,28,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011776,PXD011776_Serratia_ATCC13880_5,0.0,911022,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011776,PXD011776_Serratia_ATCC13880_2,0.0,911022,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011776,PXD011776_Serratia_ATCC13880_3,0.0,911022,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD011899,PXD011899_FL0067_AysegulS_3,0.0,9606,9913,1,9,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD011918,PXD011918_sample_02_SPL_Recal,0.0,10116,9913,1,13,classified,none,highscore_competition
+PXD011918,PXD011918_sample_01_Recal,0.0,10116,9913,1,15,classified,none,highscore_competition
+PXD011918,PXD011918_control_01_Recal,0.0,10116,9913,1,22,classified,none,highscore_competition
+PXD011918,PXD011918_control_02_SPL_Recal,0.0,10116,9913,1,16,classified,none,highscore_competition
+PXD011935,PXD011935_20181002_QExHFX1_RSLC1_DC_Hela100ng_2908_iso-1c0_01,0.0,4932,9606,1,29,classified,none,highscore_competition
+PXD012059,PXD012059_180111-01Ojo_PoolA_Cyt,0.0,9606,9823,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD012059,PXD012059_180111-01Ojo_PoolB_Cyt,0.0,9606,10090,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD012068,PXD012068_20170413_ZH_AB_wo_TiO2,0.0,10090,562,1,16,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD012068,PXD012068_20170413_ZH_AB_w_TiO2,0.0,10090,562,1,16,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD012106,PXD012106_Run2_Tricho3_5_Rep2_1900ng-002,0.0,1328881; 1817808; 287889,7227; 7955; 8355,3,25,classified,multi_organism_mapping,multi_organism_mapping
+PXD012106,PXD012106_Run1_Tricho1_60ul,0.0,1328881; 1817808; 287889,6239; 7227; 8355,3,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD012106,PXD012106_Run2_Tricho2_80ul,0.0,1328881; 1817808; 287889,7227; 7955; 8355,3,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD012106,PXD012106_Run1_Tricho3_5_Rep1_3000ng,0.0,1328881; 1817808; 287889,6239; 7227; 7955,3,25,classified,multi_organism_mapping,multi_organism_mapping
+PXD012211,PXD012211_Y2,0.0,206411,7227,1,25,classified,none,highscore_competition
+PXD012211,PXD012211_B2,0.0,206411,7227,1,26,classified,none,highscore_competition
+PXD012211,PXD012211_Y1,0.0,206411,7227,1,27,classified,none,highscore_competition
+PXD012211,PXD012211_Y3,0.0,206411,7227,1,25,classified,none,highscore_competition
+PXD012211,PXD012211_B3,0.0,206411,7227,1,27,classified,none,highscore_competition
+PXD012211,PXD012211_B1,0.0,206411,7227,1,25,classified,none,highscore_competition
+PXD012241,PXD012241_20160620_QHF_TD_ColHF11_Cuenot_CWP-Delta-2,0.0,1496,1492,1,24,unresolved,none,none
+PXD012241,PXD012241_20160620_QHF_TD_ColHF11_Cuenot_CWP-630-4,0.0,1496,1492,1,22,unresolved,none,none
+PXD012241,PXD012241_20160620_QHF_TD_ColHF11_Cuenot_CWP-630-3,0.0,1496,1492,1,23,unresolved,none,none
+PXD012241,PXD012241_20160620_QHF_TD_ColHF11_Cuenot_CWP-Delta-3,0.0,1496,1492,1,29,classified,none,highscore_competition
+PXD012241,PXD012241_20160620_QHF_TD_ColHF11_Cuenot_CWP-Delta-4,0.0,1496,1492,1,23,unresolved,none,none
+PXD012241,PXD012241_20160620_QHF_TD_ColHF11_Cuenot_CWP-630-2,0.0,1496,1492,1,21,unresolved,none,none
+PXD012398,PXD012398_P180076_F4,0.0,3635,3702,1,28,classified,none,highscore_competition
+PXD012398,PXD012398_P180076_F5,0.0,3635,3702,1,26,classified,none,highscore_competition
+PXD012398,PXD012398_P180076_F2,0.0,3635,3702,1,23,classified,none,highscore_competition
+PXD012443,PXD012443_8020TPSnR1_2,0.0,4442,3702,1,21,classified,none,highscore_competition
+PXD012443,PXD012443_8020TPSnR1_1,0.0,4442,3702,1,22,classified,none,highscore_competition
+PXD012443,PXD012443_8020TPSnR1_3,0.0,4442,3702,1,21,classified,none,highscore_competition
+PXD012443,PXD012443_8020TPSnR1_4,0.0,4442,3702,1,23,classified,none,highscore_competition
+PXD012532,PXD012532_DK1622-DK1622-repeat1,0.0,246197,562,1,1,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD012762,PXD012762_P17392_B_B2,0.0,4072,4565,1,29,classified,none,highscore_competition
+PXD012762,PXD012762_P17392_B_A1,0.0,4072,4565,1,28,classified,none,highscore_competition
+PXD012762,PXD012762_P17392_B_A2,0.0,4072,4565,1,28,classified,none,highscore_competition
+PXD012762,PXD012762_P17392_B_A3,0.0,4072,3702,1,27,classified,none,highscore_competition
+PXD012762,PXD012762_P17392_B_B3,0.0,4072,4565,1,30,classified,none,highscore_competition
+PXD012762,PXD012762_P17392_B_B1,0.0,4072,4565,1,30,classified,none,highscore_competition
+PXD012770,PXD012770_QEp18-1018_Khokha_MO_1,0.0,8364,8355,1,27,classified,none,highscore_competition
+PXD012770,PXD012770_QEp18-1022_Khokha_MO_2,0.0,8364,8355,1,27,classified,none,highscore_competition
+PXD012770,PXD012770_QEp18-1014_Khokha_Control_1,0.0,8364,8355,1,26,classified,none,highscore_competition
+PXD012770,PXD012770_QEp18-1026_Khokha_Control_2,0.0,8364,8355,1,26,classified,none,highscore_competition
+PXD012770,PXD012770_QEp18-1030_Khokha_Control_3,0.0,8364,8355,1,26,classified,none,highscore_competition
+PXD012770,PXD012770_QEp18-1034_Khokha_MO_3,0.0,8364,8355,1,27,classified,none,highscore_competition
+PXD012827,PXD012827_MSB27240A,0.0,6945,7227,1,22,unresolved,none,none
+PXD012827,PXD012827_MSB27239A,0.0,6945,7227,1,21,unresolved,none,none
+PXD012827,PXD012827_MSB27238A,0.0,6945,7227,1,11,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD012827,PXD012827_MSB27237A,0.0,6945,7227,1,25,unresolved,none,none
+PXD012837,PXD012837_yuechen_lerber_20170830_a27_lacZ,0.0,9606,10090,1,9,classified,none,low_maximum_peptonizer_score
+PXD012921,PXD012921_QEx2_019014,0.5,10360; 9606,562; 9606,2,23,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD012921,PXD012921_QEx2_019033,0.5,10360; 9606,9606; 9913,2,26,classified,multi_organism_mapping,multi_organism_mapping
+PXD012921,PXD012921_QEx2_019039,0.5,10360; 9606,9606; 9913,2,26,classified,multi_organism_mapping,multi_organism_mapping
+PXD012921,PXD012921_QEx2_019011,0.5,10360; 9606,562; 9606,2,24,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD012921,PXD012921_QEx2_019036,0.5,10360; 9606,9606; 9913,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD012921,PXD012921_QEx2_019017,0.5,10360; 9606,562; 9606,2,23,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD012966,PXD012966_7128TPCR_1,0.0,9606,1280,1,14,classified,none,highscore_competition
+PXD013659,PXD013659_LH_Q_34,0.0,1432137,10090,1,23,unresolved,none,none
+PXD013659,PXD013659_LH_Q_33,0.0,1432137,10090,1,18,unresolved,none,none
+PXD013659,PXD013659_LH_Q_32,0.0,1432137,10090,1,15,unresolved,none,none
+PXD013659,PXD013659_LH_Q_29,0.0,1432137,10090,1,18,unresolved,none,none
+PXD013659,PXD013659_LH_Q_30,0.0,1432137,10090,1,14,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD013659,PXD013659_LH_Q_36,0.0,1432137,10090,1,23,classified,none,highscore_competition
+PXD013755,PXD013755_161028_A16_Wdh_Mauro_eNOS_02,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD013755,PXD013755_161028_A16_Wdh_Mauro_eNOS_10,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD013755,PXD013755_161028_A16_Wdh_Mauro_eNOS_01,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD013755,PXD013755_161028_A16_Wdh_Mauro_eNOS_11,0.0,9606,10090,1,20,classified,none,highscore_competition
+PXD013755,PXD013755_161028_A16_Wdh_Mauro_eNOS_03,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD013933,PXD013933_18-105_S2,0.0,237561,5476,1,23,classified,none,highscore_competition
+PXD013933,PXD013933_18-105_S1,0.0,237561,5476,1,25,classified,none,highscore_competition
+PXD014077,PXD014077_Qex01_SVH_180422_TomBeneke_B29_F_001,0.0,929439,5691,1,22,classified,none,highscore_competition
+PXD014077,PXD014077_Qex01_SVH_180422_TomBeneke_Cas9_F_005,0.0,929439,5691,1,23,classified,none,highscore_competition
+PXD014542,PXD014542_P268-1,0.0,1692259,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD014542,PXD014542_P268-4,0.0,1692259,7227,1,17,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD014542,PXD014542_P268-2,0.0,1692259,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD014542,PXD014542_P268-5,0.0,1692259,7227,1,21,unresolved,none,none
+PXD014542,PXD014542_P268-6,0.0,1692259,7227,1,21,unresolved,none,none
+PXD014542,PXD014542_P268-3,0.0,1692259,7227,1,20,classified,none,low_maximum_peptonizer_score
+PXD014663,PXD014663_Phylox_SG_04,0.0,58002,7227,1,27,classified,none,highscore_competition
+PXD014663,PXD014663_Phylox_SG_02,0.0,58002,7227,1,26,classified,none,highscore_competition
+PXD014663,PXD014663_Phylox_SG_03,0.0,58002,7227,1,27,classified,none,highscore_competition
+PXD014663,PXD014663_Phylox_SG_01,0.0,58002,7227,1,28,classified,none,highscore_competition
+PXD014685,PXD014685_P17105_170324205849,0.0,9913,9606,1,11,unresolved,none,none
+PXD014685,PXD014685_P17105,0.0,9913,9606,1,21,unresolved,none,none
+PXD014685,PXD014685_P17105_170325020908,0.0,9913,9606,1,9,unresolved,none,none
+PXD014738,PXD014738_QE04101705,0.0,209285,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014738,PXD014738_QE02071806,0.0,209285,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014738,PXD014738_QE02071802,0.0,209285,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014738,PXD014738_QE08151703,0.0,209285,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014968,PXD014968_F2,0.0,658457,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014968,PXD014968_F4,0.0,658457,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014968,PXD014968_F3,0.0,658457,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014968,PXD014968_F1,0.0,658457,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD014974,PXD014974_POL11409X003__A_2_92-59213,0.0,309800,2246,1,14,unresolved,none,none
+PXD014974,PXD014974_POL11409X002__A_1_92-59212,0.0,309800,2246,1,15,unresolved,none,none
+PXD015218,PXD015218_HF1_008502,0.0,10090,9606,1,23,unresolved,none,none
+PXD015218,PXD015218_HF1_008494,0.0,10090,9606,1,26,classified,none,highscore_competition
+PXD015218,PXD015218_HF1_008498,0.0,10090,9606,1,27,classified,none,highscore_competition
+PXD015298,PXD015298_MS195591QEHF_Anthony_Lefkowitz_Gelband_Phosphorylated,0.0,7108,9606,1,19,unresolved,none,none
+PXD015377,PXD015377_ID37398_01_FSN20357_4749_042818,0.0,9606,9913,1,12,classified,none,low_maximum_peptonizer_score
+PXD015787,PXD015787_20160714_PC132-Zhang_APMS_S4-rerun,0.0,9606,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD015787,PXD015787_20160713_PC132-Zhang_APMS_S3-test,0.0,9606,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD015791,PXD015791_LINC01018,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD015791,PXD015791_No_RNA,0.0,9606,10090,1,23,classified,none,highscore_competition
+PXD015793,PXD015793_RHofele_ctprp2_spp2_021112_EDC,0.0,759272,9606,1,7,unresolved,none,none
+PXD015793,PXD015793_RHofele_ctprp2_spp2_021112_BS3,0.0,759272,9606,1,7,classified,none,low_maximum_peptonizer_score
+PXD015964,PXD015964_PvD05072018_LauraV_pellet_FM_1_1_1uL_re2,0.0,152335,1590,1,22,classified,none,highscore_competition
+PXD015964,PXD015964_PvD05072018_LauraV_pellet_FM_2_2_1uL_re2,0.0,152335,1590,1,24,unresolved,none,none
+PXD015986,PXD015986_20181204_QExHFX4_RSLC3_Tian_Loidl_MFPL_coom_JL3_50p,0.0,5911,9606,1,23,unresolved,none,none
+PXD015986,PXD015986_20190517_QExHFX3_RSLC2_Tian_Loidl_MFPL_coom_PA_70p,0.0,5911,9606,1,23,unresolved,none,none
+PXD015986,PXD015986_20181204_QExHFX4_RSLC3_Tian_Loidl_MFPL_coom_JL4_50p,0.0,5911,9606,1,24,unresolved,none,none
+PXD015986,PXD015986_20190517_QExHFX3_RSLC2_Tian_Loidl_MFPL_coom_WT_70p,0.0,5911,9606,1,24,unresolved,none,none
+PXD016311,PXD016311_GS_L_02,0.0,153009; 990119,6239; 9606,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD016311,PXD016311_GS_u_01,0.5,153009; 990119,153009; 9606,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD016321,PXD016321_3193_MC_totalTMT,0.0,10090,9606,1,24,classified,none,highscore_competition
+PXD016321,PXD016321_3193_MC_TMT_Ac,0.0,10090,9913,1,20,classified,none,highscore_competition
+PXD016814,PXD016814_jlb20190124_AMara_membraneprep,0.0,1213463,2104,1,27,classified,none,highscore_competition
+PXD016871,PXD016871_P17_143_SRSF7_Michaela_GFP_LysCTrypsin_171215112417,0.0,10090,9606,1,11,unresolved,none,none
+PXD016871,PXD016871_P17_143_SRSF7_Michaela_GFP_LysC,0.0,10090,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD016871,PXD016871_P17_143_SRSF7_Michaela_GFP_Chymo_171215025403,0.0,10090,9606,1,4,unresolved,none,none
+PXD016871,PXD016871_P17_143_SRSF7_Michaela_GFP_LysCTrypsin,0.0,10090,9606,1,10,unresolved,none,none
+PXD016871,PXD016871_P17_143_SRSF7_Michaela_GFP_LysC_171215070911,0.0,10090,9606,1,3,unresolved,none,none
+PXD016871,PXD016871_P17_143_SRSF7_Michaela_GFP_Chymo,0.0,10090,9606,1,2,classified,none,low_maximum_peptonizer_score
+PXD016932,PXD016932_182-19-1-0200-1,0.0,9606,9913,1,8,classified,none,low_maximum_peptonizer_score
+PXD016932,PXD016932_182-19-1-0200-2,0.0,9606,9913,1,1,classified,none,low_maximum_peptonizer_score
+PXD017032,PXD017032_P180539_418_2,0.0,5811,562,1,9,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD017032,PXD017032_P180539_418_3,0.0,5811,10090,1,9,classified,none,low_maximum_peptonizer_score
+PXD017032,PXD017032_P180539_418_4,0.0,5811,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD017032,PXD017032_P180539_418_1,0.0,5811,562,1,3,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD017032,PXD017032_P180539_418_6,0.0,5811,562,1,1,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD017229,PXD017229_PC_002,0.0,865859,1534976,1,2,unresolved,none,none
+PXD017273,PXD017273_Mousebrain-derivedEV_qEV,0.5,10090; 9606,10090; 10116,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD017273,PXD017273_Humanbrain-derivedEV_SG-UC,0.5,10090; 9606,10116; 9606,2,6,classified,multi_organism_mapping,multi_organism_mapping
+PXD017273,PXD017273_HumanCSF-derivedEV,0.5,10090; 9606,9606; 9913,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD017293,PXD017293_2176_Kasny_Orbi1_direct_135min-IS_HCD_3_Recal,0.0,116851,7955,1,29,classified,none,highscore_competition
+PXD017293,PXD017293_2176_Kasny_Orbi1_direct_135min-IS_HCD_2_Recal,0.0,116851,7955,1,29,classified,none,highscore_competition
+PXD017293,PXD017293_2176_Kasny_Orbi1_direct_135min-IS_HCD_1_Recal,0.0,116851,7955,1,29,classified,none,highscore_competition
+PXD017352,PXD017352_20191202_lt_12812_Cel_5h_2,0.5,562; 6239,562; 9606,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD017670,PXD017670_QEplus025644,0.5,10090; 9606,10090; 562,2,28,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD017670,PXD017670_QEplus025629,0.5,10090; 9606,10090; 562,2,27,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD017762,PXD017762_09092019_32_AF_2019_05_EDA_JD4R.akariculturedoneggsinALTlysisbuffer,0.0,786,9031,1,25,classified,none,highscore_competition
+PXD017762,PXD017762_09092019_30_AF_2019_05_EDA_JD3VEROcelllineinfectedRakari,0.0,786,9606,1,29,classified,none,highscore_competition
+PXD017762,PXD017762_09092019_29_AF_2019_05_EDA_JD2_R.akariculturedoneggs4mgmL,0.0,786,9031,1,29,classified,none,highscore_competition
+PXD017772,PXD017772_180817_Rabbit_IgG_IP,0.0,10090,9913,1,17,classified,none,highscore_competition
+PXD017772,PXD017772_180816_dicer_IP2,0.0,10090,9913,1,17,classified,none,highscore_competition
+PXD017772,PXD017772_180816_dicer_IP1,0.0,10090,9913,1,17,classified,none,highscore_competition
+PXD017792,PXD017792_G729R_E2oQE07341,0.0,9606,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD017792,PXD017792_E1aE2o_CDI_QE07340,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD017847,PXD017847_2019_S21_FWaltz_2_1500ng_M,0.0,3715,3702,1,23,classified,none,highscore_competition
+PXD017850,PXD017850_A021895_Fr6,0.0,10090,9913,1,10,classified,none,low_maximum_peptonizer_score
+PXD017850,PXD017850_A021895_Fr5,0.0,10090,9913,1,10,classified,none,low_maximum_peptonizer_score
+PXD017850,PXD017850_A021895_Fr2,0.0,10090,9913,1,13,classified,none,low_maximum_peptonizer_score
+PXD017964,PXD017964_FL507_MSQ1069_20170612_JuriNa_1_P36_MRE11_Tryp,0.0,9606,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD018045,PXD018045_Q20063_Frankia-14,0.0,1859,9606,1,26,unresolved,none,none
+PXD018045,PXD018045_Q20061_Frankia-12,0.0,1859,9606,1,25,unresolved,none,none
+PXD018045,PXD018045_Q20060_Frankia-11,0.0,1859,9606,1,26,classified,none,highscore_competition
+PXD018045,PXD018045_Q20064_Frankia-15,0.0,1859,9606,1,29,unresolved,none,none
+PXD018045,PXD018045_Q20062_Frankia-13,0.0,1859,9606,1,28,unresolved,none,none
+PXD018059,PXD018059_901141881koch_AT1,0.0,6269,6239,1,21,unresolved,none,none
+PXD018059,PXD018059_901141883koch_AT3,0.0,6269,6239,1,21,unresolved,none,none
+PXD018059,PXD018059_901141882koch_AT2,0.0,6269,6239,1,21,unresolved,none,none
+PXD018077,PXD018077_20150119_QEp3_MiWi_SA_Franziska_IgG_3,0.0,10090,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD018077,PXD018077_20150119_QEp3_MiWi_SA_Franziska_IgG_2,0.0,10090,562,1,31,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD018077,PXD018077_20150119_QEp3_MiWi_SA_Franziska_GR_1,0.0,10090,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD018096,PXD018096_Abnormal_Plasma,0.0,92683,9031,1,8,classified,none,low_maximum_peptonizer_score
+PXD018096,PXD018096_Normal_Plasma,0.0,92683,9031,1,8,unresolved,none,none
+PXD018112,PXD018112_AM_A,0.0,330879,746128,1,16,classified,none,highscore_competition
+PXD018147,PXD018147_R14129_1_LU_1,0.0,10090,9606,1,12,unresolved,none,none
+PXD018245,PXD018245_A31VControl,0.5,10090; 9606,9606; 9913,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD018245,PXD018245_A31VGFP,0.5,10090; 9606,9606; 9913,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD018245,PXD018245_A31VWT,0.5,10090; 9606,9606; 9913,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD018461,PXD018461_L7,0.0,926571,2246,1,3,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD018461,PXD018461_l8,0.0,926571,9913,1,10,classified,none,low_maximum_peptonizer_score
+PXD018508,PXD018508_mix1,0.0,28141,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD018508,PXD018508_mix2,0.0,28141,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD018508,PXD018508_mix3,0.0,28141,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD018591,PXD018591_Th-St_Gelbande03,0.0,4932,9606,1,19,classified,none,highscore_competition
+PXD018651,PXD018651_Statler_20170306_CHS_Lukas_Ubiquitin,0.0,4932,9606,1,21,unresolved,none,none
+PXD018692,PXD018692_20190404_Lorena_caninePyo_saliva_TMTsix2,0.0,9615,9606,1,8,classified,none,low_maximum_peptonizer_score
+PXD018692,PXD018692_20190404_Lorena_caninePyo_saliva_TMTsix3,0.0,9615,9606,1,21,classified,none,highscore_competition
+PXD018692,PXD018692_20190404_Lorena_caninePyo_saliva_TMTsix1,0.0,9615,9606,1,4,classified,none,low_maximum_peptonizer_score
+PXD018693,PXD018693_20200116_ArgiopeVenom_Luedecke02,0.0,9913,7227,1,23,classified,none,highscore_competition
+PXD018780,PXD018780_HsLRRC8D_2,0.0,9606,7227,1,24,classified,none,highscore_competition
+PXD018780,PXD018780_HsLRRC8D_1,0.0,9606,7227,1,24,classified,none,highscore_competition
+PXD018780,PXD018780_HsLRRC8D_3,0.0,9606,7227,1,24,classified,none,highscore_competition
+PXD018783,PXD018783_20180615_Stern_OblobII_t3_v1_current,0.0,10090,4932,1,2,classified,none,low_maximum_peptonizer_score
+PXD018783,PXD018783_20180615_Stern_OblobII_t2_v1_current,0.0,10090,4932,1,2,classified,none,low_maximum_peptonizer_score
+PXD018783,PXD018783_20180615_Stern_OblobII_t1_v1_current,0.0,10090,4932,1,7,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD018851,PXD018851_P16047_H,0.0,1085956; 649408; 669202,562; 7955; 9606,3,31,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD019117,PXD019117_F6,0.0,10116,10090,1,11,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD019117,PXD019117_F2,0.0,10116,10090,1,5,classified,none,low_maximum_peptonizer_score
+PXD019117,PXD019117_F4,0.0,10116,10090,1,3,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD019117,PXD019117_F1,0.0,10116,9606,1,10,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD019117,PXD019117_F3,0.0,10116,10090,1,1,classified,none,low_maximum_peptonizer_score
+PXD019119,PXD019119_pool-18,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD019119,PXD019119_pool-34,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD019119,PXD019119_pool-38,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD019121,PXD019121_MS-19-041-2,0.0,2; 692036,9606; 9823,2,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD019121,PXD019121_MS-19-041-1,0.0,2; 692036,9606; 9913,2,20,classified,multi_organism_mapping,multi_organism_mapping
+PXD019204,PXD019204_MS205917QEHF_igor_david_1AR_03,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD019204,PXD019204_MS205917QEHF_igor_david_1AR_02_20191017140015,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD019298,PXD019298_Mucograft_10286_soluble,0.0,9825,9606,1,8,classified,none,highscore_competition
+PXD019298,PXD019298_Soluble,0.0,9825,9823,1,7,classified,none,low_maximum_peptonizer_score
+PXD019298,PXD019298_Membrane,0.0,9825,9823,1,20,unresolved,none,none
+PXD019298,PXD019298_Mucograft_10286_membrane,0.0,9825,9823,1,16,unresolved,none,none
+PXD019412,PXD019412_R1,0.0,3702,9606,1,23,classified,none,highscore_competition
+PXD019412,PXD019412_R3,0.0,3702,9606,1,23,classified,none,highscore_competition
+PXD019412,PXD019412_R2,0.0,3702,9606,1,23,classified,none,highscore_competition
+PXD019470,PXD019470_MS-18-063-2,0.0,208964,4565,1,17,unresolved,none,none
+PXD019470,PXD019470_MS-18-063-3,0.0,208964,4565,1,17,unresolved,none,none
+PXD019470,PXD019470_MS-18-063-1,0.0,208964,4565,1,17,unresolved,none,none
+PXD019768,PXD019768_060614_470_8kD,0.0,9913,9606,1,20,unresolved,none,none
+PXD019768,PXD019768_060614_470_40kD,0.0,9913,9606,1,12,unresolved,none,none
+PXD019768,PXD019768_060614_470_17kD,0.0,9913,9606,1,20,classified,none,highscore_competition
+PXD019808,PXD019808_290419_sh_LR_3,0.0,10116,9606,1,10,unresolved,none,none
+PXD019808,PXD019808_290419_sh_LR_2,0.0,10116,9606,1,12,unresolved,none,none
+PXD019808,PXD019808_290419_sh_LR_1,0.0,10116,9606,1,9,unresolved,none,none
+PXD019808,PXD019808_290419_sh_LR_4,0.0,10116,9606,1,9,unresolved,none,none
+PXD020495,PXD020495_PVY22_14dpi,0.0,4113,3702,1,6,unresolved,none,none
+PXD020495,PXD020495_PVY28_14dpi,0.0,4113,3702,1,5,unresolved,none,none
+PXD020495,PXD020495_PVY22_8dpi,0.0,4113,3702,1,5,unresolved,none,none
+PXD020495,PXD020495_PVY28_8dpi,0.0,4113,3702,1,1,classified,none,low_maximum_peptonizer_score
+PXD020606,PXD020606_295-1,0.5,9606; 9825,9606; 9823,2,6,classified,multi_organism_mapping,multi_organism_mapping
+PXD020606,PXD020606_320_P41,0.0,9606; 9825,9823; 9913,2,6,classified,multi_organism_mapping,multi_organism_mapping
+PXD020606,PXD020606_295-2,0.5,9606; 9825,9606; 9913,2,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD020606,PXD020606_320_H42,0.5,9606; 9825,9606; 9823,2,10,classified,multi_organism_mapping,multi_organism_mapping
+PXD020732,PXD020732_RO-CS-191017_CammaratoA_AC_Sample1,0.0,9986,9606,1,16,unresolved,none,none
+PXD020732,PXD020732_RO-CS-191017_CammaratoA_AC_Sample2,0.0,9986,9606,1,17,unresolved,none,none
+PXD020786,PXD020786_18-164_Muestra4-003,0.5,13613; 9606,818; 9606,2,31,classified,multi_organism_mapping,multi_organism_mapping
+PXD020786,PXD020786_18-164_Muestra1-001,0.5,13613; 9606,818; 9606,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD020786,PXD020786_18-164_Muestra2-005,0.5,13613; 9606,818; 9606,2,31,classified,multi_organism_mapping,multi_organism_mapping
+PXD020786,PXD020786_18-164_Muestra3-002,0.5,13613; 9606,818; 9606,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD020786,PXD020786_18-164_Muestra6-004,0.5,13613; 9606,818; 9606,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD020786,PXD020786_18-164_Muestra5-006,0.5,13613; 9606,818; 9606,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD020858,PXD020858_190708_14,0.0,9606,9823,1,2,classified,none,low_maximum_peptonizer_score
+PXD020949,PXD020949_albican,0.0,1040610; 1147787,5476; 9913,2,22,classified,multi_organism_mapping,multi_organism_mapping
+PXD020956,PXD020956_WG,0.0,9825,9823,1,20,unresolved,none,none
+PXD021172,PXD021172_1636008-Q3,0.0,2850,9606,1,30,classified,none,highscore_competition
+PXD021172,PXD021172_1636008-Q2,0.0,2850,9606,1,30,classified,none,highscore_competition
+PXD021172,PXD021172_1636008-Q5_160914093628,0.0,2850,9606,1,30,classified,none,highscore_competition
+PXD021172,PXD021172_1636008-Q4,0.0,2850,9606,1,30,unresolved,none,none
+PXD021172,PXD021172_1636008-Q6_160914144623,0.0,2850,9606,1,30,classified,none,highscore_competition
+PXD021172,PXD021172_1636008-Q1,0.0,2850,9606,1,30,classified,none,highscore_competition
+PXD021232,PXD021232_Tumor_bearing,0.0,10090,9606,1,11,classified,none,highscore_competition
+PXD021328,PXD021328_pool-34,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD021328,PXD021328_pool-51,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD021328,PXD021328_pool-18,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD021423,PXD021423_Z8218LPCr_HA,0.0,52132,9606,1,26,unresolved,none,none
+PXD021516,PXD021516_20190625_QE25CM39_pl19056_BMukherjee_01,0.0,507601,9606,1,28,classified,none,highscore_competition
+PXD021516,PXD021516_20190625_QE25CM41_pl19056_BMukherjee_04,0.0,507601,10090,1,23,classified,none,highscore_competition
+PXD021516,PXD021516_20190625_QE25CM37_pl19056_BMukherjee_02,0.0,507601,10090,1,28,classified,none,highscore_competition
+PXD021516,PXD021516_20190625_QE25CM43_pl19056_BMukherjee_03,0.0,507601,9606,1,25,classified,none,highscore_competition
+PXD021574,PXD021574_U32SecM_C18_C22_heavy,0.5,562; 9913,562; 9606,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD021574,PXD021574_U32SecM_heavy,0.5,562; 9913,562; 9606,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD021574,PXD021574_U32SecM_C15_C18_heavy,0.5,562; 9913,562; 9606,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD021585,PXD021585_Genomic_Fibre_R3,0.0,1899318,9606,1,12,unresolved,none,none
+PXD021585,PXD021585_Virion,0.0,1899318,9823,1,16,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD021585,PXD021585_Genomic_Fibre_R1,0.0,1899318,9606,1,12,unresolved,none,none
+PXD021585,PXD021585_Genomic_Fibre_R2,0.0,1899318,9606,1,21,classified,none,highscore_competition
+PXD021648,PXD021648_QExHFX4_RSLC3_BSA_DSBU,0.0,9913,4932,1,14,classified,none,highscore_competition
+PXD021969,PXD021969_04OK20130918_PLIN_M2,0.0,10090,562,1,15,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD021969,PXD021969_03OK20130918_PLIN_M1,0.0,10090,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD021969,PXD021969_05OK20130918_PLIN_P1,0.0,10090,562,1,7,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD021970,PXD021970_QEp20-0471_Kaur_Chitinase-IP_1,0.0,5823,10090,1,23,classified,none,highscore_competition
+PXD022113,PXD022113_200911-MClass-20-002232-09-AXM,0.0,1578,109790,1,71,classified,none,highscore_competition
+PXD022606,PXD022606_Ac-IP-plus2-LysC-yeast-single-channel,0.0,4932,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD022606,PXD022606_Ac-IP-plus1-LysC-yeast-single-channel,0.0,4932,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD022606,PXD022606_Ac-IP-LysC-yeast-521-BSA-1051,0.0,4932,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD022606,PXD022606_Ac-IP-LysC-yeast-111,0.0,4932,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD022833,PXD022833_Hsp31-1_1_A,0.0,4932,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD022833,PXD022833_Hsp31-2_1_A,0.0,4932,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD022869,PXD022869_190131_CK_JF_Hype_autoAMP,0.0,9606,562,1,10,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD022869,PXD022869_2010012_CK_JF_Bip-AMP_Tryp,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD022970,PXD022970_03496_GA6_P040849_S00_A00_R1,0.0,10377,9823,1,2,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD022970,PXD022970_03496_GA1_P040844_S00_A00_R1,0.0,10377,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD022970,PXD022970_03496_GA4_P040847_S00_A00_R1,0.0,10377,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD022970,PXD022970_03417_GA1_P039996_A00_B00_R1,0.0,10377,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD022970,PXD022970_03496_GA3_P040846_S00_A00_R1,0.0,10377,562,1,1,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD022970,PXD022970_03417_GA2_P039997_A00_B00_R1,0.0,10377,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD022997,PXD022997_20180312_02_Qp1_TMT_1_Maja,0.0,10090,9606,1,19,unresolved,none,none
+PXD022997,PXD022997_20180312_03_Qp1_TMT_2_Maja,0.0,10090,9606,1,22,unresolved,none,none
+PXD023073,PXD023073_TGFA,0.0,562,9606,1,10,unresolved,none,none
+PXD023073,PXD023073_ODCK92R_OAZYSPM,0.0,562,9606,1,10,unresolved,none,none
+PXD023082,PXD023082_20191003_PC648-Braunstein_S5,0.0,246196,10090,1,28,unresolved,none,none
+PXD023082,PXD023082_20191003_PC648-Braunstein_S6,0.0,246196,10090,1,29,classified,none,highscore_competition
+PXD023169,PXD023169_12-06-2020-TNF-alpha_AB-1,0.0,9606,9913,1,12,unresolved,none,none
+PXD023169,PXD023169_12-06-2020-TNF-alpha-1,0.0,9606,9913,1,13,unresolved,none,none
+PXD023169,PXD023169_12-06-2020-TNF-alpha_AB-2,0.0,9606,9913,1,12,unresolved,none,none
+PXD023169,PXD023169_12-06-2020-TNF-alpha-2,0.0,9606,9913,1,13,unresolved,none,none
+PXD023169,PXD023169_12-06-2020-TNF-alpha-3,0.0,9606,9913,1,14,unresolved,none,none
+PXD023169,PXD023169_12-06-2020-TNF-alpha_AB-3,0.0,9606,9913,1,12,unresolved,none,none
+PXD023345,PXD023345_TiO2_2,0.0,9606,10116,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD023352,PXD023352_CB,0.0,93062,9606,1,11,unresolved,none,none
+PXD023352,PXD023352_CA,0.0,93062,9606,1,11,unresolved,none,none
+PXD023377,PXD023377_Eastogrp_082818_ip_b3,0.0,9606,10090,1,10,classified,none,highscore_competition
+PXD023417,PXD023417_20200110_Q1_MD_ColQ1-85_Dromer_BAL_Control_2,0.5,330879; 9606,9606; 9823,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD023417,PXD023417_20200110_Q1_MD_ColQ1-85_Dromer_BAL_Control_1,0.5,330879; 9606,9606; 9823,2,24,classified,multi_organism_mapping,multi_organism_mapping
+PXD023417,PXD023417_20200110_Q1_MD_ColQ1-85_Dromer_BAL_Control_3,0.5,330879; 9606,9606; 9823,2,22,classified,multi_organism_mapping,multi_organism_mapping
+PXD023417,PXD023417_20200110_Q1_MD_ColQ1-85_Dromer_BAL_Inf_1,0.5,330879; 9606,9606; 9823,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD023417,PXD023417_20200110_Q1_MD_ColQ1-85_Dromer_BAL_Inf_3,0.5,330879; 9606,9606; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD023417,PXD023417_20200110_Q1_MD_ColQ1-85_Dromer_BAL_Inf_2,0.5,330879; 9606,9606; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD023523,PXD023523_RAP-SY5Y-TAU-2,0.0,9606,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD023523,PXD023523_RAP-SY5Y-TAU-1,0.0,9606,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD023759,PXD023759_90415572maru_ESHP_FEMALE,0.0,375939,6339,1,18,unresolved,none,none
+PXD023759,PXD023759_90415570maru_ESHP_MIX,0.0,375939,6339,1,18,unresolved,none,none
+PXD023759,PXD023759_90415571maru_ESHP_MALE,0.0,375939,6339,1,18,unresolved,none,none
+PXD023831,PXD023831_P736_WT,0.0,3702,562,1,12,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD023973,PXD023973_160725_S_RBLS_02_01_FASP_45pto,0.0,272634,9796,1,25,classified,none,highscore_competition
+PXD023973,PXD023973_160926_S_RBLS_03_02_1ug,0.0,272634,9796,1,15,classified,none,highscore_competition
+PXD023973,PXD023973_160725_S_RBLS_01_01_FASP_45pto,0.0,272634,9796,1,28,classified,none,highscore_competition
+PXD023973,PXD023973_160926_S_RBLS_01_02_1ug,0.0,272634,9796,1,8,classified,none,highscore_competition
+PXD023973,PXD023973_160926_S_RBLS_02_02_1ug,0.0,272634,9796,1,15,classified,none,highscore_competition
+PXD024155,PXD024155_Ernie_180329_P0593_MR_AY_IP_TMT_fr3,0.5,10090; 9606,10090; 10116,2,6,classified,multi_organism_mapping,multi_organism_mapping
+PXD024155,PXD024155_Ernie_180329_P0593_MR_AY_IP_TMT_fr5,0.5,10090; 9606,10116; 9606,2,9,classified,multi_organism_mapping,multi_organism_mapping
+PXD024155,PXD024155_Ernie_180329_P0593_MR_AY_IP_TMT_fr4,0.6666666666666666,10090; 9606,10090,2,1,classified,multi_organism_mapping,multi_organism_mapping
+PXD024220,PXD024220_kj200805_vir_nuc_2mM_bs3_xl,0.0,1513458,562,1,3,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD024220,PXD024220_kj200805_vir_nuc_1mM_bs3_xl,0.0,1513458,562,1,4,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD024220,PXD024220_kj200805_vir_nuc_05mM_bs3_xl,0.0,1513458,562,1,4,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD024345,PXD024345_IJ_Lisardo_TMT1_3,0.0,10090,9796,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD024345,PXD024345_IJ_Lisardo_TMT1_1,0.0,10090,9606,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD024345,PXD024345_IJ_Lisardo_TMT1_2,0.0,10090,9796,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD024432,PXD024432_29jan_CC_Luiza_E1E2_Trypsin,0.5,374990; 9606,9606; 9823,2,13,classified,multi_organism_mapping,multi_organism_mapping
+PXD024432,PXD024432_29jan_CC_Luiza_E1E2_EndoH,0.5,374990; 9606,9606; 9913,2,20,classified,multi_organism_mapping,multi_organism_mapping
+PXD024432,PXD024432_21jan_CC_E1E2_DeGlyco,0.5,374990; 9606,9606; 9913,2,16,classified,multi_organism_mapping,multi_organism_mapping
+PXD024501,PXD024501_Hackam_ITRAQ,0.0,10090,10116,1,9,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD024563,PXD024563_OK1041_Fusion_MT_negative_Unreduced_Mutant,0.0,3702,9606,1,21,unresolved,none,none
+PXD024563,PXD024563_OK1041_Fusion_WT_positive_Reduced_WildType,0.0,3702,9606,1,21,classified,none,highscore_competition
+PXD024563,PXD024563_OK1041_Fusion_WT_negative_Unreduced_WildType,0.0,3702,9606,1,21,unresolved,none,none
+PXD024563,PXD024563_OK1041_Fusion_MT_positive_Reduced_Mutant,0.0,3702,9606,1,21,unresolved,none,none
+PXD024609,PXD024609_20200703_Gemm-phot_PS_trypsin_500ng_3,0.0,1379270,818,1,7,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD024609,PXD024609_20200703_Gemm-phot_PS_trypsin_500ng_2,0.0,1379270,818,1,9,classified,none,low_maximum_peptonizer_score
+PXD024749,PXD024749_qecf1-TM2941-5,0.5,562; 5833,5833; 9606,2,10,classified,multi_organism_mapping,multi_organism_mapping
+PXD025027,PXD025027_Probe3,0.0,9606,9913,1,21,classified,none,highscore_competition
+PXD025027,PXD025027_Probe4,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD025027,PXD025027_Probe2,0.0,9606,9913,1,21,classified,none,highscore_competition
+PXD025027,PXD025027_Probe5,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD025027,PXD025027_Probe6,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD025130,PXD025130_Q26432_MS20-025_Virus-purif_2,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD025131,PXD025131_Q26469_MS20-025_Virus-purif_3,0.0,2697049,9606,1,26,classified,none,highscore_competition
+PXD025131,PXD025131_Q26431_MS20-025_Virus-purif_1,0.0,2697049,9606,1,26,classified,none,highscore_competition
+PXD025131,PXD025131_Q26432_MS20-025_Virus-purif_2,0.0,2697049,9606,1,27,classified,none,highscore_competition
+PXD025133,PXD025133_PR19-277,0.0,9606,9913,1,12,classified,none,low_maximum_peptonizer_score
+PXD025440,PXD025440_C57_PBS_peptide,0.0,10090,3055,1,17,classified,none,highscore_competition
+PXD025472,PXD025472_20190909_GWT_GWT_1b,0.0,6239,562,1,14,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025472,PXD025472_20190909_GWT_GWT_4,0.0,6239,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025472,PXD025472_20190909_GWT_GWT_6,0.0,6239,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025472,PXD025472_20190909_GWT_GWT_2,0.0,6239,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025472,PXD025472_20190909_GWT_GWT_5,0.0,6239,562,1,20,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025472,PXD025472_20190909_GWT_GWT_3,0.0,6239,562,1,18,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025505,PXD025505_180612_NJ_Luxenburg_1,0.0,408170,818,1,30,classified,none,highscore_competition
+PXD025681,PXD025681_Mut-2,0.0,211586,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025681,PXD025681_Mut-3,0.0,211586,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025681,PXD025681_WT-3,0.0,211586,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025681,PXD025681_WT-2,0.0,211586,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025681,PXD025681_Mut-1,0.0,211586,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025681,PXD025681_WT-1,0.0,211586,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025803,PXD025803_20180403_QEp5_ViGi_SA_IFIT1cit-LysC,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025803,PXD025803_20180403_QEp5_ViGi_SA_IFIT1-LysC,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025912,PXD025912_Panx1_SILAC_Lumos2_B_global2,0.0,9606,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD025967,PXD025967_QE_MEM_20200803_1_1_2,0.0,443239,9606,1,20,unresolved,none,none
+PXD025967,PXD025967_QE_MEM_20200803_1_1_1,0.0,443239,9606,1,15,unresolved,none,none
+PXD025967,PXD025967_QE_MEM_20200803_1_2_2,0.0,443239,9606,1,19,unresolved,none,none
+PXD025967,PXD025967_QE_MEM_20200803_1_2_1,0.0,443239,9606,1,20,unresolved,none,none
+PXD026014,PXD026014_24hpi,0.0,9913,9606,1,10,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD026014,PXD026014_mock,0.0,9913,3702,1,7,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD026037,PXD026037_111820_6plex_protein_mix_sample_1_1,0.3333333333333333,4932; 9606; 9796; 9913,9534; 9606,4,2,classified,multi_organism_mapping,multi_organism_mapping
+PXD026046,PXD026046_IGG_-HEC-1-B,0.0,9606,1280,1,11,unresolved,none,none
+PXD026046,PXD026046_HA-HEC-1-B,0.0,9606,1280,1,10,classified,none,highscore_competition
+PXD026508,PXD026508_151105_Fazil_NTM,0.0,9606,9913,1,17,classified,none,highscore_competition
+PXD026598,PXD026598_K9031PRM101_MPS_3,0.0,83906,3702,1,9,unresolved,none,none
+PXD026598,PXD026598_K9031PRM101_TPS_1,0.0,83906,3702,1,9,unresolved,none,none
+PXD026598,PXD026598_K9031PRM101_MPS_2,0.0,83906,3702,1,9,unresolved,none,none
+PXD026655,PXD026655_FA298PRM1_NC_2,0.0,9825,9823,1,1,classified,none,low_maximum_peptonizer_score
+PXD026655,PXD026655_FA298PRM1_NC_1,0.0,9825,9823,1,1,classified,none,low_maximum_peptonizer_score
+PXD026655,PXD026655_FA298PRM1_Infect_2,0.0,9825,9823,1,1,classified,none,low_maximum_peptonizer_score
+PXD026798,PXD026798_Q08426_Bouafles18-3_8b,0.0,10239; 2; 2157; 2759,1492; 562; 9606; 9823,4,20,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD026798,PXD026798_Q08425_Bouafles18-3_8a,0.0,10239; 2; 2157; 2759,562; 818; 9606; 9823,4,11,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD026798,PXD026798_Q08427_Bouafles18-3_8c,0.0,10239; 2; 2157; 2759,3702; 562; 9606; 9823,4,21,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD026818,PXD026818_e200626e05,0.0,10116,10090,1,20,unresolved,none,none
+PXD026818,PXD026818_e200625e08,0.0,10116,10090,1,22,classified,none,highscore_competition
+PXD026818,PXD026818_e200626e11,0.0,10116,10090,1,22,unresolved,none,none
+PXD026822,PXD026822_C9212LQ_HHL5_2,0.0,9606,9913,1,29,classified,none,highscore_competition
+PXD026822,PXD026822_C9212LQ_HHL5_4,0.0,9606,9913,1,30,classified,none,highscore_competition
+PXD026822,PXD026822_C9212LQ_HHL5_3,0.0,9606,9913,1,30,classified,none,highscore_competition
+PXD026898,PXD026898_CCE20201014_Yi_Zhang_sample4_11_15_BHZ_SIR_5uL_1pmol_hfx1,0.0,9606,562,1,12,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD026898,PXD026898_CCE20201014_Yi_Zhang_sample5_11_16_BZ_WT_5uL_1pmol_hfx1,0.0,9606,562,1,12,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD027000,PXD027000_UM_F_50cm_2019_0508,0.0,9606,10090,1,23,classified,none,highscore_competition
+PXD027000,PXD027000_UM_F_50cm_2019_0464,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD027000,PXD027000_UM_F_50cm_2019_0413,0.0,9606,10090,1,20,classified,none,highscore_competition
+PXD027000,PXD027000_UM_F_50cm_2019_0465,0.0,9606,10090,1,17,unresolved,none,none
+PXD027015,PXD027015_20200724_QExHFX1_RSLC1_Uezuelmez_Breiteneder_ext_Uni_MFPL_rArah2_50p,0.0,925390,9606,1,22,unresolved,none,none
+PXD027181,PXD027181_WT2,0.0,1343074,562,1,18,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD027181,PXD027181_MUT2,0.0,1343074,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD027181,PXD027181_WT3,0.0,1343074,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD027181,PXD027181_WT1,0.0,1343074,562,1,12,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD027181,PXD027181_MUT1,0.0,1343074,562,1,7,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD027181,PXD027181_MUT3,0.0,1343074,562,1,13,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD027203,PXD027203_20210419__Larry_N2a_CPO,0.5,10090; 9606,10090; 10116,2,22,classified,multi_organism_mapping,multi_organism_mapping
+PXD027203,PXD027203_20210401__Larry_1C6_SY_cells,0.5,10090; 9606,9606; 9913,2,20,classified,multi_organism_mapping,multi_organism_mapping
+PXD027203,PXD027203_20210408__Larry_rerun_1C6_SY_cells,0.5,10090; 9606,9606; 9913,2,19,classified,multi_organism_mapping,multi_organism_mapping
+PXD027203,PXD027203_20210401__Larry_100_CPO_N2a,0.5,10090; 9606,10090; 10116,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD027260,PXD027260_R1735-P1,0.0,9825,9823,1,21,classified,none,highscore_competition
+PXD027260,PXD027260_R1735-P4,0.0,9825,9823,1,21,classified,none,highscore_competition
+PXD027412,PXD027412_P160552,0.5,11072; 9606,9606; 9913,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD027507,PXD027507_russ_1_20190717220810,0.0,1647520,9913,1,19,classified,none,highscore_competition
+PXD027507,PXD027507_russ_1,0.0,1647520,9606,1,20,classified,none,highscore_competition
+PXD027518,PXD027518_19-161_3,0.0,48479; 48510; 57731; 61964,562; 9606; 9796; 9823,4,9,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD027518,PXD027518_19-161_4,0.0,48479; 48510; 57731; 61964,4565; 9606; 9796; 9913,4,12,classified,multi_organism_mapping,multi_organism_mapping
+PXD027518,PXD027518_19-161_1,0.0,48479; 48510; 57731; 61964,10116; 562; 9606; 9796,4,9,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD027518,PXD027518_19-161_2,0.0,48479; 48510; 57731; 61964,10090; 10116; 9606; 9796,4,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD027524,PXD027524_VCL-TcUb-Total,0.0,1416333,5691,1,18,unresolved,none,none
+PXD027524,PXD027524_VCL-TcUb-UBI-Enriched,0.0,1416333,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD027539,PXD027539_ZLF-ESRRB,0.0,9825,9823,1,28,classified,none,highscore_competition
+PXD027539,PXD027539_ZLF-T-3F,0.0,9825,9823,1,29,classified,none,highscore_competition
+PXD027571,PXD027571_porcine_endometrium_of_gestational_day_15-1,0.0,9825,9823,1,24,classified,none,highscore_competition
+PXD027571,PXD027571_porcine_endometrium_of_gestational_day_15-2,0.0,9825,9823,1,18,unresolved,none,none
+PXD027571,PXD027571_porcine_endometrium_of_gestational_day_15-3,0.0,9825,9823,1,21,unresolved,none,none
+PXD027640,PXD027640_160611_T996neg_B,0.0,36329,5833,1,22,classified,none,highscore_competition
+PXD027640,PXD027640_160611_Med31_HA_B,0.0,36329,5833,1,22,classified,none,highscore_competition
+PXD027640,PXD027640_160611_T996neg_A,0.0,36329,5833,1,22,classified,none,highscore_competition
+PXD027640,PXD027640_160611_Med31_HA_A,0.0,36329,5833,1,22,classified,none,highscore_competition
+PXD027844,PXD027844_71081TPST_4,0.0,4081,3702,1,1,classified,none,low_maximum_peptonizer_score
+PXD027844,PXD027844_71081TPST_2,0.0,4081,3702,1,5,classified,none,low_maximum_peptonizer_score
+PXD027844,PXD027844_71081TPST_3,0.0,4081,4565,1,2,classified,none,low_maximum_peptonizer_score
+PXD027844,PXD027844_71081TPST_1,0.0,4081,4565,1,11,classified,none,low_maximum_peptonizer_score
+PXD027923,PXD027923_3A,0.0,9606,7227,1,16,classified,none,highscore_competition
+PXD028039,PXD028039_3324_AJ_Dimer-Tryp,0.0,9606,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD028039,PXD028039_3538_RA_O1_TG,0.0,9606,562,1,17,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD028039,PXD028039_3324_AJ_Tetramer-Tryp,0.0,9606,562,1,31,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD028039,PXD028039_3324_AJ_Dimer-Chymo,0.0,9606,562,1,6,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD028039,PXD028039_3324_AJ_Tetramer-Chymo,0.0,9606,562,1,9,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD028151,PXD028151_20170516_QE7_nLC3_DBJ_SA_COLLAB_MAX_TMT10phos_2mg_1st_01,0.0,9606,9913,1,6,classified,none,low_maximum_peptonizer_score
+PXD028151,PXD028151_20170516_QE7_nLC3_DBJ_SA_COLLAB_MAX_TMT10phos_2mg_2nd_02,0.0,9606,9913,1,6,classified,none,low_maximum_peptonizer_score
+PXD028151,PXD028151_20170516_QE7_nLC3_DBJ_SA_COLLAB_MAX_TMT10phos_2mg_3rd_02,0.0,9606,9913,1,6,classified,none,low_maximum_peptonizer_score
+PXD028557,PXD028557_TrizzinoM-21-G120-GelContrl-QEP,0.0,9606,4932,1,15,classified,none,highscore_competition
+PXD028582,PXD028582_ATP,0.0,10090,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD028652,PXD028652_VER-XL-2,0.5,2; 562,562; 818,2,2,classified,multi_organism_mapping,multi_organism_mapping
+PXD028652,PXD028652_VER-XL-1,0.5,2; 562,562; 818,2,2,classified,multi_organism_mapping,multi_organism_mapping
+PXD028742,PXD028742_YjgC_ForC1,0.0,224308,9606,1,9,unresolved,none,none
+PXD028742,PXD028742_YjgCD_ForCE1,0.0,224308,562,1,6,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD028742,PXD028742_YrhED_ForCE2,0.0,224308,9606,1,12,unresolved,none,none
+PXD028784,PXD028784_Pandanus_DroughtRecovery_12p5,0.0,260201,3702,1,18,unresolved,none,none
+PXD028784,PXD028784_Pandanus_DroughtRecovery_17p5,0.0,260201,3702,1,13,classified,none,highscore_competition
+PXD029055,PXD029055_BIRC6-236aa,0.0,9825,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD029055,PXD029055_Flag_2,0.0,9825,9823,1,22,classified,none,highscore_competition
+PXD029055,PXD029055_IgG_2,0.0,9825,9823,1,21,classified,none,highscore_competition
+PXD029055,PXD029055_IgG_1,0.0,9825,9606,1,14,unresolved,none,none
+PXD029055,PXD029055_Flag_1,0.0,9825,9823,1,22,classified,none,highscore_competition
+PXD029059,PXD029059_PacC30_GFP_Beeds_IP,0.0,229533,5518,1,25,unresolved,none,none
+PXD029059,PXD029059_GFP_beeds_IP,0.0,229533,5518,1,25,unresolved,none,none
+PXD029340,PXD029340_012312003ban_WT-3H,0.0,407148,9913,1,21,unresolved,none,none
+PXD029340,PXD029340_012312007ban_A1-1298-1H,0.0,407148,9913,1,17,unresolved,none,none
+PXD029340,PXD029340_012312009ban_A1-1298-3H,0.0,407148,9913,1,20,unresolved,none,none
+PXD029340,PXD029340_012312008ban_A1-1298-2H,0.0,407148,9913,1,18,classified,none,highscore_competition
+PXD029340,PXD029340_012312002ban_WT-2H,0.0,407148,9913,1,18,unresolved,none,none
+PXD029340,PXD029340_012312001ban_WT-1H,0.0,407148,9913,1,17,unresolved,none,none
+PXD029361,PXD029361_QEP2_DLEV_without_SAM_DDA_310116,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD029361,PXD029361_QEP2_DLEV_with_SAM_DDA_310116,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD029429,PXD029429_SILAC2_hTREM2IP,0.5,10090; 9606,1280; 9606,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD029429,PXD029429_293T_EmptyVector_Gel,0.5,10090; 9606,1280; 9606,2,18,classified,multi_organism_mapping,multi_organism_mapping
+PXD029429,PXD029429_293T_hTREM2_Gel,0.5,10090; 9606,9606; 9913,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD029552,PXD029552_L20182002792b,0.0,272563,9606,1,30,classified,none,highscore_competition
+PXD029675,PXD029675_4_DSSO_XL_MS2,0.0,99287,562,1,6,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD029675,PXD029675_4_DSSO_XL_ETD,0.0,99287,562,1,9,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD029675,PXD029675_PDUA_PDUP_BS3,0.0,99287,9606,1,12,classified,none,highscore_competition
+PXD029675,PXD029675_4_DSSO_XL_MS2MS3,0.0,99287,562,1,7,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD029675,PXD029675_PDUA_PDUD_BS3,0.0,99287,9606,1,9,classified,none,highscore_competition
+PXD029978,PXD029978_20201210-1-2L11-2,0.0,1351,1280,1,18,unresolved,none,none
+PXD029978,PXD029978_20201210-CK-2,0.0,1351,1280,1,23,unresolved,none,none
+PXD029978,PXD029978_20201210-1-2L11-1,0.0,1351,1280,1,24,classified,none,highscore_competition
+PXD029978,PXD029978_20201210-1-2L11-3,0.0,1351,1280,1,22,classified,none,highscore_competition
+PXD029978,PXD029978_20201210-CK-1,0.0,1351,1280,1,24,unresolved,none,none
+PXD029978,PXD029978_20201210-CK-3,0.0,1351,1280,1,22,classified,none,highscore_competition
+PXD030071,PXD030071_OECPI201201_02,0.0,3702,562,1,11,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD030071,PXD030071_OECPI201201_14,0.0,3702,562,1,8,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD030071,PXD030071_OECPI201201_18,0.0,3702,562,1,12,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD030071,PXD030071_OECPI201201_21,0.0,3702,562,1,11,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD030071,PXD030071_OECPI201201_24,0.0,3702,562,1,11,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD030071,PXD030071_OECPI201201_05,0.0,3702,562,1,8,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD030078,PXD030078_SSU_I2,0.0,2; 411483,105841; 1492,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD030078,PXD030078_SSU_G3,0.0,2; 411483,105841; 1492,2,25,classified,multi_organism_mapping,multi_organism_mapping
+PXD030078,PXD030078_SSU_G1,0.0,2; 411483,105841; 1492,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD030078,PXD030078_SSU_I3,0.0,2; 411483,105841; 1492,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD030078,PXD030078_SSU_G2,0.0,2; 411483,105841; 1492,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD030078,PXD030078_SSU_I1,0.0,2; 411483,105841; 1492,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD030240,PXD030240_JM6461_782,0.0,10090,9913,1,6,classified,none,low_maximum_peptonizer_score
+PXD030467,PXD030467_20190213_KH1,0.5,10090; 12939,10090; 9913,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD030570,PXD030570_Luc,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD030752,PXD030752_ex003714,0.0,9606,10090,1,21,unresolved,none,none
+PXD030752,PXD030752_ex003710,0.0,9606,7227,1,23,classified,none,highscore_competition
+PXD030847,PXD030847_QEP2_7994_PZRE_BOS-1_2_trypsin_030918,0.0,3860,3702,1,23,classified,none,highscore_competition
+PXD030847,PXD030847_FS1_8111_PZRE_BOS-2_1_151018_20181025020947,0.0,3860,3702,1,23,classified,none,highscore_competition
+PXD030847,PXD030847_HFX_8709_PZRE_BOS-4_1_261218,0.0,3860,3702,1,23,classified,none,highscore_competition
+PXD030847,PXD030847_FS1_8111_PZRE_BOS-3_1_151018_20181025051149,0.0,3860,3702,1,23,classified,none,highscore_competition
+PXD030883,PXD030883_20211124_CO_1051JoSc_R25,0.5,1773; 9606,10090; 9606,2,6,classified,multi_organism_mapping,multi_organism_mapping
+PXD030883,PXD030883_20211124_CO_1051JoSc_R26,0.5,1773; 9606,10090; 9606,2,3,classified,multi_organism_mapping,multi_organism_mapping
+PXD030929,PXD030929_QX201111,0.5,476; 562,562; 9606,2,10,classified,multi_organism_mapping,multi_organism_mapping
+PXD030929,PXD030929_QX09145,0.5,476; 562,562; 818,2,5,classified,multi_organism_mapping,multi_organism_mapping
+PXD030929,PXD030929_QX201112,0.5,476; 562,562; 9606,2,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD030929,PXD030929_QX09144,0.5,476; 562,562; 9606,2,2,classified,multi_organism_mapping,multi_organism_mapping
+PXD030973,PXD030973_02_PhoP-A182CouA_R,0.5,2; 562,562; 9823,2,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD030973,PXD030973_BasR,0.5,2; 562,562; 9606,2,4,classified,multi_organism_mapping,multi_organism_mapping
+PXD030973,PXD030973_01_CueR-F58CouA,0.5,2; 562,562; 9606,2,11,classified,multi_organism_mapping,multi_organism_mapping
+PXD031003,PXD031003_TB-CS-160920_KonstantopoulosA_LW_phospho_2_CTY_SK2,0.0,10090,9913,1,8,classified,none,low_maximum_peptonizer_score
+PXD031003,PXD031003_TB-CS-160920_KonstantopoulosA_LW_4_25p,0.0,10090,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031089,PXD031089_3M,0.0,562,7955,1,21,classified,none,highscore_competition
+PXD031089,PXD031089_12M,0.0,562,7955,1,24,classified,none,highscore_competition
+PXD031089,PXD031089_6M,0.0,562,7955,1,25,classified,none,highscore_competition
+PXD031089,PXD031089_1M,0.0,562,7955,1,20,classified,none,highscore_competition
+PXD031089,PXD031089_9M,0.0,562,7955,1,19,classified,none,highscore_competition
+PXD031140,PXD031140_20210424_NB_CNX_enrichment_eV_2,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031140,PXD031140_20210424_NB_CNX_enrichment_CNX_3,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031140,PXD031140_20210424_NB_CNX_enrichment_CNX_2,0.0,9606,562,1,25,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031140,PXD031140_20210424_NB_CNX_enrichment_eV_3,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031141,PXD031141_MSB44675A,0.0,184922,9913,1,22,classified,none,highscore_competition
+PXD031141,PXD031141_MSB39475A,0.0,184922,9913,1,22,classified,none,highscore_competition
+PXD031141,PXD031141_MSB44674A,0.0,184922,9913,1,22,classified,none,highscore_competition
+PXD031338,PXD031338_TMT_LP922056_Set2,0.5,10116; 9606,9606; 9913,2,9,classified,multi_organism_mapping,multi_organism_mapping
+PXD031338,PXD031338_TMT_LP922056_Set1,0.5,10116; 9606,9606; 9913,2,9,classified,multi_organism_mapping,multi_organism_mapping
+PXD031338,PXD031338_TMT_ARUK3001185_Set1,0.5,10116; 9606,9606; 9913,2,9,classified,multi_organism_mapping,multi_organism_mapping
+PXD031338,PXD031338_TMT_ARUK3001185_Set2,0.5,10116; 9606,9606; 9913,2,16,classified,multi_organism_mapping,multi_organism_mapping
+PXD031605,PXD031605_130916_Ines_iTRAQ,0.0,9606,10090,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD031623,PXD031623_MD074LQ_A_42_3,0.0,235,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031623,PXD031623_MD074LQ_A_42_2,0.0,235,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031623,PXD031623_MD074LQ_B_28_1,0.0,235,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031623,PXD031623_MD074LQ_B_28_3,0.0,235,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031623,PXD031623_MD074LQ_A_42_1,0.0,235,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031623,PXD031623_MD074LQ_B_28_2,0.0,235,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD031801,PXD031801_MS201900102_PKA2,0.0,10090,9606,1,27,classified,none,highscore_competition
+PXD032257,PXD032257_Service_Ferbeyre_070316_7,0.0,9606,9823,1,19,classified,none,highscore_competition
+PXD032257,PXD032257_Service_Ferbeyre_070316_3,0.0,9606,10090,1,19,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD032257,PXD032257_Service_Ferbeyre_070316_5,0.0,9606,4932,1,18,classified,none,low_maximum_peptonizer_score
+PXD032360,PXD032360_F20-22,0.5,10090; 383379,10090; 5811,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD032375,PXD032375_20210222_CO_0997SuUe_R04,0.5,316273; 3702,3702; 562,2,29,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD032375,PXD032375_20210222_CO_0997SuUe_R01,0.5,316273; 3702,3702; 562,2,29,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD032375,PXD032375_20210222_CO_0997SuUe_R05,0.5,316273; 3702,3702; 562,2,29,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD032375,PXD032375_20210222_CO_0997SuUe_R03,0.5,316273; 3702,3702; 562,2,29,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD032375,PXD032375_20210222_CO_0997SuUe_R02,0.5,316273; 3702,3702; 562,2,29,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD032375,PXD032375_20210222_CO_0997SuUe_R06,0.5,316273; 3702,3702; 562,2,30,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD032738,PXD032738_R2,0.0,3728,3702,1,28,classified,none,highscore_competition
+PXD032739,PXD032739_R3,0.0,3728,3702,1,24,classified,none,highscore_competition
+PXD032739,PXD032739_R2,0.0,3728,3702,1,25,classified,none,highscore_competition
+PXD032931,PXD032931_PrkA_S219E_PrkC_ATP,0.0,224308,562,1,15,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD032931,PXD032931_PrkA_PrkC_ATP,0.0,224308,562,1,15,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD033055,PXD033055_4153_RA_AS_DSBU,0.0,9606,9823,1,8,classified,none,low_maximum_peptonizer_score
+PXD033181,PXD033181_L2_220303_JS_3165_S01_MYCMAX127_2000nM_DSSO_XLMS,0.0,9606,10090,1,15,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD033181,PXD033181_L2_210503_JS_2067_XLMS_S03_C_B127_4000nM_DSSO,0.0,9606,4565,1,15,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD033619,PXD033619_MS4_naive_9A10,0.0,9606,10090,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD033619,PXD033619_MS5_primed_9A10,0.0,9606,9913,1,16,unresolved,none,none
+PXD033619,PXD033619_MS2_primed_9A10,0.0,9606,4565,1,5,classified,none,low_maximum_peptonizer_score
+PXD033633,PXD033633_20201218_QEHFX3_JLow_JZ_XLMS_C1_reinject,0.0,9606,10090,1,7,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD033633,PXD033633_20201218_QEHFX3_JLow_JZ_XLMS_C1,0.0,9606,10090,1,9,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD033840,PXD033840_Control_IP,0.0,9606,9913,1,10,classified,none,highscore_competition
+PXD034393,PXD034393_QEp21-1437_Bircher_SR6-GEF1_Band_2,0.0,7227,9606,1,13,unresolved,none,none
+PXD034393,PXD034393_QEp21-1447_Bircher_SR6-GEF1_Band_3,0.0,7227,9606,1,15,unresolved,none,none
+PXD034563,PXD034563_RB-VP-PTP69D-OE-CID_sHCD,0.0,7227,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD034563,PXD034563_RB-VP-PTP69D-WT-CID_sHCD,0.0,7227,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD034563,PXD034563_RB-VP-PTP69D-MT-CID_sHCD,0.0,7227,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD034577,PXD034577_QEp19-2033_Nyvltova_PET,0.0,9606,1280,1,9,classified,none,highscore_competition
+PXD034577,PXD034577_QEp19-2029_Nyvltova_11,0.0,9606,1280,1,8,unresolved,none,none
+PXD034865,PXD034865_pp_2022_042_WT,0.0,4932,9606,1,24,classified,none,highscore_competition
+PXD034865,PXD034865_pp_2022_042_V155G,0.0,4932,9606,1,24,classified,none,highscore_competition
+PXD034865,PXD034865_pp_2022_042_Y330C,0.0,4932,9606,1,24,classified,none,highscore_competition
+PXD034865,PXD034865_pp_2022_042_S356N,0.0,4932,9606,1,24,classified,none,highscore_competition
+PXD034893,PXD034893_ea_NEI_variantsCOLDc18forC30_122120_01,0.5,562; 9606,7227; 9606,2,20,classified,multi_organism_mapping,multi_organism_mapping
+PXD035019,PXD035019_Q29429_MS21-060_2,0.0,76126,9606,1,17,unresolved,none,none
+PXD035019,PXD035019_Q29430_MS21-060_3,0.0,76126,9606,1,16,unresolved,none,none
+PXD035019,PXD035019_Q29433_MS21-060_6,0.0,76126,9606,1,13,unresolved,none,none
+PXD035019,PXD035019_Q29432_MS21-060_5,0.0,76126,9823,1,16,classified,none,highscore_competition
+PXD035019,PXD035019_Q29434_MS21-060_7,0.0,76126,9606,1,16,unresolved,none,none
+PXD035019,PXD035019_Q29431_MS21-060_4,0.0,76126,9606,1,12,unresolved,none,none
+PXD035172,PXD035172_20211116_Goldberg_2040_01_sumit1,0.0,36329,9606,1,16,unresolved,none,none
+PXD035172,PXD035172_NFLD_mutant,0.0,36329,9606,1,15,unresolved,none,none
+PXD035172,PXD035172_20211116_Goldberg_2040_02_sumit2,0.0,36329,9606,1,19,unresolved,none,none
+PXD035225,PXD035225_20210127_AS_IP_NF54_DSP_Rep2,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD035225,PXD035225_20210217_AS_IP_SMC3_DSP_Rep1,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD035225,PXD035225_20210217_AS_IP_SMC3_DSP_Rep3,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD035320,PXD035320_Lara_210412_P1615_PH_JW_T_R1,0.0,759272,9606,1,16,unresolved,none,none
+PXD035434,PXD035434_SREA_GFP_1,0.0,229533,9913,1,20,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD035664,PXD035664_23-01-25_MJH_CSF3R_preFPLC_Chymo_EThcD,0.0,9606,9823,1,11,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD035664,PXD035664_190514_MJH_Fn3_CSF3R,0.0,9606,9823,1,11,classified,none,low_maximum_peptonizer_score
+PXD035664,PXD035664_23-02-02_MJH_IL31RaPngaseF_rec_Chymo_EThcD,0.0,9606,10090,1,21,unresolved,none,none
+PXD035682,PXD035682_47_60min_Ca2_v_37_16h,0.6666666666666666,2; 4932,4932,2,1,classified,multi_organism_mapping,multi_organism_mapping
+PXD035682,PXD035682_37_15min_v_37_16h,0.6666666666666666,2; 4932,4932,2,1,classified,multi_organism_mapping,multi_organism_mapping
+PXD035682,PXD035682_47_15min_Ca_v_37_16h,0.6666666666666666,2; 4932,4932,2,1,classified,multi_organism_mapping,multi_organism_mapping
+PXD035682,PXD035682_37_60min_v_37_16h,0.5,2; 4932,4932; 9796,2,15,classified,multi_organism_mapping,multi_organism_mapping
+PXD035682,PXD035682_47_60min_Ca2_v_NoCa2,0.5,2; 4932,4932; 9796,2,4,classified,multi_organism_mapping,multi_organism_mapping
+PXD035767,PXD035767_SH_021_20191021_ZR_SH-175,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035767,PXD035767_SH_017_20191021_ZR_SH-173,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035806,PXD035806_Nagalo_100521_Sample_01_6728_DDA,0.0,10090,9606,1,14,unresolved,none,none
+PXD035817,PXD035817_20210514_easynano50cm_3hr_30min_Huh7_5uM_AMA_0_12h_TMT_phospho_2_1,0.0,9606,10090,1,12,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD035817,PXD035817_20210514_easynano50cm_3hr_30min_Huh7_5uM_AMA_0_12h_TMT_phospho_2_2,0.0,9606,10090,1,12,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD035849,PXD035849_Sh-80,0.0,9606,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035850,PXD035850_OUTglu,0.0,244366,562,1,14,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035850,PXD035850_IN,0.0,244366,562,1,28,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035850,PXD035850_INglu,0.0,244366,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035850,PXD035850_OUT,0.0,244366,9606,1,11,unresolved,none,none
+PXD035934,PXD035934_Req121-XAG-Pearl_FT_02,0.0,9606,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035934,PXD035934_Req121-XAG-Pearl_FT_01,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD035934,PXD035934_Req121-XAG-Pearl_IMAC_02,0.0,9606,562,1,20,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD036192,PXD036192_CCE20200902_Brianna_Klein_KutateladzeLab_sample1_approx1pmol_hfx1,0.0,9606,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD036192,PXD036192_CCE20200902_Brianna_Klein_KutateladzeLab_sample2_approx1pmol_hfx1,0.0,9606,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD036200,PXD036200_liuwei94,0.0,9606,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD036201,PXD036201_liuwei-55,0.0,9606,562,1,28,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD036225,PXD036225_PovelonesM-21-G213-LacZ1-rep1-QEP,0.0,7159,7227,1,26,classified,none,highscore_competition
+PXD036225,PXD036225_PovelonesM-21-G213-LacZ1-rep2-QEP,0.0,7159,7227,1,25,classified,none,highscore_competition
+PXD036225,PXD036225_PovelonesM-21-G213-Cactus-rep3-QEP,0.0,7159,7227,1,25,classified,none,highscore_competition
+PXD036225,PXD036225_PovelonesM-21-G213-Cactus-rep1-QEP,0.0,7159,7227,1,26,classified,none,highscore_competition
+PXD036225,PXD036225_PovelonesM-21-G213-LacZ1-rep3-QEP,0.0,7159,7227,1,25,classified,none,highscore_competition
+PXD036225,PXD036225_PovelonesM-21-G213-Cactus-rep2-QEP,0.0,7159,7227,1,22,classified,none,highscore_competition
+PXD036447,PXD036447_ZH_JGL_SARS-CoV-2_IP_2ug_WH_081120_01,0.0,9606,10090,1,12,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD036634,PXD036634_LD028GI_Flag,0.0,9606,10090,1,23,classified,none,highscore_competition
+PXD036634,PXD036634_LD028GI_igg,0.0,9606,10090,1,23,classified,none,highscore_competition
+PXD036774,PXD036774_2019_0903Chiorini03,0.0,9606,9913,1,17,classified,none,highscore_competition
+PXD036877,PXD036877_4c,0.0,2254; 2594798,2246; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD036877,PXD036877_4a,0.0,2254; 2594798,2246; 9606,2,14,classified,multi_organism_mapping,multi_organism_mapping
+PXD036877,PXD036877_4b,0.0,2254; 2594798,2246; 9606,2,18,classified,multi_organism_mapping,multi_organism_mapping
+PXD037034,PXD037034_8101072719lit_WT,0.40625,10036; 10090; 10116; 10117; 1280; 1351; 2242; 31646; 3347; 3708; 3715; 3827; 3888; 3988; 4097; 4113; 4146; 44689; 4513; 4530; 4932; 5476; 562; 59729; 6239; 7091; 7227; 7634; 7955; 79698; 7998; 8049; 85963; 8801; 9031; 9534; 9544; 9598; 9600; 9606; 9796; 9825; 9913,10090; 10116; 3055; 3702; 4530; 4565; 4932; 5476; 562; 5691; 5833; 5850; 6239; 7227; 7955; 8355; 9031; 9606; 9796; 9823; 9913,43,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD037034,PXD037034_911262329litw_Scc1-TAP,0.4057971014492754,10036; 10090; 10116; 10117; 1280; 1351; 2242; 31646; 3347; 3708; 3715; 3827; 3888; 3988; 4097; 4113; 4146; 44689; 4513; 4530; 4932; 5476; 562; 59729; 6239; 7091; 7227; 7634; 7955; 79698; 7998; 8049; 85963; 8801; 9031; 9534; 9544; 9598; 9600; 9606; 9796; 9825; 9913,10090; 10116; 105841; 1280; 1492; 1590; 3055; 3702; 4530; 4565; 4932; 5476; 562; 5691; 5833; 5850; 6239; 7227; 7955; 818; 8355; 9031; 9606; 9796; 9823; 9913,43,26,classified,multi_organism_mapping,multi_organism_mapping
+PXD037103,PXD037103_080422_AC_3,0.0,1043002,5476,1,26,unresolved,none,none
+PXD037103,PXD037103_080422_AC_1,0.0,1043002,5476,1,24,unresolved,none,none
+PXD037103,PXD037103_080422_AC_2,0.0,1043002,5476,1,26,classified,none,highscore_competition
+PXD037492,PXD037492_QEP2_2018_0117_AZ_104_az667_xlink05,0.5,4932; 9913,4932; 9606,2,13,classified,multi_organism_mapping,multi_organism_mapping
+PXD037492,PXD037492_QEP2_2016_0121_RJ_58_201_xlink09,0.5,4932; 9913,9606; 9913,2,15,classified,multi_organism_mapping,multi_organism_mapping
+PXD037492,PXD037492_QEP2_2018_0117_AZ_105_az667_xlink09,0.5,4932; 9913,4932; 9606,2,10,classified,multi_organism_mapping,multi_organism_mapping
+PXD037492,PXD037492_QEP2_2016_0121_RJ_74_206_xlink09,0.5,4932; 9913,9606; 9913,2,15,classified,multi_organism_mapping,multi_organism_mapping
+PXD037492,PXD037492_QEP2_2016_0121_RJ_57_201_xlink05,0.5,4932; 9913,9606; 9913,2,15,classified,multi_organism_mapping,multi_organism_mapping
+PXD037492,PXD037492_QEP2_2016_0121_RJ_73_206_xlink05,0.5,4932; 9913,9606; 9913,2,19,classified,multi_organism_mapping,multi_organism_mapping
+PXD037838,PXD037838_qe3_2016mar29_02_90t20_160328mmsk2_1,0.0,9606,10090,1,29,classified,none,highscore_competition
+PXD037838,PXD037838_qe1_2016feb05_07_90t20_mmsk1_2,0.0,9606,10090,1,19,classified,none,highscore_competition
+PXD037907,PXD037907_20190603_1276_NTUHMCHuang_TMTC1,0.0,9606,562,1,31,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD037907,PXD037907_20190603_1274_NTUHMCHuang_Control,0.0,9606,562,1,31,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD037955,PXD037955_Cos-7_HLA-A0201-Delta-Raw_Data,0.0,9534,9606,1,25,classified,none,highscore_competition
+PXD038116,PXD038116_Arabidopsis_DMC1_in_vitro_ubiquitination_assay-MS-3,0.0,3702,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD038281,PXD038281_12Sep22_NTU_KIM_LPGDS,0.0,9606,562,1,14,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD038392,PXD038392_MS20211215-YS-553__Identification_of_N-terminal_acetylation_,0.0,10090,9606,1,22,unresolved,none,none
+PXD038653,PXD038653_NIK,0.0,9606,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD039025,PXD039025_AEX_proteomics_peptidases,0.0,29760,7227,1,7,unresolved,none,none
+PXD039025,PXD039025_SEC_proteomics_peptidases,0.0,29760,7227,1,11,unresolved,none,none
+PXD039266,PXD039266_20210827_T2_005,0.0,1645733,9606,1,17,unresolved,none,none
+PXD039266,PXD039266_20210827_T2_003,0.0,1645733,9606,1,11,classified,none,low_maximum_peptonizer_score
+PXD039266,PXD039266_20210827_T2_004,0.0,1645733,9606,1,17,unresolved,none,none
+PXD039267,PXD039267_C2-20220826_T4_009-Stage_1,0.0,1645733,9606,1,12,unresolved,none,none
+PXD039267,PXD039267_C4-20200902_T4_006-Stage_1,0.0,1645733,9606,1,12,unresolved,none,none
+PXD039267,PXD039267_C4-20200902_T4_010-Stage_2,0.0,1645733,9606,1,12,unresolved,none,none
+PXD039300,PXD039300_injel_AHMU_ko_dnalil_20220211,0.0,10090,9606,1,29,classified,none,highscore_competition
+PXD039327,PXD039327_WD089TQ_2,0.0,10090,9606,1,10,unresolved,none,none
+PXD039327,PXD039327_WD089TQ_1,0.0,10090,9606,1,9,classified,none,low_maximum_peptonizer_score
+PXD039327,PXD039327_WD089TQ_5,0.0,10090,9606,1,9,classified,none,low_maximum_peptonizer_score
+PXD039327,PXD039327_WD089TQ_6,0.0,10090,9606,1,9,classified,none,low_maximum_peptonizer_score
+PXD039327,PXD039327_WD089TQ_4,0.0,10090,9606,1,5,classified,none,low_maximum_peptonizer_score
+PXD039327,PXD039327_WD089TQ_3,0.0,10090,9606,1,12,classified,none,low_maximum_peptonizer_score
+PXD039834,PXD039834_sErbB2_293,0.0,9606,9913,1,9,unresolved,none,none
+PXD039835,PXD039835_sErbB2_CHO,0.0,9606,9913,1,9,unresolved,none,none
+PXD039939,PXD039939_ACE_0701_JB01_240min,0.0,9606,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD039998,PXD039998_02,0.0,9606,9913,1,14,classified,none,highscore_competition
+PXD039998,PXD039998_03,0.0,9606,9913,1,14,classified,none,highscore_competition
+PXD039998,PXD039998_01,0.0,9606,9913,1,14,classified,none,highscore_competition
+PXD040174,PXD040174_20221203_BH_b-actin,0.3333333333333333,2665958; 4932; 9606,4932; 9823; 9913,3,22,classified,multi_organism_mapping,multi_organism_mapping
+PXD040174,PXD040174_20221203_BH_RMA,0.3333333333333333,2665958; 4932; 9606,9606; 9823; 9913,3,16,classified,multi_organism_mapping,multi_organism_mapping
+PXD040174,PXD040174_20221203_BH_g-actin,0.3333333333333333,2665958; 4932; 9606,10116; 4932; 9913,3,19,classified,multi_organism_mapping,multi_organism_mapping
+PXD040273,PXD040273_M2_140min_1200ng_Run1,0.0,1417997; 2,6239; 7227,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD040273,PXD040273_M1_140min_1200ng_Run1,0.0,1417997; 2,7227; 9606,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD040273,PXD040273_M3_140min_1200ng_Run1,0.0,1417997; 2,7227; 9606,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD040945,PXD040945_05dez_Andre_pCDNA_3,0.0,10090,9913,1,18,classified,none,highscore_competition
+PXD041070,PXD041070_20220106_jcl_ATa_Vanaja_ctrl2_300ng_60min_Wat25cmBEH_1,0.5,10090; 562,10090; 9913,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD041082,PXD041082_20210705_EXPL2_nLC11_MEM_collab_77min_DDA_Ancient_labblank_JS_Palto,0.0,6447,9606,1,8,unresolved,none,none
+PXD041082,PXD041082_20210705_EXPL2_nLC11_MEM_collab_77min_DDA_Ancient_mollusk_Palto501,0.0,6447,9606,1,10,unresolved,none,none
+PXD041082,PXD041082_20210705_EXPL2_nLC11_MEM_collab_77min_DDA_Ancient_mollusk_Palto500,0.0,6447,9606,1,8,unresolved,none,none
+PXD041082,PXD041082_20210705_EXPL2_nLC11_MEM_collab_77min_DDA_Ancient_mollusk_Palto499,0.0,6447,9606,1,8,unresolved,none,none
+PXD041372,PXD041372_230303_PIEZO_Pure_GFKT_20230313174158,0.0,10090,9606,1,21,classified,none,highscore_competition
+PXD041469,PXD041469_OT_180119_29_MS18_010_Arsheed_MAP3KPto,0.0,4097,3702,1,25,classified,none,highscore_competition
+PXD041469,PXD041469_OT_180119_29_MS18_010_Arsheed_MAP3K,0.0,4097,3702,1,21,classified,none,highscore_competition
+PXD041469,PXD041469_OT_180119_29_MS18_010_Arsheed_MAP3KHR,0.0,4097,3702,1,24,classified,none,highscore_competition
+PXD041469,PXD041469_OT_180119_29_MS18_010_Arsheed_MAP3K_Ndelta,0.0,4097,3702,1,26,classified,none,highscore_competition
+PXD041516,PXD041516_907081188mar_ES_HPCFEMALE,0.0,375939,6239,1,22,unresolved,none,none
+PXD041516,PXD041516_907081187mar_ES_HPCMALE,0.0,375939,6239,1,22,unresolved,none,none
+PXD041516,PXD041516_907081185mar_ES_HPFEMALE,0.0,375939,6239,1,22,classified,none,highscore_competition
+PXD041516,PXD041516_907081184mar_ES_HPMALE,0.0,375939,6239,1,21,classified,none,highscore_competition
+PXD041547,PXD041547_dbEC-Exo1_W2,0.0,10090,10116,1,23,classified,none,highscore_competition
+PXD041547,PXD041547_dbEC-Exo2_W5,0.0,10090,10116,1,21,classified,none,highscore_competition
+PXD041693,PXD041693_20220218_ArmbrusterC_PMEF1_120K_clm192_WC18_65cm_HCD_OT_AGtrap_val50_6_15to38B_180m_4ul_01,0.0,1351; 529507,1280; 562,2,28,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD041693,PXD041693_20220218_ArmbrusterC_PMEF2_120K_clm192_WC18_65cm_HCD_OT_AGtrap_val50_6_15to38B_180m_4ul_01,0.0,1351; 529507,1590; 562,2,29,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD041693,PXD041693_20220218_ArmbrusterC_PM1_120K_clm192_WC18_65cm_HCD_OT_AGtrap_val50_6_15to38B_180m_4ul_01,0.0,1351; 529507,562; 818,2,30,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD041693,PXD041693_20220218_ArmbrusterC_PM2_120K_clm192_WC18_65cm_HCD_OT_AGtrap_val50_6_15to38B_180m_4ul_01,0.0,1351; 529507,1492; 562,2,30,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD041693,PXD041693_20220218_ArmbrusterC_EF2_120K_clm192_WC18_65cm_HCD_OT_AGtrap_val50_6_15to38B_180m_4ul_01,0.0,1351; 529507,1280; 1590,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD041693,PXD041693_20220218_ArmbrusterC_EF1_120K_clm192_WC18_65cm_HCD_OT_AGtrap_val50_6_15to38B_180m_4ul_01,0.0,1351; 529507,1280; 1590,2,24,classified,multi_organism_mapping,multi_organism_mapping
+PXD041814,PXD041814_anti-IgG_1,0.0,9606,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD041814,PXD041814_anti-Flag_2,0.0,9606,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD042535,PXD042535_20190109_03_CG_human,0.0,9796,9606,1,2,classified,none,low_maximum_peptonizer_score
+PXD042584,PXD042584_ams_00252,0.0,7108; 9606,7227; 9823,2,19,classified,multi_organism_mapping,multi_organism_mapping
+PXD043031,PXD043031_087_0002_03A_R_24DEC20_MIX_HUM_LU2_0000_08AM_60min_REM_REM_01,0.0,9606,9913,1,7,classified,none,low_maximum_peptonizer_score
+PXD043233,PXD043233_20201030_MAA_JG_CSNK1D_PhosphoSites_Tryp_201030165647,0.0,9606,562,1,18,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD043500,PXD043500_R20220801359,0.0,9606,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD043500,PXD043500_R20220901668,0.0,9606,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD043637,PXD043637_221028_GMLO-Andra_IPMS_5of15ul_3hrrgad_sample05,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD043637,PXD043637_221028_GMLO-Andra_IPMS_5of15ul_3hrrgad_sample02,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD043675,PXD043675_2,0.0,6446,9606,1,2,classified,none,low_maximum_peptonizer_score
+PXD043675,PXD043675_1,0.0,6446,9606,1,14,unresolved,none,none
+PXD043802,PXD043802_FOXA2-3,0.0,9606,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD043900,PXD043900_MR_AC_D_Wicke_161222_201222_Expl3_XL_ylxR-RNA_DEB_rep1_2-1,0.0,1423,9606,1,26,classified,none,highscore_competition
+PXD043900,PXD043900_MR_AC_D_Wicke_161222_201222_Expl3_XL_ylxR-RNA_NM_rep1_2,0.0,1423,9606,1,26,classified,none,highscore_competition
+PXD043900,PXD043900_MR_AC_D_Wicke_161222_201222_Expl3_XL_RnpA-RNA_DEB_rep1_1-2,0.0,1423,9606,1,26,classified,none,highscore_competition
+PXD043900,PXD043900_MR_AC_D_Wicke_161222_201222_Expl3_XL_RnpA-RNA_NM_rep1_1,0.0,1423,9606,1,26,classified,none,highscore_competition
+PXD043924,PXD043924_20230302_RH-KU80-HA_control-1,0.0,508771,5811,1,23,classified,none,highscore_competition
+PXD043994,PXD043994_20210202_RH-TIR-HA_control-1,0.0,508771,9606,1,23,unresolved,none,none
+PXD043994,PXD043994_20210202_RH-TIR-HA_control-2,0.0,508771,9606,1,27,unresolved,none,none
+PXD044029,PXD044029_20211107_OBECM_4h_TMT10_pY,0.0,9606,9913,1,16,unresolved,none,none
+PXD044029,PXD044029_20211107_OBECM_24h_TMT10_pY,0.0,9606,9913,1,18,classified,none,highscore_competition
+PXD044147,PXD044147_Jamila_2ml_C_120919_15562901,0.0,9606,9913,1,18,classified,none,highscore_competition
+PXD044161,PXD044161_9802_TiO2_1,0.0,10090,9606,1,9,classified,none,low_maximum_peptonizer_score
+PXD044242,PXD044242_220511-CK2,0.0,67593,9606,1,28,classified,none,highscore_competition
+PXD044242,PXD044242_220511-CK1,0.0,67593,10090,1,28,classified,none,highscore_competition
+PXD044242,PXD044242_DOE20220522-5-4,0.0,67593,9606,1,27,classified,none,highscore_competition
+PXD044305,PXD044305_GOWN_114_2000ng,0.0,429431,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044592,PXD044592_20221007_LS_Crk4-IP-2,0.0,508771,9606,1,27,classified,none,highscore_competition
+PXD044592,PXD044592_20230302_RH-KU80-HA_control-1,0.0,508771,9606,1,22,classified,none,highscore_competition
+PXD044592,PXD044592_20221007_LS_Crk4-IP-3,0.0,508771,9606,1,27,classified,none,highscore_competition
+PXD044592,PXD044592_20230302_RH-KU80-HA_control-2,0.0,508771,9606,1,26,classified,none,highscore_competition
+PXD044592,PXD044592_20221007_LS_Crk4-IP-1,0.0,508771,9606,1,28,classified,none,highscore_competition
+PXD044629,PXD044629_03222023_Marissa_MSC,0.0,9606,9913,1,20,classified,none,highscore_competition
+PXD044638,PXD044638_2021_10_27_EoinWolfe_1A_211029184716,0.0,36036,5476,1,28,classified,none,highscore_competition
+PXD044638,PXD044638_2021_10_27_EoinWolfe_1A_211028092515,0.0,36036,5476,1,29,classified,none,highscore_competition
+PXD044638,PXD044638_2021_10_13_EoinWolfe_1A1,0.0,36036,5476,1,23,classified,none,highscore_competition
+PXD044638,PXD044638_2021_10_13_EoinWolfe_1A2,0.0,36036,4932,1,21,classified,none,highscore_competition
+PXD044638,PXD044638_2021_10_13_EoinWolfe_1A3,0.0,36036,5476,1,27,classified,none,highscore_competition
+PXD044720,PXD044720_2021_10_27_EoinWolfe_1B,0.0,36036,5476,1,28,classified,none,highscore_competition
+PXD044720,PXD044720_2021_10_27_EoinWolfe_1B_211029220357,0.0,36036,5476,1,28,classified,none,highscore_competition
+PXD044729,PXD044729_2021_10_13_EoinWolfe_2A2,0.0,36036,5476,1,21,classified,none,highscore_competition
+PXD044729,PXD044729_2021_10_13_EoinWolfe_2A1,0.0,36036,5476,1,26,classified,none,highscore_competition
+PXD044729,PXD044729_2021_10_13_EoinWolfe_2A3,0.0,36036,5476,1,27,classified,none,highscore_competition
+PXD044742,PXD044742_2021_10_13_EoinWolfe_4B2,0.0,36036,5476,1,29,classified,none,highscore_competition
+PXD044742,PXD044742_2021_10_13_EoinWolfe_4B1,0.0,36036,5476,1,29,classified,none,highscore_competition
+PXD044742,PXD044742_2021_10_13_EoinWolfe_4B3,0.0,36036,5476,1,30,classified,none,highscore_competition
+PXD044742,PXD044742_2021_10_27_EoinWolfe_4B,0.0,36036,5476,1,30,classified,none,highscore_competition
+PXD044742,PXD044742_2021_10_27_EoinWolfe_4B_211030174407,0.0,36036,5476,1,30,classified,none,highscore_competition
+PXD044743,PXD044743_20200816_EXPL5_nLC7_MEM_collab_77min_DDA_Ancient_calculus_1835_01,0.0,9606,9796,1,1,classified,none,low_maximum_peptonizer_score
+PXD044743,PXD044743_20200816_EXPL5_nLC7_MEM_collab_77min_DDA_Ancient_labblank_1836_01,0.0,9606,9796,1,1,classified,none,low_maximum_peptonizer_score
+PXD044750,PXD044750_PRF_Q_2020_Y_OSAW_412_49753,0.0,10116,562,1,19,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044759,PXD044759_Q14963_SS13,0.0,82569,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044763,PXD044763_2021_10_27_EoinWolfe_5A_211030210051,0.0,36036,5476,1,27,classified,none,highscore_competition
+PXD044763,PXD044763_2021_10_13_EoinWolfe_5A2,0.0,36036,5476,1,26,classified,none,highscore_competition
+PXD044763,PXD044763_2021_10_27_EoinWolfe_5A,0.0,36036,5476,1,27,classified,none,highscore_competition
+PXD044763,PXD044763_2021_10_13_EoinWolfe_5A3,0.0,36036,5476,1,27,classified,none,highscore_competition
+PXD044763,PXD044763_2021_10_13_EoinWolfe_5A1,0.0,36036,5476,1,22,classified,none,highscore_competition
+PXD044772,PXD044772_2021_10_13_EoinWolfe_5B3,0.0,36036,5476,1,27,classified,none,highscore_competition
+PXD044772,PXD044772_2021_10_13_EoinWolfe_5B2,0.0,36036,5476,1,24,classified,none,highscore_competition
+PXD044772,PXD044772_2021_10_27_EoinWolfe_5B_211031001736,0.0,36036,4932,1,30,classified,none,highscore_competition
+PXD044772,PXD044772_2021_10_13_EoinWolfe_5B1,0.0,36036,5476,1,24,classified,none,highscore_competition
+PXD044772,PXD044772_2021_10_27_EoinWolfe_5B,0.0,36036,5476,1,29,classified,none,highscore_competition
+PXD044785,PXD044785_2021_10_27_EoinWolfe_6A,0.0,36036,5476,1,28,classified,none,highscore_competition
+PXD044785,PXD044785_2021_10_13_EoinWolfe_6A1,0.0,36036,5476,1,23,classified,none,highscore_competition
+PXD044785,PXD044785_2021_10_13_EoinWolfe_6A3,0.0,36036,5476,1,25,classified,none,highscore_competition
+PXD044785,PXD044785_2021_10_13_EoinWolfe_6A2,0.0,36036,4932,1,25,classified,none,highscore_competition
+PXD044785,PXD044785_2021_10_27_EoinWolfe_6A_211031023420,0.0,36036,5476,1,28,classified,none,highscore_competition
+PXD044786,PXD044786_2021_10_27_EoinWolfe_6B_211031055105,0.0,36036,5476,1,26,classified,none,highscore_competition
+PXD044786,PXD044786_2021_10_13_EoinWolfe_6B1,0.0,36036,5476,1,21,classified,none,highscore_competition
+PXD044786,PXD044786_2021_10_27_EoinWolfe_6B,0.0,36036,5476,1,26,classified,none,highscore_competition
+PXD044786,PXD044786_2021_10_13_EoinWolfe_6B2,0.0,36036,4932,1,21,classified,none,highscore_competition
+PXD044786,PXD044786_2021_10_13_EoinWolfe_6B3,0.0,36036,5476,1,25,classified,none,highscore_competition
+PXD044788,PXD044788_2021_10_13_EoinWolfe_4A3,0.0,36036,5476,1,26,classified,none,highscore_competition
+PXD044788,PXD044788_2021_10_13_EoinWolfe_4A1,0.0,36036,5476,1,26,classified,none,highscore_competition
+PXD044853,PXD044853_3,0.0,5763,562,1,20,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044853,PXD044853_1,0.0,5763,562,1,18,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044853,PXD044853_2,0.0,5763,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044853,PXD044853_4,0.0,5763,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044853,PXD044853_5,0.0,5763,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD044853,PXD044853_6,0.0,5763,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045249,PXD045249_BE212LQ_NC,0.0,208964,562,1,31,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045249,PXD045249_BE212LQ_High,0.0,208964,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045249,PXD045249_BE212LQ_Low,0.0,208964,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045793,PXD045793_20221107_Larry_USP_6His,0.0,119856,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045793,PXD045793_20200729_Larry_USP,0.0,119856,562,1,7,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045793,PXD045793_20221028__Larry_USP_6His,0.0,119856,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045793,PXD045793_20220823_H2O2_USP_6His_col_block,0.0,119856,562,1,10,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045793,PXD045793_20220722_Control_USP_6His_CAM_Trypsin_C18,0.0,119856,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD045793,PXD045793_20220722_H2O2_Stress_USP-6His_CAM_trypsin_C18,0.0,119856,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046076,PXD046076_BSA-DPD,0.0,1280,9606,1,9,unresolved,none,none
+PXD046076,PXD046076_AGE-DPD,0.0,1280,9606,1,10,unresolved,none,none
+PXD046083,PXD046083_DD039TPSnB1_Fr1,0.0,5811,10090,1,22,classified,none,highscore_competition
+PXD046083,PXD046083_DD039TPSnB1_Fr3,0.0,5811,10090,1,22,unresolved,none,none
+PXD046083,PXD046083_DD039TPSnB1_Fr5,0.0,5811,10090,1,23,unresolved,none,none
+PXD046083,PXD046083_DD039TPSnB1_Fr6,0.0,5811,10090,1,27,unresolved,none,none
+PXD046083,PXD046083_DD039TPSnB1_Fr2,0.0,5811,10090,1,23,unresolved,none,none
+PXD046083,PXD046083_DD039TPSnB1_Fr4,0.0,5811,10090,1,29,classified,none,highscore_competition
+PXD046139,PXD046139_EE012GI_Vector,0.0,9606,10090,1,23,classified,none,highscore_competition
+PXD046217,PXD046217_20210616_BMoran_Schumer_11490_PRM_F1_mito_4,0.0,1500961,7955,1,11,classified,none,low_maximum_peptonizer_score
+PXD046217,PXD046217_20210616_BMoran_Schumer_11490_PRM_F1_mito_2,0.0,1500961,7955,1,9,classified,none,low_maximum_peptonizer_score
+PXD046217,PXD046217_20210616_BMoran_Schumer_11490_PRM_F1_mito_5,0.0,1500961,7955,1,9,classified,none,low_maximum_peptonizer_score
+PXD046217,PXD046217_20210616_BMoran_Schumer_11490_PRM_F1_mito_1,0.0,1500961,7955,1,10,classified,none,low_maximum_peptonizer_score
+PXD046217,PXD046217_20210616_BMoran_Schumer_11490_PRM_F1_mito_3,0.0,1500961,7955,1,10,classified,none,low_maximum_peptonizer_score
+PXD046363,PXD046363_QEX2_941235,0.0,10090,562,1,14,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046363,PXD046363_QEX2_941238,0.0,10090,562,1,14,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046363,PXD046363_QEX2_941239,0.0,10090,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046945,PXD046945_IgG_2,0.0,9606,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046945,PXD046945_IP_2,0.0,9606,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046945,PXD046945_IgG_1,0.0,9606,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046990,PXD046990_23089_Anton_Ecl_DSBU_XL_TRAP_50cm_90min_Dundee_2,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046990,PXD046990_23089_Anton_Ecl_DSBU_XL_TRAP_50cm_90min_Dundee_1,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD046990,PXD046990_fbstcm_220922_04_RiboE3_XL,0.0,9606,562,1,24,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD047152,PXD047152_R20211102259_HNS_D,0.0,498217,562,1,17,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD047152,PXD047152_R20210801677_HNS,0.0,498217,562,1,11,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD047327,PXD047327_QEp23-1098_Shi_Ctrl-sh-1,0.0,9606,9913,1,8,classified,none,highscore_competition
+PXD047698,PXD047698_YS-600-FTO,0.0,10090,9606,1,20,classified,none,highscore_competition
+PXD047698,PXD047698_YS-600-FTO-Ni,0.0,10090,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD047892,PXD047892_20190227_PIG_PdECM_E01,0.0,9825,9823,1,10,unresolved,none,none
+PXD048362,PXD048362_E03091_MS22-050_FR3-N2_j14_RR2_3,0.0,40483,4932,1,23,classified,none,low_maximum_peptonizer_score
+PXD048362,PXD048362_E03089_MS22-050_FR1-air_j14_RR2_1,0.0,40483,4932,1,27,classified,none,highscore_competition
+PXD048362,PXD048362_E03090_MS22-050_FR2-air_j14_RR2_2,0.0,40483,4932,1,24,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD048362,PXD048362_E03092_MS22-050_FR4-N2_j14_RR2_4,0.0,40483,9606,1,23,classified,none,highscore_competition
+PXD048810,PXD048810_260423_Turkey_Collagen_1hr_1_in_100,0.0,436486; 9103; 9913,9031; 9606; 9823,3,22,classified,multi_organism_mapping,multi_organism_mapping
+PXD048810,PXD048810_290423_Edmontosaur_1hr_Neat,0.3333333333333333,436486; 9103; 9913,9031; 9606; 9913,3,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD048810,PXD048810_260423_Bovine_Collagen_1hr_1_in_1000,0.3333333333333333,436486; 9103; 9913,562; 9796; 9913,3,12,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD048846,PXD048846_Crispigrp_032223_N6RPB1IgG_B5,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD048846,PXD048846_Crispigrp_032223_N6RPB1IgG_B4,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD048977,PXD048977_F002684,0.0,9606,9913,1,12,unresolved,none,none
+PXD048977,PXD048977_F002687,0.0,9606,9913,1,10,unresolved,none,none
+PXD048977,PXD048977_F002690,0.0,9606,9913,1,10,unresolved,none,none
+PXD049029,PXD049029_BPI_29466_Paramecium_tetraurelia_PtGtsf1_F_E_rep2,0.0,5888,9606,1,22,unresolved,none,none
+PXD049029,PXD049029_BPI_29466_Paramecium_tetraurelia_PtGtsf1_F_E_rep1,0.0,5888,9606,1,21,unresolved,none,none
+PXD049029,PXD049029_BPI_29466_Paramecium_tetraurelia_CTRL_FlagHA_E_rep1,0.0,5888,9606,1,21,unresolved,none,none
+PXD049029,PXD049029_BPI_29466_Paramecium_tetraurelia_PtGtsf1_FlagHA_E_rep3,0.0,5888,9606,1,21,unresolved,none,none
+PXD049029,PXD049029_BPI_29466_Paramecium_tetraurelia_CTRL_FlagHA_E_rep2,0.0,5888,9606,1,21,unresolved,none,none
+PXD049029,PXD049029_BPI_29466_Paramecium_tetraurelia_CTRL_FlagHA_E_rep3,0.0,5888,9606,1,22,unresolved,none,none
+PXD049188,PXD049188_PRF_Q_2023_W_ZOU_943_58378,0.0,9606,7227,1,28,classified,none,highscore_competition
+PXD049188,PXD049188_PRF_Q_2023_W_ZOU_943_58375,0.0,9606,7227,1,26,classified,none,highscore_competition
+PXD049188,PXD049188_PRF_Q_2023_W_ZOU_943_58376,0.0,9606,7227,1,28,classified,none,highscore_competition
+PXD049188,PXD049188_PRF_Q_2023_W_ZOU_943_58377,0.0,9606,7227,1,26,classified,none,highscore_competition
+PXD049693,PXD049693_P1568_bm2_rho,0.5,6100; 9606,9606; 9823,2,2,classified,multi_organism_mapping,multi_organism_mapping
+PXD049693,PXD049693_P1568_bm2_bio,0.0,6100; 9606,9823,2,1,classified,multi_organism_mapping,multi_organism_mapping
+PXD049693,PXD049693_P1423_GFP_bio,0.5,6100; 9606,9606; 9796,2,8,classified,multi_organism_mapping,multi_organism_mapping
+PXD049693,PXD049693_P1423_GFP_rho,0.5,6100; 9606,9606; 9913,2,18,classified,multi_organism_mapping,multi_organism_mapping
+PXD050009,PXD050009_ECAR131-P12726-M1088-A04-Caco-Virus-1-1,0.5,9534; 9606,9606; 9913,2,26,classified,multi_organism_mapping,multi_organism_mapping
+PXD050009,PXD050009_ECAR131-P12728-M1088-A06-Caco-Virus-3-1,0.5,9534; 9606,9606; 9913,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD050009,PXD050009_ECAR131-P12723-M1088-A01-Caco-mock-1-1,0.5,9534; 9606,9606; 9913,2,24,classified,multi_organism_mapping,multi_organism_mapping
+PXD050009,PXD050009_ECAR131-P12727-M1088-A05-Caco-Virus-2-1,0.5,9534; 9606,9606; 9913,2,26,classified,multi_organism_mapping,multi_organism_mapping
+PXD050009,PXD050009_ECAR131-P12725-M1088-A03-Caco-mock-3-1,0.5,9534; 9606,9606; 9913,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD050009,PXD050009_ECAR131-P12724-M1088-A02-Caco-mock-2-1,0.5,9534; 9606,9606; 9913,2,26,classified,multi_organism_mapping,multi_organism_mapping
+PXD050190,PXD050190_21P05510001,0.0,10036,562,1,31,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD050193,PXD050193_B220113_20_HF_AS_CO_80_RH-P1_72h,0.0,381666,562,1,17,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD050193,PXD050193_B220113_27_HF_AS_CO_80_RH-Z5_24h,0.0,381666,562,1,12,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD050193,PXD050193_B220113_28_HF_AS_CO_80_RH-Z5_72h,0.0,381666,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD050193,PXD050193_B220113_24_HF_AS_CO_80_RH-Z3_72h,0.0,381666,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD050193,PXD050193_B220113_19_HF_AS_CO_80_RH-P1_24h,0.0,381666,9606,1,10,unresolved,none,none
+PXD050193,PXD050193_B220113_23_HF_AS_CO_80_RH-Z3_24h,0.0,381666,562,1,14,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD050244,PXD050244_20210902_Premi_IP_FT_Fractionation_4,0.0,9606,9913,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD050244,PXD050244_20210902_Premi_IP_FT_Fractionation_3,0.0,9606,9913,1,8,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD050353,PXD050353_150924QXc1_RB-0965-150922-004_011,0.0,1004879; 12968; 165179; 204516; 290055; 817; 853; 95340,105841; 1492; 1547; 33035; 4565; 562; 818; 9606,8,29,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD050353,PXD050353_150924QXc1_RB-0965-150922-002_007,0.0,1004879; 12968; 165179; 204516; 290055; 817; 853; 95340,105841; 1492; 1547; 1590; 33035; 818; 9606; 9913,8,25,classified,multi_organism_mapping,multi_organism_mapping
+PXD050530,PXD050530_Solo_20221007_KF_HS_Sputum_P98_3,0.5,9606; 9825,1280; 9606,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD050530,PXD050530_Solo_20221007_KF_HS_Sputum_C15_2,0.5,9606; 9825,818; 9606,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD050530,PXD050530_Solo_20221007_KF_HS_Sputum_P98_1,0.5,9606; 9825,1280; 9606,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD050530,PXD050530_Solo_20221007_KF_HS_Sputum_C15_3,0.5,9606; 9825,818; 9606,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD050530,PXD050530_Solo_20221007_KF_HS_Sputum_P98_2,0.5,9606; 9825,1280; 9606,2,28,classified,multi_organism_mapping,multi_organism_mapping
+PXD050603,PXD050603_Ei15JHW_GAC,0.0,9606,10090,1,26,classified,none,highscore_competition
+PXD050603,PXD050603_Ei15JHW_KGA,0.0,9606,10090,1,27,classified,none,highscore_competition
+PXD050948,PXD050948_20191022_OR14_Ag2_Stucc001_SA_Max_GFP,0.5,10116; 9606,562; 9606,2,23,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD050948,PXD050948_20191022_OR14_Ag2_Stucc001_SA_Max_P180,0.5,10116; 9606,9031; 9606,2,27,classified,multi_organism_mapping,multi_organism_mapping
+PXD051084,PXD051084_ctrl-1,0.0,8364,8355,1,23,classified,none,highscore_competition
+PXD051084,PXD051084_E2F1-2,0.0,8364,8355,1,26,classified,none,highscore_competition
+PXD051084,PXD051084_ctrl-2,0.0,8364,8355,1,23,classified,none,highscore_competition
+PXD051186,PXD051186_M6_1200ng_140min_Run2,0.0,1548728; 2847306,562; 6239,2,31,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD051186,PXD051186_M5_1200ng_140min_Run2,0.0,1548728; 2847306,562; 7227,2,30,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD051495,PXD051495_20240318_QEHF25CM135_pl24023_JBM_01,0.0,5811,10090,1,23,classified,none,highscore_competition
+PXD051495,PXD051495_20240318_QEHF25CM04_pl24017_JBM_G125_03,0.0,5811,9606,1,25,unresolved,none,none
+PXD051529,PXD051529_20210314_WL_Wendy_HMves_1D_TMT_phos,0.5,10090; 9606,9606; 9823,2,12,classified,multi_organism_mapping,multi_organism_mapping
+PXD052123,PXD052123_22P18340001_1,0.0,10090,9913,1,22,classified,none,highscore_competition
+PXD052123,PXD052123_22P18340001_2,0.0,10090,9913,1,22,classified,none,highscore_competition
+PXD052123,PXD052123_22P18340001_3,0.0,10090,9913,1,22,classified,none,highscore_competition
+PXD052123,PXD052123_22P18340002_3,0.0,10090,9913,1,22,classified,none,highscore_competition
+PXD052123,PXD052123_22P18340002_2,0.0,10090,9913,1,22,classified,none,highscore_competition
+PXD052123,PXD052123_22P18340002_1,0.0,10090,9913,1,22,classified,none,highscore_competition
+PXD052470,PXD052470_95d,0.0,9940,9913,1,21,unresolved,none,none
+PXD052470,PXD052470_105d,0.0,9940,9913,1,16,unresolved,none,none
+PXD052470,PXD052470_85d,0.0,9940,9913,1,16,unresolved,none,none
+PXD052470,PXD052470_75d,0.0,9940,9913,1,19,unresolved,none,none
+PXD052540,PXD052540_tauC3_Ub,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD052540,PXD052540_ptauC3_Ub,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD052540,PXD052540_tauC3_Phospho,0.0,9606,562,1,19,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD052900,PXD052900_Lampyris_TopDown_OrbitrapResults_Q2_ColID_289_2685_05,0.0,41311,7227,1,21,classified,none,highscore_competition
+PXD052936,PXD052936_rs230407_1300_BL_6plex_01,0.0,83332,10116,1,6,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD052936,PXD052936_rs220603_1162_BL_6plex_01,0.0,83332,9606,1,8,unresolved,none,none
+PXD053014,PXD053014_TGN38_WT_2,0.0,10090,9913,1,18,unresolved,none,none
+PXD053103,PXD053103_20221024_Q2_MD_ColQ2-115_Emma,0.0,2287,9606,1,15,unresolved,none,none
+PXD053353,PXD053353_1_Vec,0.0,9606,10090,1,24,classified,none,highscore_competition
+PXD053899,PXD053899_R2440-lb,0.0,181088,9606,1,7,unresolved,none,none
+PXD053899,PXD053899_R2461-130,0.0,181088,562,1,21,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD053899,PXD053899_R2461-110,0.0,181088,9913,1,7,unresolved,none,none
+PXD053919,PXD053919_20181023_NEB_BR5,0.0,9606,10090,1,23,unresolved,none,none
+PXD053919,PXD053919_20181023_NEB_BR6,0.0,9606,10090,1,23,unresolved,none,none
+PXD053919,PXD053919_20181101_NEB_BR12,0.0,9606,10090,1,23,unresolved,none,none
+PXD053919,PXD053919_20181101_NEB_BR10,0.0,9606,10090,1,23,unresolved,none,none
+PXD053944,PXD053944_bL12m_FLAG_IP,0.0,5811,9606,1,21,unresolved,none,none
+PXD054007,PXD054007_20240619-Lhcb2-Kac,0.0,4081,562,1,16,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD054662,PXD054662_PtCAF1_E_EV_1,0.0,5888,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD054662,PXD054662_PtCAF1_E_EV_2,0.0,5888,562,1,27,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD054662,PXD054662_PtCAF1_E_019_2,0.0,5888,9606,1,31,unresolved,none,none
+PXD054662,PXD054662_PtCAF1_E_019_1,0.0,5888,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD054708,PXD054708_XA03087LPST_G2,0.0,10090,9606,1,16,unresolved,none,none
+PXD054708,PXD054708_XA03087LPST_N2,0.0,10090,9606,1,15,classified,none,low_maximum_peptonizer_score
+PXD054708,PXD054708_XA03087LPST_N3,0.0,10090,10116,1,15,classified,none,low_maximum_peptonizer_score
+PXD054858,PXD054858_Clone2-R2,0.0,1257118; 137992,9606; 9823,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD054858,PXD054858_Clone1-R2,0.0,1257118; 137992,3702; 9606,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD054858,PXD054858_Clone1-R1,0.0,1257118; 137992,3702; 9606,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD055077,PXD055077_SUMOylation_PhoX_TBDSPP_FAIMS_140823,0.0,9986,10090,1,18,unresolved,none,none
+PXD055077,PXD055077_SUMOylation_PhoX_TBDSPP_FT_FAIMS_140823,0.0,9986,10090,1,16,classified,none,highscore_competition
+PXD055412,PXD055412_CCE20220329_Briana_Aboulache_LugerLab_wt_pSMARCAD1_hfx1,0.0,9606,7227,1,22,classified,none,highscore_competition
+PXD055450,PXD055450_CCE20210722_Briana_Aboulache_LugerLab_23A_SMARCAD1_hfx1,0.0,9606,7227,1,21,classified,none,highscore_competition
+PXD055882,PXD055882_20240611_LZ_HA-LAMP5,0.0,9606,10090,1,22,classified,none,highscore_competition
+PXD056084,PXD056084_JS_IRGM1_CC_1,0.0,10090,562,1,19,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD056084,PXD056084_JS_IRGM1_CC_3,0.0,10090,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD056084,PXD056084_JS_IRGM1_CC_2,0.0,10090,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD056253,PXD056253_E8208_iSLK_rKSHV-24h_2,0.5,37296; 9606,9606; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD056253,PXD056253_E8207_iSLK_rKSHV-non_2,0.5,37296; 9606,9606; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD056253,PXD056253_E8205_iSLK_rKSHV-24h_1,0.5,37296; 9606,9606; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD056253,PXD056253_E8209_iSLK_rKSHV-48h_2,0.5,37296; 9606,9606; 9823,2,20,classified,multi_organism_mapping,multi_organism_mapping
+PXD056253,PXD056253_E8206_iSLK_rKSHV-48h_1,0.5,37296; 9606,9606; 9823,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD056253,PXD056253_E8204_iSLK_rKSHV-non_1,0.5,37296; 9606,7955; 9606,2,21,classified,multi_organism_mapping,multi_organism_mapping
+PXD056760,PXD056760_20200127_09_J2012_2F,0.0,6211,9606,1,11,unresolved,none,none
+PXD056760,PXD056760_20200127_11_AT17_2F,0.0,6211,9606,1,10,unresolved,none,none
+PXD056760,PXD056760_20200127_08_J2012_1F,0.0,6211,9606,1,16,unresolved,none,none
+PXD056760,PXD056760_20200127_10_AT17_1F,0.0,6211,562,1,18,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD056815,PXD056815_P-SN-GB-tomato-root-TMT,0.0,1334098,3702,1,19,unresolved,none,none
+PXD056949,PXD056949_EXPLO_YD1_YD1_240830_WBL_GlcNHS_1h_HCD_22,0.5,2; 562,562; 9606,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD056949,PXD056949_EXPLO_YD1_YD1_240830_WBL_SATP_28,0.5,2; 562,562; 9913,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD056949,PXD056949_EXPLO_YD1_YD1_240830_WBL_Control_HCD_20,0.5,2; 562,562; 9606,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD056949,PXD056949_EXPLO_YD1_YD1_240830_WBL_GlcNHS_24h_HCD_24,0.5,2; 562,562; 9913,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD056949,PXD056949_EXPLO_YD1_YD1_240830_WBL_SATA_HCD_26,0.5,2; 562,562; 9606,2,29,classified,multi_organism_mapping,multi_organism_mapping
+PXD057481,PXD057481_EXO3,0.0,9606,9913,1,26,classified,none,highscore_competition
+PXD057481,PXD057481_EXO2,0.0,9606,9913,1,9,unresolved,none,none
+PXD057513,PXD057513_Experiment2_set7mutant,0.0,5661,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD058095,PXD058095_R1,0.5,5811; 9606,9606; 9913,2,23,classified,multi_organism_mapping,multi_organism_mapping
+PXD058095,PXD058095_R2,0.5,5811; 9606,9606; 9913,2,25,classified,multi_organism_mapping,multi_organism_mapping
+PXD058162,PXD058162_20170316_Fusion1_SA_IK_ext_DNApd_FOXE3_IB10_dimethyl_Reverse,0.5,10090; 9606,10090; 8355,2,7,classified,multi_organism_mapping,multi_organism_mapping
+PXD058162,PXD058162_20170316_Fusion1_SA_IK_ext_DNApd_FOXE3_IB10_dimethyl_Forward,0.5,10090; 9606,10090; 10116,2,7,classified,multi_organism_mapping,multi_organism_mapping
+PXD058162,PXD058162_20170415_Fusion1_SA_IK_ext_DNApd_FOXE3_CCERx_dimethyl_Forward,0.5,10090; 9606,10090; 10116,2,6,classified,multi_organism_mapping,multi_organism_mapping
+PXD058162,PXD058162_20220429_Exploris1_SA_MB_ToulouseEXT_DNApd_dimethyl_forward,0.5,10090; 9606,9606; 9913,2,9,classified,multi_organism_mapping,multi_organism_mapping
+PXD058162,PXD058162_20220429_Exploris1_SA_MB_ToulouseEXT_DNApd_dimethyl_reverse,0.5,10090; 9606,9606; 9796,2,11,classified,multi_organism_mapping,multi_organism_mapping
+PXD058432,PXD058432_BST2-Ub,0.0,10090,9606,1,29,classified,none,highscore_competition
+PXD059496,PXD059496_HFX2_FPEP230078630-1A,0.0,9646,9913,1,21,classified,none,highscore_competition
+PXD059650,PXD059650_SO_260924_Calumenin_WITH_TPST,0.0,9606,562,1,11,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD060122,PXD060122_Ecl1_0309_R0017-12_S005011_L_DIA_01,0.0,9606,9913,1,16,classified,none,highscore_competition
+PXD060122,PXD060122_Ecl1_0309_R0017-12_S005013_L_DIA_01,0.0,9606,9913,1,21,classified,none,highscore_competition
+PXD060122,PXD060122_Ecl1_0309_R0017-12_S005009_L_DIA_01,0.0,9606,9913,1,12,classified,none,highscore_competition
+PXD060122,PXD060122_Ecl1_0309_R0017-12_S005012_L_DIA_01,0.0,9606,9913,1,16,classified,none,highscore_competition
+PXD060122,PXD060122_Ecl1_0309_R0017-12_S005010_L_DIA_01,0.0,9606,9913,1,16,classified,none,highscore_competition
+PXD060600,PXD060600_20250113_NS-10098_CMH_sample62_HCD_PRM,0.0,562,9913,1,5,unresolved,none,none
+PXD060600,PXD060600_20250113_NS-10098_CMH_sample62,0.0,562,9913,1,7,unresolved,none,none
+PXD060600,PXD060600_20250113_NS-10098_CMH_sample62_EThcD_PRM,0.0,562,9913,1,3,unresolved,none,none
+PXD060724,PXD060724_Chymotrypsin_EThCD_WZ20spd_161224_1,0.0,9986,9606,1,1,classified,none,low_maximum_peptonizer_score
+PXD060724,PXD060724_Trypsin_EThCD_WZ20spd_161224_2,0.0,9986,9913,1,2,classified,none,low_maximum_peptonizer_score
+PXD060724,PXD060724_Trypsin_EThCD_WZ20spd_161224_3,0.0,9986,9913,1,4,classified,none,low_maximum_peptonizer_score
+PXD060724,PXD060724_Trypsin_EThCD_WZ20spd_161224_1,0.0,9986,9606,1,8,classified,none,low_maximum_peptonizer_score
+PXD060734,PXD060734_isbECLIPSE_2024-12-12_KES_ES903_4hDDA_PfOok_1Mcells,0.0,5833,9606,1,21,classified,none,highscore_competition
+PXD060873,PXD060873_20220520_C28341_002_S385773_HeLa_Galt1HAsCGrx1p_C4_NEM_A1_Recombinant_protein,0.0,9606,10090,1,21,classified,none,highscore_competition
+PXD060874,PXD060874_20240606_C35373_003_S698654_HEK293_Galt1sCGrx1pHA_01IAA_rep1_Cell_extracts,0.0,9606,4932,1,10,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD060923,PXD060923_Cascade-D1,0.0,262724,562,1,25,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD060923,PXD060923_Cascade-WT,0.0,262724,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD061468,PXD061468_20250130_jlb_MAntoku_King_uni1_220ng_60min_OTOThcd_Wat25cmBEH_1,0.0,108458,3055,1,20,classified,none,highscore_competition
+PXD061468,PXD061468_20250204_jlb_MAntoku_King_UniDOC_tryp_500ng_60min_OTOThcd_Wat25cmBEH_1,0.0,108458,3055,1,28,classified,none,highscore_competition
+PXD061468,PXD061468_20250130_jlb_MAntoku_King_uni1CE_220ng_60min_OTOThcd_Wat25cmBEH_1,0.0,108458,3055,1,21,unresolved,none,none
+PXD061845,PXD061845_Cos-7_ii,0.0,60711,9606,1,17,unresolved,none,none
+PXD061845,PXD061845_Cos-7,0.0,60711,9606,1,15,unresolved,none,none
+PXD061921,PXD061921_S00067_Exploris01_AM_PSII_E329L_before_wash_R1,0.0,1111708,562,1,25,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD061921,PXD061921_S00294_Exploris01_SZ_Jack_PSII_S2_20250226070300,0.0,1111708,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD061921,PXD061921_S00294_Exploris01_SZ_Jack_PSII_S1_20250226042540,0.0,1111708,9913,1,29,classified,none,highscore_competition
+PXD061921,PXD061921_S00067_Exploris01_AM_PSII_V397S_before_wash_R1,0.0,1111708,9606,1,18,classified,none,low_maximum_peptonizer_score
+PXD061933,PXD061933_SIRT6,0.0,9606,562,1,23,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD062250,PXD062250_20241219-Vector-1,0.0,9606,10090,1,20,classified,none,highscore_competition
+PXD062250,PXD062250_20241219-Vector-2,0.0,9606,10090,1,19,classified,none,highscore_competition
+PXD062250,PXD062250_20241219-Vector-3,0.0,9606,10090,1,19,classified,none,highscore_competition
+PXD062259,PXD062259_20200908_EXPL8_nLC4_MEM_collab_77min_DDA_Ancient_bone_T_triunguis_M10_01,0.0,101491,9031,1,9,unresolved,none,none
+PXD062511,PXD062511_MS241280-YS-CHI-120,0.0,9606,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD063449,PXD063449_Iron_deplete_MM_A,0.0,100816,4932,1,28,classified,none,highscore_competition
+PXD063449,PXD063449_Iron_deplete_MM_B,0.0,100816,4932,1,28,classified,none,highscore_competition
+PXD063449,PXD063449_Iron_deplete_MM_C,0.0,100816,5476,1,21,classified,none,highscore_competition
+PXD063494,PXD063494_20210429_SEL_HF_SA_ALW_R04_270421_gel_003,0.3333333333333333,2; 562; 9606,4565; 9606; 9823,3,19,classified,multi_organism_mapping,multi_organism_mapping
+PXD063494,PXD063494_20210429_SEL_HF_SA_ALW_R04_270421_gel_004,0.3333333333333333,2; 562; 9606,10116; 9606; 9823,3,19,classified,multi_organism_mapping,multi_organism_mapping
+PXD063682,PXD063682_Dfortarget,0.0,9606,10090,1,23,classified,none,highscore_competition
+PXD063682,PXD063682_D,0.0,9606,10090,1,23,classified,none,highscore_competition
+PXD064366,PXD064366_Foliated_layer_of_adult_shell,0.0,121615,9606,1,7,unresolved,none,none
+PXD064366,PXD064366_Adult_shell-whole,0.0,121615,9606,1,7,unresolved,none,none
+PXD064366,PXD064366_Chalky_layer_of_adult_shell,0.0,121615,9606,1,7,unresolved,none,none
+PXD064366,PXD064366_Prismatic_layer_of_adult_shell,0.0,121615,9606,1,7,unresolved,none,none
+PXD064366,PXD064366_Larval_shell,0.0,121615,9606,1,7,unresolved,none,none
+PXD064633,PXD064633_MH_20240111182422,0.0,1316932,562,1,5,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD064897,PXD064897_E20250415_07,0.0,9606,3702,1,20,classified,none,highscore_competition
+PXD064940,PXD064940_165_2024-GM-HRI-P_3,0.0,9606,562,1,12,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD065727,PXD065727_R24H44-K562-IP,0.0,9606,562,1,29,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD065914,PXD065914_R20221001815_CAKI_1,0.0,9606,562,1,30,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD065914,PXD065914_R20221001815_769_P,0.0,9606,562,1,31,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD065994,PXD065994_EV002849_EP_a-GAA_TD_K2,0.0,9606,10090,1,6,unresolved,none,none
+PXD066259,PXD066259_QECPI240429_07,0.0,105231,3702,1,23,classified,none,highscore_competition
+PXD066259,PXD066259_QECPI240429_03_20240429175417,0.0,105231,3702,1,27,classified,none,highscore_competition
+PXD066259,PXD066259_QECPI240429_03,0.0,105231,3702,1,28,classified,none,highscore_competition
+PXD066259,PXD066259_QECPI240429_05,0.0,105231,3702,1,24,classified,none,highscore_competition
+PXD066259,PXD066259_QECPI240429_09,0.0,105231,4565,1,24,classified,none,highscore_competition
+PXD066288,PXD066288_band,0.0,446911,9606,1,12,unresolved,none,none
+PXD066288,PXD066288_Secretome_8,0.0,446911,9606,1,27,unresolved,none,none
+PXD066288,PXD066288_Secretome_9,0.0,446911,9606,1,27,unresolved,none,none
+PXD066288,PXD066288_Secretome_10,0.0,446911,9606,1,27,unresolved,none,none
+PXD066288,PXD066288_Secretome_7,0.0,446911,9606,1,24,unresolved,none,none
+PXD067139,PXD067139_T480_FAIMS_A_A,0.0,9606,9823,1,11,classified,none,low_maximum_peptonizer_score
+PXD067139,PXD067139_T480_FAIMS_A_P,0.0,9606,9823,1,7,classified,none,low_maximum_peptonizer_score
+PXD067277,PXD067277_OSU_D2_FASP_Elite_02262014_01,0.0,408170; 408172; 410658,3702; 818; 9606,3,20,classified,multi_organism_mapping,multi_organism_mapping
+PXD067277,PXD067277_OSU_D7_FASP_Elite_03172014_01,0.0,408170; 408172; 410658,33035; 562; 9606,3,20,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD067300,PXD067300_LC07_220720222008,0.5,1324588; 562,1590; 562,2,30,classified,multi_organism_mapping,multi_organism_mapping
+PXD067550,PXD067550_R20220100103_HSPA4,0.0,9606,10090,1,12,unresolved,none,none
+PXD068025,PXD068025_HY-LDF-20230914-MD,0.0,10090,9606,1,23,classified,none,highscore_competition
+PXD068025,PXD068025_HY-LDF-20230914-FD,0.0,10090,9606,1,24,classified,none,highscore_competition
+PXD068025,PXD068025_HY-LDF-20230914-FB,0.0,10090,9606,1,31,classified,none,highscore_competition
+PXD068522,PXD068522_250812_TVES_E00028_c00013_SA_TMT_V2pST,0.0,9606,10090,1,11,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD068894,PXD068894_Q2_ColID_337_projID_2840_01,0.0,36963,9606,1,19,unresolved,none,none
+PXD068894,PXD068894_Q2_ColID_286_2707_01,0.0,36963,10090,1,13,unresolved,none,none
+PXD068894,PXD068894_Q2_ColID_286_2707_02_1,0.0,36963,10090,1,13,unresolved,none,none
+PXD068894,PXD068894_Q2_ColID_286_2707_04_1,0.0,36963,10090,1,15,unresolved,none,none
+PXD068894,PXD068894_Q2_ColID_337_projID_2840_02,0.0,36963,9606,1,16,unresolved,none,none
+PXD068894,PXD068894_Q2_ColID_286_2707_03_1,0.0,36963,10090,1,15,unresolved,none,none
+PXD069171,PXD069171_20221013_MC_DPQE_MAST2_01_MC21_21,0.0,9606,9913,1,9,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD069171,PXD069171_20220908_MC_DPQE_MAST2_02_XJ04_11,0.0,9606,9913,1,9,classified,none,highscore_competition;low_maximum_peptonizer_score
+PXD069559,PXD069559_AM23Filtro,0.0,2212966,9606,1,18,unresolved,none,none
+PXD069559,PXD069559_AM18Filtro,0.0,2212966,9606,1,18,unresolved,none,none
+PXD070469,PXD070469_pPAMP_1,0.3333333333333333,1280; 1282; 287,1280; 9606; 9823,3,19,classified,multi_organism_mapping,multi_organism_mapping
+PXD070469,PXD070469_pPAMP_2,0.3333333333333333,1280; 1282; 287,1280; 9606; 9913,3,18,classified,multi_organism_mapping,multi_organism_mapping
+PXD070469,PXD070469_hPAMP_1,0.3333333333333333,1280; 1282; 287,1280; 562; 9606,3,18,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD070469,PXD070469_pPAMP_3,0.3333333333333333,1280; 1282; 287,1280; 562; 9606,3,18,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD070469,PXD070469_hPAMP_2,0.3333333333333333,1280; 1282; 287,1280; 562; 9606,3,17,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD070469,PXD070469_hPAMP_3,0.3333333333333333,1280; 1282; 287,1280; 562; 9606,3,17,classified,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi,multi_organism_mapping;ecoli_expression_host_non_ecoli_poi
+PXD070488,PXD070488_XB03428B2PIIg_S1_1,0.0,10090,9606,1,2,classified,none,low_maximum_peptonizer_score
+PXD072123,PXD072123_RFS1002207362_5_PYK2_KFL,0.0,9606,562,1,14,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD072123,PXD072123_RFS1002207362_8_FAK_KFL_MPK4,0.0,9606,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD072123,PXD072123_RFS1002207362_7_PYK2_KFL_Src,0.0,9606,562,1,22,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD072123,PXD072123_RFS1002207362_4_FAK_KFL_MPK4,0.0,9606,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD072123,PXD072123_RFS1002207362_1_FAK_KFL,0.0,9606,562,1,10,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD072123,PXD072123_RFS1002207362_3_FAK_KFL_Src,0.0,9606,562,1,17,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi
+PXD073162,PXD073162_AntiBtTGRE1,0.0,7725,9606,1,20,unresolved,none,none
+PXD073162,PXD073162_IgGRE1,0.0,7725,9606,1,20,unresolved,none,none
+PXD073162,PXD073162_IgGRE2,0.0,7725,9606,1,20,unresolved,none,none
+PXD073162,PXD073162_AntiBtTGRE2,0.0,7725,9606,1,20,unresolved,none,none
+PXD073844,PXD073844_huronggui103,0.0,9606,562,1,26,classified,ecoli_expression_host_non_ecoli_poi,ecoli_expression_host_non_ecoli_poi

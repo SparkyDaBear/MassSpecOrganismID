@@ -1,0 +1,6 @@
+[submodule "submodules/peptonizer2000"]
+	path = submodules/peptonizer2000
+	url = https://github.com/unipept/Peptonizer2000.git
+[submodule "submodules/runassessor"]
+	path = submodules/runassessor
+	url = https://github.com/RunAssessor/RunAssessor.git

@@ -1,0 +1,23 @@
+name: casanovo_env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu118
+      - torch==2.1.2+cu118
+      - torchvision==0.16.2+cu118
+      - torchaudio==2.1.2+cu118
+      - lightning==2.1.3
+      - casanovo
+      - psims
+      - setuptools<82

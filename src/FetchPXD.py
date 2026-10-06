@@ -1,0 +1,1347 @@
+import pandas as pd
+import sys, os
+import glob
+import argparse
+import requests
+import subprocess
+import time
+import shutil
+from typing import List, Any, Dict, Optional
+import json
+import zipfile
+import shlex
+import tempfile
+from pathlib import Path
+from urllib.parse import unquote, urlparse
+
+# Add parent directory to path for importing PipelineLogger and pmc_client
+sys.path.insert(0, str(Path(__file__).parent))
+from PipelineLogger import PipelineLogger
+from pmc_client import PMCClient
+
+EXIT_NO_RAW_FILES = 42
+PRIDE_GLOBUS_COLLECTION = "47772002-3e5b-4fd3-b97c-18cee38d6df2"
+FETCH_INVENTORY_FILENAME = "fetch_inventory.json"
+###################################################################################################################################################
+def fetch_pride_project_and_files(pxd: str, page_size: int = 200, timeout: int = 20, max_pages: Optional[int] = 100, session: Optional[requests.Session] = None) -> Dict[str, Any]:
+    """
+    Fetch PRIDE project metadata and all file records for a given PXD.
+
+    Returns
+    -------
+    Dict[str, Any]
+        {
+          "project": <project metadata JSON>,
+          "files": {
+             "page": {...},              # pagination summary (if available)
+             "files": [ ...file dicts...],
+          }
+        }
+    """
+    sess = session or requests.Session()
+    headers = {"User-Agent": "PRIDE-fetch/1.0 (+https://github.com/your-org/your-repo)"}
+
+    base = f"https://www.ebi.ac.uk/pride/ws/archive/v3/projects/{pxd}"
+
+    # 1) Project metadata
+    proj_resp = sess.get(base, headers=headers, timeout=timeout)
+    if not proj_resp.ok:
+        raise RuntimeError(
+            f"Failed to fetch project {pxd}: {proj_resp.status_code} {proj_resp.text[:300]}"
+        )
+    project_json = proj_resp.json()
+
+    # 2) Files (paginated)
+    files_endpoint = f"{base}/files"
+    page_num = 0
+    file_data = []
+
+    while True:
+        params = {"pageSize": page_size, "page": page_num}
+        files_resp = sess.get(files_endpoint, headers=headers, params=params, timeout=timeout)
+        if not files_resp.ok:
+            raise RuntimeError(
+                f"Failed to fetch files page {page_num} for {pxd}: "
+                f"{files_resp.status_code} {files_resp.text[:300]}"
+            )
+        data = files_resp.json()
+        # print(data)
+        file_data.extend(data)
+
+        if max_pages is not None and page_num + 1 >= max_pages:
+            break
+
+        if len(data) == 0:
+            break
+
+        page_num += 1
+
+    return {"project": project_json, "files": file_data}
+###################################################################################################################################################
+
+###################################################################################################################################################
+def download_ftp_file_aria2c(url, outfile, threads=4):
+    """
+    Download using aria2c with multiple threads for parallel segment downloads.
+    Try HTTPS first, then FTP.
+    """
+    candidates = []
+    if url.startswith("ftp://"):
+        candidates.append(url.replace("ftp://", "https://", 1))
+    candidates.append(url)
+
+    last_err = None
+    for candidate in candidates:
+        for attempt in range(6):
+            try:
+                print(f"Downloading (aria2c, {threads} threads, attempt {attempt+1}) {candidate} -> {outfile}")
+                result = _aria2c(candidate, outfile, threads)
+                print(result.stdout)
+                return
+            except subprocess.CalledProcessError as e:
+                last_err = e
+                rc = e.returncode
+                # Retry on network/server errors
+                if rc in (3, 5, 7, 9):  # aria2c error codes for network issues
+                    sleep_s = 5 * (2 ** attempt)
+                    print(f"aria2c failed (rc={rc}). Retrying in {sleep_s}s...\nSTDERR:\n{e.stderr}")
+                    time.sleep(sleep_s)
+                    continue
+                else:
+                    print(f"aria2c failed (rc={rc}). Not retrying.\nSTDERR:\n{e.stderr}")
+                    break
+
+    # If we get here, all retries/candidates failed
+    raise last_err
+
+def download_ftp_file_wget(url, outfile):
+    """
+    Download using wget with retry logic.
+    Try HTTPS first (friendlier through firewalls/proxies), then FTP.
+    Retry with exponential backoff on network/server errors.
+    """
+    candidates = []
+    if url.startswith("ftp://"):
+        candidates.append(url.replace("ftp://", "https://", 1))
+    candidates.append(url)
+
+    last_err = None
+    for candidate in candidates:
+        for attempt in range(6):  # 6 attempts per candidate
+            try:
+                print(f"Downloading (attempt {attempt+1}) {candidate} -> {outfile}")
+                result = _wget(candidate, outfile)
+                print(result.stdout)
+                return
+            except subprocess.CalledProcessError as e:
+                last_err = e
+                rc = e.returncode
+                # 4 = network failure, 8 = server error; retry those
+                if rc in (4, 8):
+                    sleep_s = 5 * (2 ** attempt)
+                    print(f"wget failed (rc={rc}). Retrying in {sleep_s}s...\nSTDERR:\n{e.stderr}")
+                    time.sleep(sleep_s)
+                    continue
+                else:
+                    print(f"wget failed (rc={rc}). Not retrying.\nSTDERR:\n{e.stderr}")
+                    break
+
+    # If we get here, all retries/candidates failed
+    raise last_err
+###################################################################################################################################################
+
+###################################################################################################################################################
+def _aria2c(url: str, outfile_path: str, threads: int = 4):
+    """
+    Use aria2c for multi-threaded segment downloads.
+    -x: maximum number of connections per server
+    -s: number of connections used for download (split into segments)
+    -j: max concurrent downloads (we download one file at a time here)
+    -c: continue partial downloads
+    --file-allocation=none: faster for most cases
+    """
+    # Get directory and filename
+    out_dir = os.path.dirname(outfile_path) or "."
+    out_file = os.path.basename(outfile_path)
+    
+    cmd = [
+        "aria2c",
+        "-x", str(threads),  # connections per server
+        "-s", str(threads),  # split download into segments
+        "-j", "1",          # download one file at a time
+        "-c",               # continue downloads
+        "--file-allocation=none",
+        "--max-tries=10",
+        "--retry-wait=5",
+        "--timeout=600",          # 10 minutes (aria2c max allowed), relies on -c to resume if interrupted
+        "-d", out_dir,      # output directory
+        "-o", out_file,     # output filename
+        url,
+    ]
+    print("Running command:", " ".join(cmd))
+    return subprocess.run(cmd, check=True, capture_output=True, text=True)
+
+def _wget(url: str, outfile_path: str):
+    # Quiet-ish but resilient; keeps partials (-c)
+    cmd = [
+        "wget", "-c",
+        "--tries=10",
+        "--retry-connrefused",
+        "--waitretry=5",
+        "--read-timeout=1800",  # 30 minutes read timeout (accommodates slow networks)
+        "--timeout=300",       # 5 minutes per connection attempt
+        "-O", outfile_path,
+        url,
+    ]
+    print("Running command:", " ".join(cmd))
+    return subprocess.run(cmd, check=True, capture_output=True, text=True)
+
+
+def select_raw_file_records(files_info: List[Dict[str, Any]], max_raw_files: Optional[int] = None) -> List[Dict[str, str]]:
+    selected = []
+    seen = set()
+    for file_record in files_info:
+        file_name = file_record.get("fileName")
+        if not file_name or not file_name.lower().endswith(".raw") or file_name in seen:
+            continue
+
+        ftp_url = next(
+            (
+                location.get("value")
+                for location in (file_record.get("publicFileLocations") or [])
+                if (location.get("value") or "").startswith("ftp://")
+            ),
+            None,
+        )
+        if not ftp_url:
+            print(f"Skipping .raw file without a PRIDE FTP location: {file_name}")
+            continue
+
+        selected.append({"file_name": file_name, "ftp_url": ftp_url})
+        seen.add(file_name)
+        if max_raw_files and len(selected) >= max_raw_files:
+            break
+    return selected
+
+
+def raw_file_stem(file_name: str) -> str:
+    """Return the extension-free stem used by matching RAW and mzML files."""
+    return Path(file_name).stem
+
+
+def missing_raw_file_records(
+    selected_files: List[Dict[str, str]],
+    valid_mzml_stems: set[str],
+) -> List[Dict[str, str]]:
+    """Return selected PRIDE RAW records without a valid converted mzML file."""
+    return [
+        file_record
+        for file_record in selected_files
+        if raw_file_stem(file_record["file_name"]) not in valid_mzml_stems
+    ]
+
+
+def local_raw_files_by_stem(pxd_dir: str) -> Dict[str, str]:
+    """Index retained RAW files by normalized stem for incremental conversion."""
+    return {
+        raw_file_stem(file_name): os.path.join(pxd_dir, file_name)
+        for file_name in os.listdir(pxd_dir)
+        if file_name.lower().endswith(".raw")
+    }
+
+
+def normalized_max_raw_files(max_raw_files: Optional[int]) -> Optional[int]:
+    """Represent zero and omitted caps consistently as an uncapped selection."""
+    return max_raw_files if max_raw_files and max_raw_files > 0 else None
+
+
+def write_fetch_inventory(
+    pxd_dir: str,
+    pxd: str,
+    selected_files: List[Dict[str, str]],
+    max_raw_files: Optional[int],
+) -> None:
+    """Persist the exact PRIDE RAW selection used to populate a central cache."""
+    inventory = {
+        "pxd": pxd,
+        "max_raw_files": normalized_max_raw_files(max_raw_files),
+        "complete": False,
+        "selected_raw_files": [file_record["file_name"] for file_record in selected_files],
+        "expected_mzml_stems": [raw_file_stem(file_record["file_name"]) for file_record in selected_files],
+    }
+    inventory_path = os.path.join(pxd_dir, FETCH_INVENTORY_FILENAME)
+    with open(inventory_path, "w", encoding="utf-8") as handle:
+        json.dump(inventory, handle, indent=2)
+
+
+def mark_fetch_inventory_complete(pxd_dir: str) -> None:
+    """Record that every selected PRIDE RAW file has a valid mzML output."""
+    inventory_path = os.path.join(pxd_dir, FETCH_INVENTORY_FILENAME)
+    with open(inventory_path, "r", encoding="utf-8") as handle:
+        inventory = json.load(handle)
+    inventory["complete"] = True
+    with open(inventory_path, "w", encoding="utf-8") as handle:
+        json.dump(inventory, handle, indent=2)
+
+
+def pride_ftp_url_to_globus_path(ftp_url: str) -> str:
+    parsed = urlparse(ftp_url)
+    prefix = "/pride/data/archive/"
+    if parsed.hostname != "ftp.pride.ebi.ac.uk" or not parsed.path.startswith(prefix):
+        raise ValueError(f"Unsupported PRIDE FTP URL for Globus transfer: {ftp_url}")
+    return "/pride-archive/" + unquote(parsed.path[len(prefix):])
+
+
+def transfer_files_via_globus(
+    pxd: str,
+    selected_files: List[Dict[str, str]],
+    pxd_dir: str,
+    source_collection: str,
+    destination_collection: Optional[str],
+    destination_base: Optional[str],
+) -> str:
+    globus_executable = shutil.which("globus")
+    if not globus_executable:
+        raise RuntimeError("Globus was requested, but the 'globus' CLI is not available in PATH")
+
+    if not destination_collection:
+        local_id = subprocess.run(
+            [globus_executable, "endpoint", "local-id"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        destination_collection = local_id.stdout.strip()
+    if not destination_collection:
+        raise RuntimeError("Could not determine the local Globus destination collection")
+
+    if not destination_base or destination_base.strip().lower() in {"null", "none"}:
+        destination_base = os.path.dirname(pxd_dir)
+    destination_root = os.path.abspath(destination_base)
+    destination_pxd_dir = os.path.join(destination_root, pxd)
+    batch_lines = []
+    for selected_file in selected_files:
+        source_path = pride_ftp_url_to_globus_path(selected_file["ftp_url"])
+        destination_path = os.path.join(destination_pxd_dir, selected_file["file_name"])
+        batch_lines.append(f"{shlex.quote(source_path)} {shlex.quote(destination_path)}")
+
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as batch_file:
+        batch_file.write("\n".join(batch_lines) + "\n")
+        batch_path = batch_file.name
+
+    try:
+        submit = subprocess.run(
+            [
+                globus_executable,
+                "transfer",
+                f"{source_collection}:/",
+                f"{destination_collection}:/",
+                "--batch",
+                batch_path,
+                "--sync-level",
+                "checksum",
+                "--verify-checksum",
+                "--label",
+                f"HAMLET fetch {pxd}",
+                "--format",
+                "json",
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        task_id = json.loads(submit.stdout)["task_id"]
+        print(f"Submitted Globus task {task_id} for {len(selected_files)} RAW file(s)")
+
+        wait_result = subprocess.run([globus_executable, "task", "wait", task_id])
+        task_result = subprocess.run(
+            [globus_executable, "task", "show", task_id, "--format", "json"],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        task_data = json.loads(task_result.stdout)
+        with open(os.path.join(pxd_dir, "globus_transfer.json"), "w", encoding="utf-8") as task_file:
+            json.dump(task_data, task_file, indent=2)
+
+        if wait_result.returncode != 0 or task_data.get("status") != "SUCCEEDED":
+            raise RuntimeError(
+                f"Globus task {task_id} ended with status {task_data.get('status')}: "
+                f"{task_data.get('fatal_error') or task_data.get('nice_status_details') or 'unknown error'}"
+            )
+
+        missing = [
+            item["file_name"]
+            for item in selected_files
+            if not os.path.isfile(os.path.join(pxd_dir, item["file_name"]))
+        ]
+        if missing:
+            raise RuntimeError(f"Globus task succeeded but destination files are missing: {', '.join(missing)}")
+        return task_id
+    finally:
+        os.unlink(batch_path)
+###################################################################################################################################################
+
+###################################################################################################################################################
+def find_spectral_files_in_directory(directory: str) -> List[str]:
+    """
+    Recursively search a directory for spectral data files.
+    
+    Returns list of absolute paths to .raw and .wiff files (case-insensitive).
+    """
+    spectral_files = []
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            file_lower = file.lower()
+            if file_lower.endswith('.raw') or file_lower.endswith('.wiff'):
+                spectral_files.append(os.path.join(root, file))
+    return spectral_files
+
+def extract_zip_file(zip_path: str, extract_to: str) -> bool:
+    """
+    Extract a ZIP file to the specified directory.
+    
+    Returns True if successful, False otherwise.
+    """
+    try:
+        print(f"Extracting ZIP file: {zip_path} to {extract_to}")
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_to)
+        print(f"Successfully extracted {zip_path}")
+        return True
+    except zipfile.BadZipFile as e:
+        print(f"ERROR: {zip_path} is not a valid ZIP file: {e}")
+        return False
+    except Exception as e:
+        print(f"ERROR: Failed to extract {zip_path}: {e}")
+        return False
+
+###################################################################################################################################################
+def convert_spectral_file_to_mzml(file_path: str):
+    """
+    Convert .RAW files to centroided .mzML.
+    
+    Uses ThermoRawFileParser which is a native .NET tool that reads Thermo RAW files 
+    directly without requiring containers or Wine.
+    
+    Args:
+        file_path: Path to .raw file
+    Returns:
+        Path to output .mzML if successful, None otherwise
+    """
+    filetype = os.path.splitext(file_path)[1]  # Get original extension (preserving case)
+    
+    # Only .raw files are supported in this container-free version
+    if filetype.lower() != '.raw':
+        print(f"Skipping conversion for {file_path}: only .raw files are supported in this version")
+        return None
+    
+    outfile = file_path[:-len(filetype)] + '.mzML'  # Replace extension with .mzML
+    
+    # Check if output already exists
+    if os.path.exists(outfile):
+        print(f"mzML file already exists: {outfile}")
+        return outfile
+    
+    # Convert .raw to .mzML using ThermoRawFileParser
+    return _convert_thermo_raw_to_mzml(file_path, outfile)
+
+###################################################################################################################################################
+def _convert_thermo_raw_to_mzml(file_path: str, outfile: str):
+    """
+    Convert Thermo .RAW files to .mzML using ThermoRawFileParser.
+    
+    ThermoRawFileParser is a native .NET tool that reads Thermo RAW files directly
+    (no Wine/Wine needed). This is more reliable than ProteoWizard's Wine-based approach.
+    
+    Args:
+        file_path: Path to .raw file
+        outfile: Path to output .mzML file
+    """
+    abs_file_path = os.path.abspath(file_path)
+    abs_outdir = os.path.dirname(abs_file_path)
+    filename_only = os.path.basename(file_path)
+    
+    try:
+        print(f"\n{'='*80}")
+        print(f"Converting {file_path} --> .mzML via ThermoRawFileParser")
+        print(f"{'='*80}")
+        cmd = [
+            "ThermoRawFileParser",
+            "-i", abs_file_path,
+            "-b", outfile,
+            "-f", "2",
+        ]
+        print(f"\nCommand:")
+        print(f"  {' '.join(cmd)}")
+        print(f"\nInput file:")
+        print(f"  {abs_file_path} ({os.path.getsize(abs_file_path)} bytes)")
+        print(f"Output directory:")
+        print(f"  {abs_outdir}")
+        print(f"\nRunning ThermoRawFileParser...")
+        result = subprocess.run(
+            cmd,
+            check=True,
+            capture_output=True,
+            text=True,
+            timeout=6000,
+        )
+        print(result.stdout)
+        if result.stderr:
+            print(f"(stderr): {result.stderr}")
+        if os.path.exists(outfile):
+            print(f"\nSuccess! Finished converting {file_path} --> {outfile}")
+            return outfile
+        raise RuntimeError(f"Output file not created: {outfile}")
+    except subprocess.TimeoutExpired:
+        print(f"ERROR: ThermoRawFileParser conversion exceeded 10 minutes for {file_path}")
+    except subprocess.CalledProcessError as e:
+        print(f"ERROR: ThermoRawFileParser failed with exit code {e.returncode}")
+        print(f"stdout:\n{e.stdout}")
+        print(f"stderr:\n{e.stderr}")
+    except Exception as e:
+        print(f"ERROR: Unexpected error converting {file_path}: {e}")
+    print("Continuing to next file...")
+    return None
+
+###################################################################################################################################################
+def _convert_wiff_to_mzml(file_path: str, outfile: str, max_retries: int = 3):
+    """
+    Convert AB Sciex .WIFF files to .mzML using ProteoWizard (via Wine/Singularity).
+    
+    WIFF files require ProteoWizard's Wine-based conversion because there's no
+    native Linux alternative with good coverage of AB Sciex formats.
+    
+    Args:
+        file_path: Path to .wiff file
+        outfile: Path to output .mzML file
+        max_retries: Number of retries on transient Wine issues
+    """
+    filetype = os.path.splitext(file_path)[1]
+    
+    # Verify paired .scan file exists (case-insensitive)
+    scan_file = file_path + '.scan'
+    if not os.path.exists(scan_file):
+        # Try to find it case-insensitively
+        base_dir = os.path.dirname(file_path)
+        base_file = os.path.basename(file_path)
+        scan_candidates = glob.glob(os.path.join(base_dir, base_file + '.scan*'), recursive=False)
+        if scan_candidates:
+            scan_file = scan_candidates[0]
+        else:
+            print(f"WARNING: No .wiff.scan sidecar found for {file_path}")
+            print(f"Expected: {scan_file}")
+            print(f"Skipping WIFF conversion (both .wiff and .wiff.scan are required)")
+            return None
+    
+    # Get paths to ProteoWizard resources
+    pwiz_sif = os.environ.get("PROTEOWIZARD_SINGULARITY")
+    pwiz_prefix = os.environ.get("PROTEOWIZARD_WINEPREFIX")
+    
+    # Check if msconvert is available on PATH (for unified container/direct Wine setup)
+    msconvert_available = shutil.which("msconvert") is not None
+    
+    if not pwiz_sif and not msconvert_available:
+        print(f"WARNING: ProteoWizard setup incomplete for WIFF conversion")
+        print(f"  - $PROTEOWIZARD_SINGULARITY not set (external ProteoWizard container)")
+        print(f"  - msconvert not found on PATH (in-container Wine/ProteoWizard setup)")
+        print(f"Skipping WIFF conversion for {file_path}")
+        print(f"Manual conversion required: use ProteoWizard msconvert or equivalent tool")
+        return None
+    
+    if pwiz_sif and (not pwiz_sif or not os.path.exists(pwiz_sif)):
+        print(f"ERROR: ProteoWizard Singularity image not found at: {pwiz_sif}")
+        print(f"Set $PROTEOWIZARD_SINGULARITY environment variable or ensure msconvert is on PATH")
+        return None
+    
+    if pwiz_sif and (not pwiz_prefix or not os.path.exists(pwiz_prefix)):
+        print(f"ERROR: ProteoWizard wine prefix not found at: {pwiz_prefix}")
+        print(f"Set $PROTEOWIZARD_WINEPREFIX environment variable")
+        return None
+    
+    # Get absolute paths
+    abs_file_path = os.path.abspath(file_path)
+    abs_outdir = os.path.dirname(abs_file_path)
+    
+    # Determine which path to use: direct msconvert or external Singularity container
+    use_direct_msconvert = msconvert_available and not pwiz_sif
+    use_singularity = pwiz_sif and pwiz_prefix
+    
+    # ========== DIRECT MSCONVERT (Unified Container Path) ==========
+    if use_direct_msconvert:
+        print(f"\n{'='*80}")
+        print(f"Converting {file_path} --> .mzML via direct msconvert (unified container)")
+        print(f"{'='*80}")
+        
+        # Set up environment for msconvert to work with Wine/locale
+        env = os.environ.copy()
+        env['LC_ALL'] = 'C'
+        env['LANG'] = 'C'
+        env['WINEPREFIX'] = os.environ.get('WINEPREFIX', '/opt/wineprefix')
+        
+        # Build msconvert command
+        cmd = [
+            "msconvert",
+            abs_file_path,
+            "--mzML",         # Output format
+            "--zlib",         # Zlib compression
+            "--filter", "peakPicking vendor",  # Centroiding via vendor algorithm
+            "-o", abs_outdir  # Output directory
+        ]
+        
+        print(f"\nCommand: {' '.join(cmd)}")
+        print(f"Environment: LC_ALL=C, LANG=C, WINEPREFIX={env['WINEPREFIX']}")
+        
+        for attempt in range(max_retries + 1):
+            try:
+                if attempt > 0:
+                    print(f"\nRETRY ATTEMPT {attempt}/{max_retries}")
+                
+                print(f"\nRunning msconvert...")
+                result = subprocess.run(
+                    cmd,
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    timeout=6000,  # 100 minute timeout
+                    env=env
+                )
+                print(result.stdout)
+                
+                # Verify output file was created
+                if os.path.exists(outfile):
+                    print(f"\nSuccess! Created {outfile}")
+                    return outfile
+                else:
+                    # msconvert completed but didn't produce output
+                    # Check for WIFF vendor DLL issue
+                    if result.stderr and "vendor" in result.stderr.lower():
+                        print(f"\nWARNING: ProteoWizard cannot read WIFF files on Linux without Windows vendor DLLs")
+                        print(f"The conda msconvert was built without vendor DLL support.")
+                        print(f"WIFF files require manual conversion or a Windows ProteoWizard installation.")
+                        return None
+                    else:
+                        print(f"\nERROR: msconvert completed but did not create output file: {outfile}")
+                        if result.stderr:
+                            print(f"stderr: {result.stderr}")
+                        raise RuntimeError("msconvert did not produce output")
+                        
+            except subprocess.TimeoutExpired:
+                error_msg = f"TIMEOUT: msconvert conversion exceeded 100 minutes for {file_path}"
+                print(f"ERROR: {error_msg}")
+                if attempt < max_retries:
+                    backoff_seconds = 2 ** attempt
+                    print(f"Retrying in {backoff_seconds} seconds...")
+                    time.sleep(backoff_seconds)
+                else:
+                    raise
+                    
+            except subprocess.CalledProcessError as e:
+                error_msg = f"msconvert failed with exit code {e.returncode}: {e.stderr}"
+                print(f"ERROR: {error_msg}")
+                
+                # Check for WIFF vendor DLL issue
+                if e.stderr and ("vendor" in e.stderr.lower() or "scan" in e.stderr.lower()):
+                    print(f"\nWARNING: ProteoWizard cannot read WIFF files on Linux without Windows vendor DLLs")
+                    return None
+                
+                if attempt < max_retries:
+                    backoff_seconds = 2 ** attempt
+                    print(f"Retrying in {backoff_seconds} seconds...")
+                    time.sleep(backoff_seconds)
+                else:
+                    raise
+        
+        return None
+    
+    # ========== EXTERNAL SINGULARITY CONTAINER PATH ==========
+    if use_singularity:
+        abs_pwiz_sif = os.path.abspath(pwiz_sif)
+        abs_pwiz_prefix = os.path.abspath(pwiz_prefix)
+        filename_only = os.path.basename(file_path)
+        
+        for attempt in range(max_retries + 1):
+            try:
+                print(f"\n{'='*80}")
+                print(f"Converting {file_path} --> .mzML via ProteoWizard msconvert")
+                if attempt > 0:
+                    print(f"RETRY ATTEMPT {attempt}/{max_retries}")
+                print(f"{'='*80}")
+                
+                # Build singularity exec command with proper binds
+                # Bind: data directory to /data, wine prefix to /wineprefix64
+                # CRITICAL: Set WINEPREFIX env var so wine uses the extracted wineprefix64
+                cmd = [
+                    "singularity", "exec",
+                    "--bind", f"{abs_outdir}:/data",
+                    "--bind", f"{abs_pwiz_prefix}:/wineprefix64",
+                    "--env", "WINEPREFIX=/wineprefix64",
+                    abs_pwiz_sif,
+                    "wine", "msconvert",
+                    "/data/" + filename_only,
+                    "--mzML",         # Output format
+                    "--zlib",         # Zlib compression
+                    "--filter", "peakPicking vendor",  # Centroiding via vendor algorithm
+                    "-o", "/data"     # Output directory (inside container)
+                ]
+                
+                print(f"\nSingularity Command:")
+                # Print with proper quoting for multi-word arguments
+                cmd_for_display = []
+                for arg in cmd:
+                    if ' ' in arg and not arg.startswith(('-', '/')):  # Quote args with spaces (but not flags/paths)
+                        cmd_for_display.append(f'"{arg}"')
+                    else:
+                        cmd_for_display.append(arg)
+                print(f"  {' '.join(cmd_for_display)}")
+                
+                print(f"\nBound Paths:")
+                print(f"  Host {abs_outdir} <--> Container /data")
+                print(f"  Host {abs_pwiz_prefix} <--> Container /wineprefix64")
+                print(f"  Wine Prefix: /wineprefix64 (WINEPREFIX env var)")
+                
+                print(f"\nHost-side directory listing ({abs_outdir}):")
+                try:
+                    for item in sorted(os.listdir(abs_outdir)):
+                        item_path = os.path.join(abs_outdir, item)
+                        if os.path.isfile(item_path):
+                            size = os.path.getsize(item_path)
+                            print(f"  FILE: {item} ({size} bytes)")
+                        else:
+                            print(f"  DIR:  {item}/")
+                except Exception as e:
+                    print(f"  WARNING: Could not list directory: {e}")
+                
+                # List container-side directory before conversion
+                print(f"\nContainer-side directory listing (before conversion, inside /data):")
+                ls_cmd = [
+                    "singularity", "exec",
+                    "--bind", f"{abs_outdir}:/data",
+                    "--bind", f"{abs_pwiz_prefix}:/wineprefix64",
+                    "--env", "WINEPREFIX=/wineprefix64",
+                    abs_pwiz_sif,
+                    "ls", "-lah", "/data"
+                ]
+                try:
+                    ls_result = subprocess.run(ls_cmd, capture_output=True, text=True, timeout=10)
+                    print(ls_result.stdout)
+                    if ls_result.stderr:
+                        print(f"  (stderr): {ls_result.stderr}")
+                except Exception as e:
+                    print(f"  WARNING: Could not list container /data: {e}")
+                
+                print(f"\nRunning msconvert...")
+                result = subprocess.run(
+                    cmd,
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    timeout=6000  # 100 minute timeout
+                )
+                print(result.stdout)
+                print(f"\nSuccess! Finished converting {file_path} --> {outfile}")
+                return outfile
+
+            except subprocess.TimeoutExpired:
+                error_msg = f"TIMEOUT: msconvert conversion exceeded 10 minutes for {file_path}"
+                print(f"ERROR: {error_msg}")
+                if attempt < max_retries:
+                    backoff_seconds = 2 ** attempt  # Exponential backoff: 1, 2, 4 seconds
+                    print(f"Retrying in {backoff_seconds} seconds...")
+                    time.sleep(backoff_seconds)
+                    continue
+                else:
+                    print(f"Giving up after {max_retries} retries")
+                    return None
+                    
+            except subprocess.CalledProcessError as e:
+                # Check if error is "no files found" - likely transient Wine issue
+                error_output = e.stderr + e.stdout
+                is_no_files_error = "no files found" in error_output.lower()
+                # Also detect vendor filter arg parsing issue
+                is_vendor_error = "no files found matching" in error_output.lower() and "vendor" in error_output.lower()
+                
+                print(f"ERROR: msconvert failed with exit code {e.returncode}")
+                print(f"stdout:\n{e.stdout}")
+                print(f"stderr:\n{e.stderr}")
+                
+                if (is_no_files_error or is_vendor_error) and attempt < max_retries:
+                    backoff_seconds = 2 ** attempt  # Exponential backoff: 1, 2, 4 seconds
+                    print(f"\nDetected transient 'no files found' error (likely Wine/binding issue)")
+                    print(f"Retrying in {backoff_seconds} seconds...")
+                    time.sleep(backoff_seconds)
+                    continue
+                else:
+                    if is_no_files_error or is_vendor_error:
+                        print(f"Gave up after {max_retries} retries of transient 'no files found' error")
+                    print("Conversion failed")
+                    return None
+                    
+            except Exception as e:
+                print(f"Unexpected error converting {file_path} to .mzML: {e}")
+                if attempt < max_retries:
+                    backoff_seconds = 2 ** attempt
+                    print(f"Retrying in {backoff_seconds} seconds...")
+                    time.sleep(backoff_seconds)
+                    continue
+                else:
+                    return None
+        
+        return None
+
+###################################################################################################################################################
+def check_existing_mzml_files(pxd_dir: str) -> tuple:
+    """
+    Check if mzML files already exist in the given directory.
+    
+    Returns:
+        (exists: bool, mzml_files: List[str])
+    """
+    mzml_files = glob.glob(os.path.join(pxd_dir, "*.mzML"))
+    exists = len(mzml_files) > 0
+    return exists, mzml_files
+
+
+def validate_mzml_file(filepath: str, min_size_mb: int = 1) -> tuple:
+    """
+    Validate mzML file integrity.
+    
+    Returns:
+        (is_valid: bool, reason: str or None)
+    """
+    try:
+        if not os.path.exists(filepath):
+            return False, f"File does not exist: {filepath}"
+        
+        # Check file size (mzML files should be > min_size_mb)
+        size_mb = os.path.getsize(filepath) / (1024 * 1024)
+        if size_mb < min_size_mb:
+            return False, f"File too small ({size_mb:.1f}MB < {min_size_mb}MB)"
+        
+        # Check for mzML markers in file
+        with open(filepath, 'rb') as f:
+            header = f.read(1024)
+            if b'<mzML' not in header and b'<?xml' not in header:
+                return False, "File does not contain mzML markers"
+
+            f.seek(max(0, os.path.getsize(filepath) - 8192))
+            footer = f.read()
+            if b'</mzML>' not in footer and b'</indexedmzML>' not in footer:
+                return False, "File does not contain a complete mzML closing tag"
+        
+        return True, None
+    except Exception as e:
+        return False, f"Validation error: {str(e)}"
+
+
+def remove_converted_raw_files(pxd_dir: str) -> int:
+    """Delete RAW files only when the corresponding mzML is valid."""
+    removed = 0
+    for raw_path in Path(pxd_dir).glob("*"):
+        if not raw_path.is_file() or raw_path.suffix.lower() != ".raw":
+            continue
+
+        mzml_path = raw_path.with_suffix(".mzML")
+        is_valid, reason = validate_mzml_file(str(mzml_path))
+        if not is_valid:
+            print(f"  Keeping {raw_path.name}: corresponding mzML is not valid ({reason})")
+            continue
+
+        raw_path.unlink()
+        removed += 1
+        print(f"  Removed converted RAW file: {raw_path.name}")
+
+    return removed
+
+###################################################################################################################################################
+def run_runAssessor(output_dir="raw_data", central_mzml_dir=None, pxd=None):
+    """
+    Run RunAssessor on the mzML files in output_dir, writing
+    output_dir/runAssessor/study_metadata.json, then run
+    determine_acquisition_params.py so output_dir/detected_params.json records
+    whether the dataset is DIA (Cascadia) or DDA (Casanovo). OrganismID.py reads
+    this file to decide which de novo sequencer to run.
+    """
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    runassessor_dir = os.path.join(output_dir, "runAssessor")
+    os.makedirs(runassessor_dir, exist_ok=True)
+    metadata_path = os.path.join(runassessor_dir, "study_metadata.json")
+
+    if os.path.exists(metadata_path):
+        print(f"  ✓ runAssessor output already exists: {metadata_path}")
+    else:
+        mzml_files = sorted(
+            glob.glob(os.path.join(output_dir, "*.mzML"))
+            + glob.glob(os.path.join(output_dir, "*.mzML.gz"))
+        )
+        if not mzml_files:
+            print(f"WARNING: No mzML files found in {output_dir}; writing empty study_metadata.json")
+            with open(metadata_path, 'w') as f:
+                json.dump({}, f)
+        else:
+            runassessor_script = os.path.normpath(
+                os.path.join(script_dir, "..", "submodules", "runassessor", "src", "runassessor.py")
+            )
+            if not os.path.exists(runassessor_script):
+                raise FileNotFoundError(f"RunAssessor script not found: {runassessor_script}")
+
+            cmd = [
+                sys.executable, runassessor_script,
+                "--verbose",
+                "--metadata_filepath", metadata_path,
+                *mzml_files,
+            ]
+            print(f"Running RunAssessor: {' '.join(cmd)}")
+            result = subprocess.run(cmd, capture_output=True, text=True)
+            print(result.stdout)
+            if result.returncode != 0:
+                print(result.stderr)
+                raise RuntimeError(f"RunAssessor failed with exit code {result.returncode}")
+            print(f"✓ RunAssessor wrote {metadata_path}")
+
+    # Decide DIA vs DDA (and labeling) from runAssessor + PRIDE evidence.
+    detected_params_path = os.path.join(output_dir, "detected_params.json")
+    determine_acquisition_params_script = os.path.join(script_dir, "determine_acquisition_params.py")
+    if not os.path.exists(determine_acquisition_params_script):
+        raise FileNotFoundError(
+            f"determine_acquisition_params.py not found: {determine_acquisition_params_script}"
+        )
+
+    cmd = [
+        sys.executable, determine_acquisition_params_script,
+        "--input_dir", output_dir,
+        "--output", detected_params_path,
+    ]
+    if central_mzml_dir:
+        cmd += ["--central_mzml_dir", central_mzml_dir]
+    if pxd:
+        cmd += ["--pxd", pxd]
+    print(f"Running determine_acquisition_params: {' '.join(cmd)}")
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    print(result.stdout)
+    if result.returncode != 0:
+        print(result.stderr)
+        raise RuntimeError(f"determine_acquisition_params failed with exit code {result.returncode}")
+    print(f"✓ Wrote {detected_params_path}")
+###################################################################################################################################################
+
+###################################################################################################################################################
+def processes_pxds(
+    pxd_list: List[str],
+    download_dir: str,
+    use_aria2c: bool = False,
+    aria2c_threads: int = 4,
+    max_raw_files: Optional[int] = None,
+    logger: Optional[PipelineLogger] = None,
+    skip_run_assessor: bool = False,
+    use_globus: bool = False,
+    globus_source_collection: str = PRIDE_GLOBUS_COLLECTION,
+    globus_destination_collection: Optional[str] = None,
+    globus_destination_base: Optional[str] = None,
+):
+    for pxd in pxd_list:
+        print(f"\nProcessing PXD: {pxd}")
+        if logger:
+            logger.process_step("fetch", f"Processing {pxd}", {"pxd": pxd})
+        download_method = "Globus" if use_globus else ('aria2c (' + str(aria2c_threads) + ' threads)' if use_aria2c else 'wget')
+        print(f"Download method: {download_method}")
+        if max_raw_files:
+            print(f"Max raw files to download: {max_raw_files}")
+
+        # Create directory for this PXD
+        pxd_dir = os.path.join(download_dir, pxd)
+        os.makedirs(pxd_dir, exist_ok=True)
+
+        pride_data = fetch_pride_project_and_files(pxd)
+        project_info = pride_data['project']
+        files_info = pride_data['files']
+
+        # Save project metadata
+        metadata_file = os.path.join(pxd_dir, f"{pxd}_PRIDEmetadata.json")
+        with open(metadata_file, 'w') as mf:
+            json.dump(pride_data, mf, indent=2)
+        print(f"Saved project metadata to {metadata_file}")
+
+        selected_files = select_raw_file_records(files_info, max_raw_files)
+        if not selected_files:
+            warning_msg = f"WARNING: No downloadable .raw files were found for {pxd}. This PXD will be skipped."
+            print(warning_msg)
+            if logger:
+                logger.process_error("fetch", warning_msg, is_fatal=True, details={"pxd": pxd})
+            sys.exit(EXIT_NO_RAW_FILES)
+        write_fetch_inventory(pxd_dir, pxd, selected_files, max_raw_files)
+
+        _, mzml_files = check_existing_mzml_files(pxd_dir)
+        valid_mzml_stems = set()
+        for mzml in mzml_files:
+            is_valid, reason = validate_mzml_file(mzml)
+            if is_valid:
+                valid_mzml_stems.add(raw_file_stem(mzml))
+            else:
+                print(f"  ✗ {os.path.basename(mzml)} is corrupted: {reason}")
+                os.remove(mzml)
+
+        missing_files = missing_raw_file_records(selected_files, valid_mzml_stems)
+        if not missing_files:
+            mark_fetch_inventory_complete(pxd_dir)
+            removed_raw_count = remove_converted_raw_files(pxd_dir)
+            if removed_raw_count:
+                print(f"✓ Removed {removed_raw_count} converted RAW file(s) from central storage")
+            print(
+                f"✓ Reusing {len(valid_mzml_stems)} valid mzML file(s) for {pxd}; "
+                f"all {len(selected_files)} selected PRIDE RAW file(s) are covered"
+            )
+            if skip_run_assessor:
+                print("  Skipping runAssessor (handled by separate pipeline stage)")
+            else:
+                runAssessor_outfile = os.path.join(download_dir, pxd, "runAssessor", "study_metadata.json")
+                if not os.path.exists(runAssessor_outfile):
+                    print(f"  runAssessor output missing for {pxd}, running now...")
+                    run_runAssessor(output_dir=pxd_dir, central_mzml_dir=download_dir, pxd=pxd)
+                else:
+                    print(f"  ✓ runAssessor output already exists: {runAssessor_outfile}")
+            work_pxd_dir = os.path.join('.', pxd)
+            if os.path.islink(work_pxd_dir):
+                os.unlink(work_pxd_dir)
+            elif os.path.isdir(work_pxd_dir):
+                shutil.rmtree(work_pxd_dir)
+            os.symlink(pxd_dir, work_pxd_dir)
+            print(f"✓ Created symlink: {work_pxd_dir} → {pxd_dir}")
+            if logger:
+                logger.process_step(
+                    "fetch",
+                    f"Reusing complete selected inventory for {pxd}",
+                    {"pxd": pxd, "mzml_count": len(valid_mzml_stems), "selected_raw_count": len(selected_files)},
+                )
+            continue
+
+        print(
+            f"Found {len(valid_mzml_stems)}/{len(selected_files)} selected PRIDE RAW file(s) "
+            f"as valid mzML; fetching {len(missing_files)} missing file(s) for {pxd}"
+        )
+        retained_raw_files = local_raw_files_by_stem(pxd_dir)
+        files_to_download = [
+            file_record
+            for file_record in missing_files
+            if raw_file_stem(file_record["file_name"]) not in retained_raw_files
+        ]
+        if len(files_to_download) != len(missing_files):
+            print(
+                f"Reusing {len(missing_files) - len(files_to_download)} retained RAW file(s) "
+                "for conversion"
+            )
+
+        # Fetch PMC publication text if PMID is available
+        try:
+            pmid = None
+            # Extract PMID from PRIDE metadata
+            if 'project' in pride_data and 'references' in pride_data['project']:
+                references = pride_data['project']['references']
+                if references and len(references) > 0:
+                    pmid = references[0].get('pubmedID')
+            
+            if pmid:
+                print(f"Found PMID {pmid} for {pxd}, querying PMC...")
+                if logger:
+                    logger.process_step("fetch", {"action": "pmid_extracted", "pmid": pmid, "pxd": pxd})
+                
+                # Create pmc_json directory
+                pmc_json_dir = os.path.join(pxd_dir, 'pmc_json')
+                os.makedirs(pmc_json_dir, exist_ok=True)
+                
+                # Initialize PMC client and fetch publication text
+                pmc_client = PMCClient(timeout=30)
+                pmcid = pmc_client.pmid_to_pmcid(str(pmid))
+                
+                if pmcid:
+                    print(f"Converted PMID {pmid} to PMCID {pmcid}")
+                    if logger:
+                        logger.process_step("fetch", {"action": "pmcid_obtained", "pmid": pmid, "pmcid": pmcid, "pxd": pxd})
+                    
+                    # Fetch full text in BioC JSON format
+                    bioc_data = pmc_client.fetch_full_text(pmcid)
+                    
+                    if bioc_data:
+                        # Save BioC JSON
+                        pmc_json_file = os.path.join(pmc_json_dir, f"{pxd}_{pmid}.json")
+                        with open(pmc_json_file, 'w') as f:
+                            json.dump(bioc_data, f, indent=2)
+                        print(f"Saved PMC publication text to {pmc_json_file}")
+                        if logger:
+                            logger.process_step("fetch", {"action": "pmc_text_saved", "pmid": pmid, "pmcid": pmcid, "file": pmc_json_file, "pxd": pxd})
+                    else:
+                        print(f"Warning: Could not fetch full text for PMCID {pmcid}")
+                        if logger:
+                            logger.process_step("fetch", {"action": "pmc_fetch_failed", "pmid": pmid, "pmcid": pmcid, "pxd": pxd})
+                else:
+                    print(f"Warning: Could not convert PMID {pmid} to PMCID (paper may not be in PMC)")
+                    if logger:
+                        logger.process_step("fetch", {"action": "pmcid_not_found", "pmid": pmid, "pxd": pxd})
+            else:
+                print(f"No PubMed ID found in PRIDE metadata for {pxd}")
+                if logger:
+                    logger.process_step("fetch", {"action": "no_pmid", "pxd": pxd})
+        
+        except Exception as e:
+            print(f"Warning: Error fetching PMC publication text: {e}")
+            if logger:
+                logger.process_error("fetch", f"PMC fetch error: {str(e)}", is_fatal=False)
+
+        if use_globus and files_to_download:
+            transfer_files_via_globus(
+                pxd,
+                files_to_download,
+                pxd_dir,
+                globus_source_collection,
+                globus_destination_collection,
+                globus_destination_base or download_dir,
+            )
+
+        max_conversion_retries = 1
+        num_raw_downloaded = 0
+        num_download_failures = 0
+        for selected_file in missing_files:
+            file_name = selected_file["file_name"]
+            ftp_url = selected_file["ftp_url"]
+            raw_stem = raw_file_stem(file_name)
+            retained_raw = raw_stem in retained_raw_files
+            outfile_path = retained_raw_files.get(raw_stem, os.path.join(pxd_dir, file_name))
+
+            mzml_path = None
+            download_failed = False
+            for attempt in range(max_conversion_retries + 1):
+                if not retained_raw and not use_globus:
+                    if attempt > 0:
+                        print(f"RETRY {attempt}/{max_conversion_retries}: re-downloading {file_name} after conversion failure")
+                    print(f"Downloading .raw file {file_name} from {ftp_url} to {outfile_path}")
+                    try:
+                        if use_aria2c:
+                            download_ftp_file_aria2c(ftp_url, outfile_path, aria2c_threads)
+                        else:
+                            download_ftp_file_wget(ftp_url, outfile_path)
+                    except Exception as e:
+                        error_msg = f"Download failed for {file_name}: {str(e)}"
+                        print(f"WARNING: {error_msg}")
+                        if logger:
+                            logger.process_error("fetch", error_msg, is_fatal=False, details={
+                                "pxd": pxd,
+                                "file_name": file_name,
+                                "ftp_url": ftp_url,
+                                "error_type": type(e).__name__
+                            })
+                        download_failed = True
+                        break
+
+                mzml_path = convert_spectral_file_to_mzml(outfile_path)
+                if mzml_path and os.path.exists(mzml_path):
+                    break
+
+                if attempt < max_conversion_retries:
+                    print(f"Conversion failed for {outfile_path}; deleting and retrying via fresh download...")
+                    if os.path.exists(outfile_path):
+                        os.remove(outfile_path)
+                    retained_raw = False
+                else:
+                    print(f"WARNING: Conversion failed for {outfile_path} after {max_conversion_retries} retry/retries")
+
+            if download_failed:
+                # Skip this file and continue to the next one
+                num_download_failures += 1
+                print(f"Skipping {file_name} and continuing to next file...")
+                continue
+
+            if mzml_path and os.path.exists(mzml_path):
+                num_raw_downloaded += 1
+                print(f"Successfully converted {outfile_path} to {mzml_path}")
+            else:
+                num_download_failures += 1
+                print(f"WARNING: Conversion failed for {outfile_path}")
+
+        # Print download summary
+        print(f"\n{'='*80}")
+        print(f"Download Summary for {pxd}:")
+        print(f"  Successfully downloaded: {num_raw_downloaded} file(s)")
+        if num_download_failures > 0:
+            print(f"  Failed downloads: {num_download_failures} file(s)")
+            if logger:
+                logger.process_step("fetch", f"Download complete with failures", {
+                    "pxd": pxd,
+                    "successful": num_raw_downloaded,
+                    "failed": num_download_failures
+                })
+        print(f"{'='*80}\n")
+
+        _, completed_mzml_files = check_existing_mzml_files(pxd_dir)
+        completed_mzml_stems = set()
+        for mzml in completed_mzml_files:
+            is_valid, reason = validate_mzml_file(mzml)
+            if is_valid:
+                completed_mzml_stems.add(raw_file_stem(mzml))
+            else:
+                print(f"  ✗ {os.path.basename(mzml)} is corrupted: {reason}")
+                os.remove(mzml)
+
+        incomplete_files = missing_raw_file_records(selected_files, completed_mzml_stems)
+        if incomplete_files:
+            incomplete_names = ", ".join(file_record["file_name"] for file_record in incomplete_files)
+            warning_msg = (
+                f"WARNING: Fetch did not produce valid mzML files for all selected PRIDE RAW files "
+                f"for {pxd}: {incomplete_names}"
+            )
+            print(f"\n{'='*80}")
+            print(warning_msg)
+            print(f"{'='*80}\n")
+
+            # A completely failed fetch (zero usable files) is fatal; a partial fetch is not,
+            # since downstream stages process each spectral file independently.
+            is_fatal = not completed_mzml_stems
+
+            # Log to pipeline logger
+            if logger:
+                logger.process_error("fetch", warning_msg, is_fatal=is_fatal, details={"pxd": pxd})
+            
+            # Log warning to file
+            warning_log_file = os.path.join(pxd_dir, f"{pxd}_INCOMPLETE_FETCH_WARNING.log")
+            with open(warning_log_file, 'w') as wf:
+                wf.write(warning_msg + "\n")
+                wf.write(f"Timestamp: {pd.Timestamp.now()}\n")
+                wf.write(
+                    f"Valid mzML coverage: {len(completed_mzml_stems)}/{len(selected_files)} "
+                    "selected PRIDE RAW files.\n"
+                )
+                wf.write("One or more selected PRIDE RAW files were not converted to valid mzML.\n")
+            
+            print(f"Warning logged to: {warning_log_file}")
+
+            if is_fatal:
+                raise RuntimeError(warning_msg)
+
+            print(
+                f"Continuing with {len(completed_mzml_stems)}/{len(selected_files)} valid mzML file(s); "
+                "downstream stages will process the available files independently."
+            )
+
+        print(
+            f"\nSelected inventory complete for {pxd}: {len(completed_mzml_stems)}/"
+            f"{len(selected_files)} RAW file(s) have valid mzML outputs"
+        )
+        mark_fetch_inventory_complete(pxd_dir)
+        
+        # VALIDATION: Verify all mzML files are valid
+        exists, mzml_files = check_existing_mzml_files(pxd_dir)
+        if exists:
+            print(f"\n✓ Validating {len(mzml_files)} mzML file(s)...")
+            all_valid = True
+            for mzml in mzml_files:
+                is_valid, reason = validate_mzml_file(mzml)
+                if is_valid:
+                    print(f"  ✓ {os.path.basename(mzml)} is valid")
+                else:
+                    print(f"  ✗ {os.path.basename(mzml)} is corrupted: {reason}")
+                    # Delete corrupted file for retry on next run
+                    os.remove(mzml)
+                    all_valid = False
+                    if logger:
+                        logger.process_error("fetch", f"Corrupted mzML file deleted: {os.path.basename(mzml)}", is_fatal=False)
+            
+            if not all_valid:
+                print(f"⚠ Some files were corrupted and deleted. They will be re-downloaded on next run.")
+        else:
+            print(f"⚠ No mzML files found after conversion - download may have failed")
+
+        removed_raw_count = remove_converted_raw_files(pxd_dir)
+        print(f"✓ Removed {removed_raw_count} converted RAW file(s) from central storage")
+
+        # Run runAssessor on the downloaded data unless delegated to a separate stage.
+        if skip_run_assessor:
+            print("Skipping runAssessor (handled by separate pipeline stage)")
+        else:
+            run_runAssessor(output_dir=pxd_dir, central_mzml_dir=download_dir, pxd=pxd)
+        
+        # Create symlink in current work directory for Nextflow output
+        work_pxd_dir = os.path.join('.', pxd)
+        if os.path.islink(work_pxd_dir):
+            os.unlink(work_pxd_dir)
+        elif os.path.isdir(work_pxd_dir):
+            shutil.rmtree(work_pxd_dir)
+        os.symlink(pxd_dir, work_pxd_dir)
+        print(f"✓ Created symlink: {work_pxd_dir} → {pxd_dir}")
+###################################################################################################################################################
+
+###################################################################################################################################################
+def main():
+    """
+    Main function for downloading and converting PRIDE datasets.
+    
+    File Format Support:
+    - .RAW (Thermo): Converted to .mzML via ThermoRawFileParser
+      * Lightweight native .NET tool (no containers required)
+      * Must be available in PATH or conda environment
+    
+    Environment Variables (optional):
+    - $PROTEOWIZARD_SINGULARITY: Ignored (ThermoRawFileParser is used)
+    - $PROTEOWIZARD_WINEPREFIX: Ignored (ThermoRawFileParser is used)
+    
+    NOTE: This version ONLY downloads .raw files. Other formats (.wiff, .zip) are skipped.
+    
+    Example:
+    python FetchPXD.py --PXD PXD003539 PXD006877 --max_raw_files 5
+    """
+    parser = argparse.ArgumentParser(description='Download and convert PRIDE spectral data (.RAW → .mzML)')
+    parser.add_argument('--central_mzml_dir', default=None, help='Central directory for all mzML files (if not provided, uses current directory)')
+    parser.add_argument('--download_dir', default='data/PRIDE_downloads', help='Directory to save downloaded projects (deprecated, use --central_mzml_dir)')
+    parser.add_argument('--PXD', nargs='+', help='List of PXD identifiers to download (overrides other selection criteria)')
+    parser.add_argument('--use_aria2c', action='store_true', help='Use aria2c for multi-threaded downloads instead of wget')
+    parser.add_argument('--aria2c_threads', type=int, default=4, help='Number of threads for aria2c downloads (default: 4)')
+    parser.add_argument('--max_raw_files', type=int, default=None, help='Maximum number of spectrum files (.RAW) to download per PXD (default: all files)')
+    parser.add_argument('--globus', action='store_true', help='Transfer PRIDE RAW files with Globus instead of HTTPS/FTP')
+    parser.add_argument('--globus_source_collection', default=PRIDE_GLOBUS_COLLECTION, help='PRIDE Globus source collection UUID')
+    parser.add_argument('--globus_destination_collection', default=None, help='Destination collection UUID (default: globus endpoint local-id)')
+    parser.add_argument('--globus_destination_base', default=None, help='Destination collection path corresponding to central_mzML_dir')
+    parser.add_argument('--skip_run_assessor', action='store_true', help='Skip runAssessor execution (use when pipeline runs it as a dedicated stage)')
+    parser.add_argument('--log_file', default=None, help='Path to JSONL file for pipeline event logging')
+    args = parser.parse_args()
+    print(f"\nStarting FetchPXD with arguments: {args}")
+    
+    # Initialize logger if log_file specified
+    logger = None
+    if args.log_file and args.PXD:
+        pxd_id = args.PXD[0] if isinstance(args.PXD, list) else args.PXD
+        logger = PipelineLogger(args.log_file, pxd_id)
+        logger.process_start("fetch", {"pxd": pxd_id})
+    
+    # Note: ThermoRawFileParser conversion requires ThermoRawFileParser to be available
+    print("INFO: ThermoRawFileParser will be used for .raw → .mzML conversion.")
+    print("Ensure ThermoRawFileParser is installed and available in PATH or conda environment.")
+
+    ## Use central_mzml_dir if provided, otherwise use download_dir for backward compatibility
+    download_dir = args.central_mzml_dir if args.central_mzml_dir else args.download_dir
+    os.makedirs(download_dir, exist_ok=True)
+    print(f"Central mzML directory: {download_dir}")
+
+    ## For each PXD query the PRIDE API and download the 
+    pxd_list = args.PXD
+    if not pxd_list:
+        print("No PXD identifiers provided. Exiting.")
+        if logger:
+            logger.process_error("fetch", "No PXD identifiers provided")
+        return
+    print(f"Processing PXDs: {pxd_list}")
+    processes_pxds(
+        pxd_list,
+        download_dir,
+        args.use_aria2c,
+        args.aria2c_threads,
+        args.max_raw_files,
+        logger=logger,
+        skip_run_assessor=args.skip_run_assessor,
+        use_globus=args.globus,
+        globus_source_collection=args.globus_source_collection,
+        globus_destination_collection=args.globus_destination_collection,
+        globus_destination_base=args.globus_destination_base,
+    )
+    
+###################################################################################################################################################
+if __name__ == "__main__":
+    main()
+print('NORMAL TERMINATION')

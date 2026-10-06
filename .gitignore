@@ -1,0 +1,72 @@
+# ── Pipeline run/output directories ──────────────────────────────────────────
+runs/
+results/
+OrganismID/
+data/PRIDE_downloads/
+spectral_files/
+
+# ── Snakemake / Peptonizer2000 run artifacts ─────────────────────────────────
+.snakemake/
+/scripts
+
+# ── PyTorch Lightning / de novo tool run artifacts ───────────────────────────
+lightning_logs/
+.cache/
+
+# ── Mass spectrometry data files (large, fetched by FetchPXD.py) ────────────
+*.mzML
+*.mzML.gz
+*.mzXML
+*.raw
+*.RAW
+*.d/
+*.wiff
+*.wiff.scan
+
+# ── Large model / database files (>100 MB, exceed GitHub's file size limit) ─
+# Fetched automatically by setup.sh; see README.md if you need to do it manually.
+assets/cascadia.ckpt
+assets/taxonomy/nodes.dmp
+assets/taxonomy/names.dmp
+
+# ── Archives ──────────────────────────────────────────────────────────────────
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.bz2
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+.venv/
+venv/
+env/
+envs/
+
+# ── Secrets ───────────────────────────────────────────────────────────────────
+.env
+.env.*
+
+# ── SLURM / Nextflow ──────────────────────────────────────────────────────────
+slurm_*.log
+.nextflow/
+.nextflow.log*
+
+# ── OS / editor ───────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
