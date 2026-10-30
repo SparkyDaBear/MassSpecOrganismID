@@ -116,7 +116,7 @@ def add_aa_scores_average(df):
 ###############################################
 
 ###############################################
-def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides.tsv', contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta'):
+def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides.tsv', contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta', human_sample: bool = False):
     """
     Filter peptides based on specific criteria.
     1. longer than 10 residues. 
@@ -144,7 +144,7 @@ def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides
     filtered_df.rename(columns={'stripped_sequence': 'peptide','search_engine_score[1]': 'score'}, inplace=True)
 
     # Remove contaminants
-    filtered_df = remove_contaminants(filtered_df, contaminants_fasta=contaminants_fasta)
+    filtered_df = remove_contaminants(filtered_df, contaminants_fasta=contaminants_fasta, human_sample=human_sample)
     print(f'Filtered peptides {min_score}:\n{filtered_df}')
     
     # Save the parsed Casanovo PSMs to a TSV file
@@ -160,34 +160,57 @@ def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides
 ###############################################
 
 ###############################################
-def remove_contaminants(df, contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta'):
+def remove_contaminants(df, contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta', human_sample: bool = False):
 
     # --- inputs ---
     enzyme = "trypsin"                          # trypsin, no-P rule
     missed_cleavages = 2
     min_len, max_len = 6, 50
     treat_I_L_as_same = True
+    normalize = (lambda s: s.replace('I', 'L')) if treat_I_L_as_same else (lambda s: s)
+    skin_pattern = re.compile(r'keratin|filaggrin|hornerin', re.IGNORECASE)
+    skin_fasta = os.path.join(os.path.dirname(contaminants_fasta), "SkinHairContaminants.fasta")
 
     # --- digest contaminant FASTA ---
     cont_pep_to_accessions = defaultdict(set)
     cont_accession_to_desc = {}
+    skin_accession_to_seq = {}
 
     for header, seq in fasta.read(contaminants_fasta):
         # store accession and description
         acc = header.split()[0]
         cont_accession_to_desc[acc] = header
+        if skin_pattern.search(header):
+            skin_accession_to_seq[acc] = normalize(seq)
 
         # digest
         peps = parser.cleave(seq, parser.expasy_rules[enzyme], missed_cleavages=missed_cleavages, min_length=min_len, max_length=max_len)
         for p in peps:
-            cont_pep_to_accessions[p].add(acc)
+            cont_pep_to_accessions[normalize(p)].add(acc)
+
+    if not human_sample and os.path.exists(skin_fasta):
+        for header, seq in fasta.read(skin_fasta):
+            skin_accession_to_seq[header.split()[0]] = normalize(seq)
+    all_skin = '*'.join(skin_accession_to_seq.values())
+
+    def skin_accessions(peptide):
+        p = normalize(peptide)
+        if human_sample or p not in all_skin:
+            return []
+        return sorted(acc for acc, s in skin_accession_to_seq.items() if p in s)
+
+    print(f"Contaminant filter: exact tryptic match (I=L){'' if human_sample else ' + skin/hair proteins matched anywhere in the sequence'}"
+          f"{' (human sample: skin/hair rule off)' if human_sample else ''}")
 
     # --- match peptides to contaminant peptides ---
     # Only process contaminants if there are peptides to check
     if len(df) > 0:
-        df['contam_accessions'] = df['peptide'].map(lambda p: sorted(cont_pep_to_accessions.get(p, [])))
+        exact = df['peptide'].map(lambda p: sorted(cont_pep_to_accessions.get(normalize(p), [])))
+        skin = df['peptide'].map(skin_accessions)
+        df['contam_accessions'] = [e or k for e, k in zip(exact, skin)]
         df['is_contaminant_exact'] = df['contam_accessions'].map(lambda s: len(s) > 0)
-        print(f'Contaminant peptides found: {df["is_contaminant_exact"].sum()} out of {len(df)}')
+        n_skin = sum(1 for e, k in zip(exact, skin) if k and not e)
+        print(f'Contaminant peptides found: {df["is_contaminant_exact"].sum()} out of {len(df)} ({n_skin} by the skin/hair rule)')
         
         # Only try to display contaminant peptides if there are any
         if df['is_contaminant_exact'].sum() > 0:
@@ -276,7 +299,7 @@ def _normalize_denovo_df(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def process_denovo_files(denovo_files, *, contaminants_fasta: str, denovo_threshold_pct: int):
+def process_denovo_files(denovo_files, *, contaminants_fasta: str, denovo_threshold_pct: int, human_sample: bool = False):
     """Process de novo outputs (Casanovo mzTab or Cascadia TSV) into filtered peptide TSVs."""
     outfiles: list[str] = []
     min_score = float(denovo_threshold_pct) / 100.0
@@ -298,6 +321,7 @@ def process_denovo_files(denovo_files, *, contaminants_fasta: str, denovo_thresh
             min_score=min_score,
             outfile=filtered_outfile,
             contaminants_fasta=contaminants_fasta,
+            human_sample=human_sample,
         )
         outfiles.extend(outfile_list)
 
@@ -1513,6 +1537,7 @@ def main():
         denovo_files,
         contaminants_fasta=args.contaminants_fasta,
         denovo_threshold_pct=denovo_threshold_pct,
+        human_sample="9606" in pride_taxids,
     )
     print(f"Filtered files: {filtered_files}")
     slim_files = [f for f in filtered_files if f.endswith('_slim.tsv')]
