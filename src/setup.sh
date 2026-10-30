@@ -168,6 +168,7 @@ else
     PATCH_FILES=(
         "${REPO_ROOT}/patches/peptonizer2000/pandas_compat.patch"
         "${REPO_ROOT}/patches/peptonizer2000/unipept_nontryptic_species_rollup.patch"
+        "${REPO_ROOT}/patches/peptonizer2000/pride_genus_rollup.patch"
     )
 
     cd "${PEPTONIZER_DIR}"
