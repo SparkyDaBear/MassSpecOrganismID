@@ -163,25 +163,29 @@ else
     git submodule update --init --recursive
     log_info "submodules/runassessor and submodules/peptonizer2000 are ready."
 
-    log_section "Applying Peptonizer2000 pandas-compatibility patch"
+    log_section "Applying Peptonizer2000 patches"
     PEPTONIZER_DIR="${REPO_ROOT}/submodules/peptonizer2000"
-    PATCH_FILE="${REPO_ROOT}/patches/peptonizer2000/pandas_compat.patch"
-
-    if [[ ! -f "${PATCH_FILE}" ]]; then
-        log_error "Patch file not found: ${PATCH_FILE}"
-        exit 1
-    fi
+    PATCH_FILES=(
+        "${REPO_ROOT}/patches/peptonizer2000/pandas_compat.patch"
+        "${REPO_ROOT}/patches/peptonizer2000/unipept_nontryptic_species_rollup.patch"
+    )
 
     cd "${PEPTONIZER_DIR}"
-    if git apply --reverse --check "${PATCH_FILE}" 2>/dev/null; then
-        log_info "Patch already applied; skipping."
-    elif git apply --check "${PATCH_FILE}" 2>/dev/null; then
-        git apply "${PATCH_FILE}"
-        log_info "Patch applied: ${PATCH_FILE}"
-    else
-        log_warn "Patch did not apply cleanly (submodule commit may have changed)."
-        log_warn "Inspect manually: cd ${PEPTONIZER_DIR} && git apply ${PATCH_FILE}"
-    fi
+    for PATCH_FILE in "${PATCH_FILES[@]}"; do
+        if [[ ! -f "${PATCH_FILE}" ]]; then
+            log_error "Patch file not found: ${PATCH_FILE}"
+            exit 1
+        fi
+        if git apply --reverse --check "${PATCH_FILE}" 2>/dev/null; then
+            log_info "Patch already applied; skipping: ${PATCH_FILE}"
+        elif git apply --check "${PATCH_FILE}" 2>/dev/null; then
+            git apply "${PATCH_FILE}"
+            log_info "Patch applied: ${PATCH_FILE}"
+        else
+            log_warn "Patch did not apply cleanly (submodule commit may have changed): ${PATCH_FILE}"
+            log_warn "Inspect manually: cd ${PEPTONIZER_DIR} && git apply ${PATCH_FILE}"
+        fi
+    done
     cd "${REPO_ROOT}"
 fi
 

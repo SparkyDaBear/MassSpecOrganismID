@@ -1,0 +1,55 @@
+diff --git a/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py b/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py
+index 296a15b..492ae03 100644
+--- a/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py
++++ b/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py
+@@ -1,5 +1,6 @@
+ from typing import Dict, List
+ 
++from .ncbi_ranks import NCBI_RANKS
+ from .unipept_communicator import UnipeptCommunicator
+ 
+ def fetch_peptides_and_filter_taxa(
+@@ -15,14 +16,26 @@ def fetch_peptides_and_filter_taxa(
+     # the user.
+ 
+     taxon_query_ids = [int(item) for item in taxonomy_query.split(",")]
++    rank_idx = NCBI_RANKS.index(rank)
++
++    query_lineages = unipept_communicator.get_lineages_for_taxa(taxon_query_ids)
++    query_at_rank = {lineage[rank_idx] for lineage in query_lineages.values() if lineage and lineage[rank_idx] is not None}
+ 
+     # Retrieve all (in)direct children of the filter taxa provided by the user
+-    taxa_filter = set(unipept_communicator.get_descendants_for_taxa(taxon_query_ids, rank))
++    taxa_filter = set(unipept_communicator.get_descendants_for_taxa(list(set(taxon_query_ids) | query_at_rank), rank))
+ 
+     # Compute the intersection of the taxa that should be retained and the original list of taxa
++    unmatched = {}
+     for (peptide, taxa) in peptides_taxa.items():
+-        peptides_taxa[peptide] = list(set(taxa) & taxa_filter)
+-
+-    return peptides_taxa
++        kept = list(set(taxa) & taxa_filter)
++        if taxa and not kept:
++            unmatched[peptide] = taxa
++        peptides_taxa[peptide] = kept
+ 
++    if unmatched:
++        lineages = unipept_communicator.get_lineages_for_taxa(list({taxon for taxa in unmatched.values() for taxon in taxa}))
++        for (peptide, taxa) in unmatched.items():
++            at_rank = {lineages[taxon][rank_idx] for taxon in taxa if lineages.get(taxon) and lineages[taxon][rank_idx] is not None}
++            peptides_taxa[peptide] = list(at_rank & taxa_filter)
+ 
++    return peptides_taxa
+diff --git a/peptonizer/peptonizer/unipept_communicator.py b/peptonizer/peptonizer/unipept_communicator.py
+index f669bf8..41b406b 100644
+--- a/peptonizer/peptonizer/unipept_communicator.py
++++ b/peptonizer/peptonizer/unipept_communicator.py
+@@ -51,7 +51,7 @@ class UnipeptCommunicator:
+             payload = {
+                 "input": batch,
+                 "compact": True,
+-                "tryptic": True
++                "tryptic": False
+             }
+ 
+             # Perform the HTTP POST request
