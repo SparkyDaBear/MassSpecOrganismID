@@ -589,7 +589,7 @@ script_dir: {script_dir}
 ###############################################
 
 ###############################################
-def run_peptonizer_attempt(input_file, data_dir, log_dir, config_path, taxid_list_str, *, conda_exe=None, snakemake_env_path=None, peptonizer_container=None, peptonizer_home):
+def run_peptonizer_attempt(input_file, data_dir, log_dir, config_path, taxid_list_str, *, conda_exe=None, snakemake_env_path=None, peptonizer_container=None, peptonizer_home, genus_rollup_taxids=()):
     """Run one Peptonizer2000 attempt and return its result path when successful."""
     snakefile = os.path.join(peptonizer_home, "snakemake", "workflow", "Snakefile")
     workdir = os.getcwd()
@@ -602,6 +602,7 @@ def run_peptonizer_attempt(input_file, data_dir, log_dir, config_path, taxid_lis
             shutil.copytree(scripts_src, scripts_dst)
 
     env = os.environ.copy()
+    env["PEPTONIZER_GENUS_ROLLUP_TAXA"] = ",".join(str(t) for t in genus_rollup_taxids)
     os.makedirs(data_dir, exist_ok=True)
     os.makedirs(log_dir, exist_ok=True)
     make_config(input_file, data_dir, log_dir, config_path, taxid_list_str, peptonizer_home)
@@ -716,6 +717,7 @@ def generate_snakemake_commands(filtered_files, taxid_blocks, pride_taxids, scor
                     snakemake_env_path=snakemake_env_path,
                     peptonizer_container=peptonizer_container,
                     peptonizer_home=peptonizer_home,
+                    genus_rollup_taxids=pride_taxids,
                 )
                 best_taxid = best_score = None
                 passed = False

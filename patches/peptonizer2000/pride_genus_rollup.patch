@@ -1,0 +1,38 @@
+diff --git a/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py b/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py
+index 492ae03..16b00e0 100644
+--- a/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py
++++ b/peptonizer/peptonizer/fetch_peptides_and_filter_taxa.py
+@@ -1,3 +1,4 @@
++import os
+ from typing import Dict, List
+ 
+ from .ncbi_ranks import NCBI_RANKS
+@@ -25,6 +26,7 @@ def fetch_peptides_and_filter_taxa(
+     taxa_filter = set(unipept_communicator.get_descendants_for_taxa(list(set(taxon_query_ids) | query_at_rank), rank))
+ 
+     # Compute the intersection of the taxa that should be retained and the original list of taxa
++    original_taxa = {peptide: list(taxa) for (peptide, taxa) in peptides_taxa.items()}
+     unmatched = {}
+     for (peptide, taxa) in peptides_taxa.items():
+         kept = list(set(taxa) & taxa_filter)
+@@ -38,4 +40,20 @@ def fetch_peptides_and_filter_taxa(
+             at_rank = {lineages[taxon][rank_idx] for taxon in taxa if lineages.get(taxon) and lineages[taxon][rank_idx] is not None}
+             peptides_taxa[peptide] = list(at_rank & taxa_filter)
+ 
++    rollup_ids = [int(item) for item in os.environ.get("PEPTONIZER_GENUS_ROLLUP_TAXA", "").split(",") if item.strip()]
++    if rollup_ids:
++        genus_idx = NCBI_RANKS.index("genus")
++        genus_targets = {}
++        for lineage in unipept_communicator.get_lineages_for_taxa(rollup_ids).values():
++            if lineage and lineage[genus_idx] is not None and lineage[rank_idx] is not None:
++                genus_targets.setdefault(lineage[genus_idx], set()).add(lineage[rank_idx])
++        genus_to_target = {genus: next(iter(targets)) for (genus, targets) in genus_targets.items() if len(targets) == 1}
++        if genus_to_target:
++            all_lineages = unipept_communicator.get_lineages_for_taxa(list({taxon for taxa in original_taxa.values() for taxon in taxa}))
++            for (peptide, taxa) in original_taxa.items():
++                targets = {genus_to_target[all_lineages[taxon][genus_idx]] for taxon in taxa
++                           if all_lineages.get(taxon) and all_lineages[taxon][genus_idx] in genus_to_target}
++                if targets:
++                    peptides_taxa[peptide] = list(set(peptides_taxa[peptide]) | (targets & taxa_filter))
++
+     return peptides_taxa
