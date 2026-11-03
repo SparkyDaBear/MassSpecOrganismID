@@ -101,6 +101,39 @@ networkx, pandas, rbo, matplotlib, requests.)
 `OrganismID.py`'s `--peptonizer_home` flag defaults to `submodules/peptonizer2000/` relative to the repo root, so
 the Snakefile/scripts are found automatically — override it only if you keep the submodule somewhere else.
 
+### Peptide filtering and taxonomy patches
+
+Setup also applies `unipept_nontryptic_species_rollup.patch` and
+`pride_genus_rollup.patch`, in that order after `pandas_compat.patch`. For an
+existing environment, apply these two additional patches in the Peptonizer2000
+submodule before running organism identification:
+
+```bash
+git -C submodules/peptonizer2000 apply ../../patches/peptonizer2000/unipept_nontryptic_species_rollup.patch
+git -C submodules/peptonizer2000 apply ../../patches/peptonizer2000/pride_genus_rollup.patch
+```
+
+Unipept lookup now permits nontryptic matches. Taxonomy filtering expands query
+taxids to their requested-rank ancestors and can recover unmatched peptide taxa
+at that rank. OrganismID additionally passes PRIDE taxids through
+`PEPTONIZER_GENUS_ROLLUP_TAXA`: when exactly one PRIDE target at the requested rank
+exists within a genus, peptide matches from that genus can also support that
+target. This is metadata-guided species assignment, not independent species-level
+peptide evidence; account for it when benchmarking predictions against PRIDE.
+
+Contaminant matching treats I and L as equivalent. For samples whose PRIDE taxids
+do not explicitly include `9606`, it also removes peptides matching anywhere in
+skin/hair contaminant sequences, including the additional
+`data/FASTA/SkinHairContaminants.fasta` next to the selected contaminants FASTA.
+For PRIDE-listed human samples, this extra substring rule is disabled; the
+standard tryptic contaminant filter still applies.
+
+Run the focused offline regression tests in `meti_env`:
+
+```bash
+python -m unittest discover -s tests -p 'test_organism_id_pr_changes.py' -v
+```
+
 ## Prerequisites: three conda environments
 
 Casanovo and Cascadia (the two de novo sequencing tools) have **mutually incompatible** PyTorch/Lightning version
