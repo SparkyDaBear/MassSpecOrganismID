@@ -854,7 +854,7 @@ def remove_converted_raw_files(pxd_dir: str) -> int:
     return removed
 
 ###################################################################################################################################################
-def run_runAssessor(output_dir="raw_data", central_mzml_dir=None, pxd=None):
+def run_runAssessor(output_dir="raw_data", central_mzml_dir=None, pxd=None, force=False, n_threads=1):
     """
     Run RunAssessor on the mzML files in output_dir, writing
     output_dir/runAssessor/study_metadata.json, then run
@@ -867,7 +867,7 @@ def run_runAssessor(output_dir="raw_data", central_mzml_dir=None, pxd=None):
     os.makedirs(runassessor_dir, exist_ok=True)
     metadata_path = os.path.join(runassessor_dir, "study_metadata.json")
 
-    if os.path.exists(metadata_path):
+    if os.path.exists(metadata_path) and not force:
         print(f"  ✓ runAssessor output already exists: {metadata_path}")
     else:
         mzml_files = sorted(
@@ -888,6 +888,7 @@ def run_runAssessor(output_dir="raw_data", central_mzml_dir=None, pxd=None):
             cmd = [
                 sys.executable, runassessor_script,
                 "--verbose",
+                "--n_threads", str(n_threads),
                 "--metadata_filepath", metadata_path,
                 *mzml_files,
             ]
@@ -916,6 +917,8 @@ def run_runAssessor(output_dir="raw_data", central_mzml_dir=None, pxd=None):
         cmd += ["--central_mzml_dir", central_mzml_dir]
     if pxd:
         cmd += ["--pxd", pxd]
+    if force:
+        cmd += ["--force"]
     print(f"Running determine_acquisition_params: {' '.join(cmd)}")
     result = subprocess.run(cmd, capture_output=True, text=True)
     print(result.stdout)
@@ -934,6 +937,8 @@ def processes_pxds(
     max_raw_files: Optional[int] = None,
     logger: Optional[PipelineLogger] = None,
     skip_run_assessor: bool = False,
+    force_run_assessor: bool = False,
+    assessor_threads: int = 1,
     use_globus: bool = False,
     globus_source_collection: str = PRIDE_GLOBUS_COLLECTION,
     globus_destination_collection: Optional[str] = None,
@@ -995,9 +1000,9 @@ def processes_pxds(
                 print("  Skipping runAssessor (handled by separate pipeline stage)")
             else:
                 runAssessor_outfile = os.path.join(download_dir, pxd, "runAssessor", "study_metadata.json")
-                if not os.path.exists(runAssessor_outfile):
+                if force_run_assessor or not os.path.exists(runAssessor_outfile):
                     print(f"  runAssessor output missing for {pxd}, running now...")
-                    run_runAssessor(output_dir=pxd_dir, central_mzml_dir=download_dir, pxd=pxd)
+                    run_runAssessor(output_dir=pxd_dir, central_mzml_dir=download_dir, pxd=pxd, force=force_run_assessor, n_threads=assessor_threads)
                 else:
                     print(f"  ✓ runAssessor output already exists: {runAssessor_outfile}")
             work_pxd_dir = os.path.join('.', pxd)
@@ -1256,7 +1261,7 @@ def processes_pxds(
         if skip_run_assessor:
             print("Skipping runAssessor (handled by separate pipeline stage)")
         else:
-            run_runAssessor(output_dir=pxd_dir, central_mzml_dir=download_dir, pxd=pxd)
+            run_runAssessor(output_dir=pxd_dir, central_mzml_dir=download_dir, pxd=pxd, force=force_run_assessor, n_threads=assessor_threads)
         
         # Create symlink in current work directory for Nextflow output
         work_pxd_dir = os.path.join('.', pxd)
@@ -1299,8 +1304,12 @@ def main():
     parser.add_argument('--globus_destination_collection', default=None, help='Destination collection UUID (default: globus endpoint local-id)')
     parser.add_argument('--globus_destination_base', default=None, help='Destination collection path corresponding to central_mzML_dir')
     parser.add_argument('--skip_run_assessor', action='store_true', help='Skip runAssessor execution (use when pipeline runs it as a dedicated stage)')
+    parser.add_argument('--force_run_assessor', action='store_true', help='Recompute RunAssessor even when its output exists')
+    parser.add_argument('--assessor_threads', type=int, default=1, help='RunAssessor worker threads')
     parser.add_argument('--log_file', default=None, help='Path to JSONL file for pipeline event logging')
     args = parser.parse_args()
+    if args.assessor_threads < 1:
+        parser.error('--assessor_threads must be positive')
     print(f"\nStarting FetchPXD with arguments: {args}")
     
     # Initialize logger if log_file specified
@@ -1335,6 +1344,8 @@ def main():
         args.max_raw_files,
         logger=logger,
         skip_run_assessor=args.skip_run_assessor,
+        force_run_assessor=args.force_run_assessor,
+        assessor_threads=args.assessor_threads,
         use_globus=args.globus,
         globus_source_collection=args.globus_source_collection,
         globus_destination_collection=args.globus_destination_collection,

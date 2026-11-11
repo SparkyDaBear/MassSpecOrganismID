@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import os
 import random
@@ -116,7 +117,7 @@ def add_aa_scores_average(df):
 ###############################################
 
 ###############################################
-def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides.tsv', contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta', human_sample: bool = False):
+def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides.tsv', contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta', human_sample: bool = False, skin_contaminants_fasta=None):
     """
     Filter peptides based on specific criteria.
     1. longer than 10 residues. 
@@ -144,7 +145,7 @@ def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides
     filtered_df.rename(columns={'stripped_sequence': 'peptide','search_engine_score[1]': 'score'}, inplace=True)
 
     # Remove contaminants
-    filtered_df = remove_contaminants(filtered_df, contaminants_fasta=contaminants_fasta, human_sample=human_sample)
+    filtered_df = remove_contaminants(filtered_df, contaminants_fasta=contaminants_fasta, human_sample=human_sample, skin_contaminants_fasta=skin_contaminants_fasta)
     print(f'Filtered peptides {min_score}:\n{filtered_df}')
     
     # Save the parsed Casanovo PSMs to a TSV file
@@ -160,7 +161,7 @@ def filter_peptides(df, min_length=10, min_score=0.7, outfile='filtered_peptides
 ###############################################
 
 ###############################################
-def remove_contaminants(df, contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta', human_sample: bool = False):
+def remove_contaminants(df, contaminants_fasta:str='data/FASTA/UniversalContaminats.fasta', human_sample: bool = False, skin_contaminants_fasta=None):
 
     # --- inputs ---
     enzyme = "trypsin"                          # trypsin, no-P rule
@@ -169,28 +170,29 @@ def remove_contaminants(df, contaminants_fasta:str='data/FASTA/UniversalContamin
     treat_I_L_as_same = True
     normalize = (lambda s: s.replace('I', 'L')) if treat_I_L_as_same else (lambda s: s)
     skin_pattern = re.compile(r'keratin|filaggrin|hornerin', re.IGNORECASE)
-    skin_fasta = os.path.join(os.path.dirname(contaminants_fasta), "SkinHairContaminants.fasta")
+    skin_fasta = skin_contaminants_fasta or os.path.join(os.path.dirname(contaminants_fasta), "SkinHairContaminants.fasta")
+    if skin_contaminants_fasta and not os.path.isfile(skin_fasta):
+        raise FileNotFoundError(skin_fasta)
 
     # --- digest contaminant FASTA ---
     cont_pep_to_accessions = defaultdict(set)
     cont_accession_to_desc = {}
     skin_accession_to_seq = {}
 
-    for header, seq in fasta.read(contaminants_fasta):
-        # store accession and description
-        acc = header.split()[0]
-        cont_accession_to_desc[acc] = header
-        if skin_pattern.search(header):
-            skin_accession_to_seq[acc] = normalize(seq)
-
-        # digest
-        peps = parser.cleave(seq, parser.expasy_rules[enzyme], missed_cleavages=missed_cleavages, min_length=min_len, max_length=max_len)
-        for p in peps:
-            cont_pep_to_accessions[normalize(p)].add(acc)
+    with fasta.read(contaminants_fasta) as records:
+        for header, seq in records:
+            acc = header.split()[0]
+            cont_accession_to_desc[acc] = header
+            if skin_pattern.search(header):
+                skin_accession_to_seq[acc] = normalize(seq)
+            peps = parser.cleave(seq, parser.expasy_rules[enzyme], missed_cleavages=missed_cleavages, min_length=min_len, max_length=max_len)
+            for p in peps:
+                cont_pep_to_accessions[normalize(p)].add(acc)
 
     if not human_sample and os.path.exists(skin_fasta):
-        for header, seq in fasta.read(skin_fasta):
-            skin_accession_to_seq[header.split()[0]] = normalize(seq)
+        with fasta.read(skin_fasta) as records:
+            for header, seq in records:
+                skin_accession_to_seq[header.split()[0]] = normalize(seq)
     all_skin = '*'.join(skin_accession_to_seq.values())
 
     def skin_accessions(peptide):
@@ -299,7 +301,7 @@ def _normalize_denovo_df(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def process_denovo_files(denovo_files, *, contaminants_fasta: str, denovo_threshold_pct: int, human_sample: bool = False):
+def process_denovo_files(denovo_files, *, contaminants_fasta: str, denovo_threshold_pct: int, human_sample: bool = False, skin_contaminants_fasta=None):
     """Process de novo outputs (Casanovo mzTab or Cascadia TSV) into filtered peptide TSVs."""
     outfiles: list[str] = []
     min_score = float(denovo_threshold_pct) / 100.0
@@ -322,6 +324,7 @@ def process_denovo_files(denovo_files, *, contaminants_fasta: str, denovo_thresh
             outfile=filtered_outfile,
             contaminants_fasta=contaminants_fasta,
             human_sample=human_sample,
+            skin_contaminants_fasta=skin_contaminants_fasta,
         )
         outfiles.extend(outfile_list)
 
@@ -382,7 +385,7 @@ def load_pride_organism_taxids(pride_metadata_path):
     return taxids
 
 
-def determine_use_cascadia(input_dir):
+def determine_use_cascadia(input_dir, detected_params_path=None):
     """Decide Cascadia (DIA) vs Casanovo (DDA) for this PXD.
 
     FetchPXD.py's run_runAssessor() step writes <input_dir>/detected_params.json
@@ -394,8 +397,11 @@ def determine_use_cascadia(input_dir):
     --cascadia_env_path are required up front regardless of which tool ends
     up being used.
     """
-    detected_params_path = os.path.join(input_dir, "detected_params.json")
+    explicit_path = detected_params_path is not None
+    detected_params_path = detected_params_path or os.path.join(input_dir, "detected_params.json")
     if not os.path.exists(detected_params_path):
+        if explicit_path:
+            raise FileNotFoundError(detected_params_path)
         print(
             f"No detected_params.json found at {detected_params_path}; "
             "defaulting to Casanovo (DDA). Run FetchPXD.py without --skip_run_assessor "
@@ -403,16 +409,16 @@ def determine_use_cascadia(input_dir):
         )
         return False
 
-    try:
-        with open(detected_params_path, 'r') as f:
-            detected = json.load(f)
-    except Exception as e:
-        print(f"Could not parse {detected_params_path}: {e}; defaulting to Casanovo (DDA)")
-        return False
-
-    params = detected.get('detected_params', {})
+    with open(detected_params_path, 'r') as f:
+        detected = json.load(f)
+    params = detected['detected_params']
     acq_source = params.get('acquisition_source', 'unknown')
-    if params.get('DIA'):
+    dia = params.get('DIA')
+    if isinstance(dia, str) and dia.lower() in ('true', 'false'):
+        dia = dia.lower() == 'true'
+    if not isinstance(dia, bool):
+        raise ValueError(f"Invalid DIA boolean in {detected_params_path}: {dia!r}")
+    if dia:
         print(f"Detected acquisition type: DIA (source: {acq_source}). Using Cascadia for de novo sequencing.")
         return True
 
@@ -589,7 +595,7 @@ script_dir: {script_dir}
 ###############################################
 
 ###############################################
-def run_peptonizer_attempt(input_file, data_dir, log_dir, config_path, taxid_list_str, *, conda_exe=None, snakemake_env_path=None, peptonizer_container=None, peptonizer_home, genus_rollup_taxids=()):
+def run_peptonizer_attempt(input_file, data_dir, log_dir, config_path, taxid_list_str, *, conda_exe=None, snakemake_env_path=None, peptonizer_container=None, peptonizer_home, genus_rollup_taxids=(), cores=10):
     """Run one Peptonizer2000 attempt and return its result path when successful."""
     snakefile = os.path.join(peptonizer_home, "snakemake", "workflow", "Snakefile")
     workdir = os.getcwd()
@@ -608,7 +614,7 @@ def run_peptonizer_attempt(input_file, data_dir, log_dir, config_path, taxid_lis
     make_config(input_file, data_dir, log_dir, config_path, taxid_list_str, peptonizer_home)
 
     cmd = [
-        "snakemake", "-s", snakefile, "--cores", "10",
+        "snakemake", "-s", snakefile, "--cores", str(cores),
         "--configfile", config_path, "--printshellcmds", "--directory", workdir,
     ]
     if peptonizer_container:
@@ -660,7 +666,7 @@ def run_peptonizer_attempt(input_file, data_dir, log_dir, config_path, taxid_lis
     return outfile
 
 
-def generate_snakemake_commands(filtered_files, taxid_blocks, pride_taxids, score_threshold=0.8, min_peptides=100, *, conda_exe=None, snakemake_env_path=None, peptonizer_container=None, peptonizer_home):
+def generate_snakemake_commands(filtered_files, taxid_blocks, pride_taxids, score_threshold=0.8, min_peptides=100, *, conda_exe=None, snakemake_env_path=None, peptonizer_container=None, peptonizer_home, cores=10, force=False):
     """Run Peptonizer block-by-block and publish only the first passing result."""
     peptonizer_result_files = []
 
@@ -677,7 +683,7 @@ def generate_snakemake_commands(filtered_files, taxid_blocks, pride_taxids, scor
         canonical_outfile = os.path.join(canonical_data_dir, "peptonizer_result.csv")
         manifest_path = os.path.join(canonical_data_dir, "peptonizer_iteration_manifest.json")
 
-        if os.path.exists(canonical_outfile) and os.path.exists(manifest_path):
+        if not force and os.path.exists(canonical_outfile) and os.path.exists(manifest_path):
             with open(manifest_path, 'r') as handle:
                 cached_manifest = json.load(handle)
             if (
@@ -718,6 +724,7 @@ def generate_snakemake_commands(filtered_files, taxid_blocks, pride_taxids, scor
                     peptonizer_container=peptonizer_container,
                     peptonizer_home=peptonizer_home,
                     genus_rollup_taxids=pride_taxids,
+                    cores=cores,
                 )
                 best_taxid = best_score = None
                 passed = False
@@ -773,7 +780,7 @@ def generate_snakemake_commands(filtered_files, taxid_blocks, pride_taxids, scor
 ###############################################
 
 ####################################################
-def run_de_novo_sequencing(input_dir, output_dir, *, conda_exe=None, casanovo_env_path=None, casanovo_config_path=None, cascadia_env_path=None, cascadia_model_path=None, denovo_threshold_pct: int = 80, src_dir=None, file_subset=None, use_cascadia: bool = False):
+def run_de_novo_sequencing(input_dir, output_dir, *, conda_exe=None, casanovo_env_path=None, casanovo_config_path=None, cascadia_env_path=None, cascadia_model_path=None, denovo_threshold_pct: int = 80, src_dir=None, file_subset=None, use_cascadia: bool = False, force=False):
     """
     Run de novo sequencing (Casanovo or Cascadia) on all .mzML files under input_dir.
     If no .mzML files are found, attempt to convert .raw files to .mzML.
@@ -866,6 +873,9 @@ def run_de_novo_sequencing(input_dir, output_dir, *, conda_exe=None, casanovo_en
         # Fast-path: if output already exists, reuse it.
         # - Cascadia: prefer existing .mztab; else convert existing .ssl; else run prediction.
         # - Casanovo: if .mztab exists and is non-empty, skip rerun.
+        if force and os.path.isdir(out_dir):
+            shutil.rmtree(out_dir)
+            os.makedirs(out_dir)
         if use_cascadia:
             if os.path.exists(out_file) and os.path.getsize(out_file) > 0:
                 print(f"Found existing Cascadia mztab, skipping prediction: {out_file}")
@@ -1362,7 +1372,18 @@ def main():
                              'by PRIDE metadata and LLM results')
     parser.add_argument('--status_file', default=None,
                         help='Optional JSON file describing whether usable Peptonizer results were produced')
+    parser.add_argument('--detected_params', help='Explicit acquisition JSON supplied by the workflow')
+    parser.add_argument('--skin_contaminants_fasta', help='Explicit additional skin/hair FASTA')
+    parser.add_argument('--taxonomy_dir', help='Directory containing nodes.dmp and names.dmp')
+    parser.add_argument('--cores', type=int, default=10, help='Maximum Snakemake cores')
+    parser.add_argument('--force', action='store_true', help='Bypass existing prediction and taxonomy caches')
     args = parser.parse_args()
+    if args.cores < 1:
+        parser.error('--cores must be positive')
+    if args.taxonomy_dir:
+        for filename in ('nodes.dmp', 'names.dmp'):
+            if not os.path.isfile(os.path.join(args.taxonomy_dir, filename)):
+                raise FileNotFoundError(os.path.join(args.taxonomy_dir, filename))
 
     # Initialize logger if log_file specified
     logger = None
@@ -1387,7 +1408,7 @@ def main():
     print(f'PXD: {pxd}')
     
     # Check for cached organism_id results
-    cache_hit, cached_mode, cached_files = check_cached_organism_results(
+    cache_hit, cached_mode, cached_files = (False, None, []) if args.force else check_cached_organism_results(
         pxd=pxd,
         input_dir=args.input_dir,
         results_base_dir=args.results_base_dir,
@@ -1438,6 +1459,26 @@ def main():
             "the git submodule yet, run: git submodule update --init submodules/peptonizer2000 "
             "(and apply patches/peptonizer2000/pandas_compat.patch)."
         )
+    expected_package = os.path.realpath(os.path.join(
+        args.peptonizer_home, "peptonizer", "peptonizer", "__init__.py"))
+    package_check = (
+        "import importlib.util, os; "
+        "s=importlib.util.find_spec('peptonizer'); "
+        f"expected={expected_package!r}; "
+        "actual=os.path.realpath(s.origin) if s and s.origin else None; "
+        "print('Peptonizer package:', actual); "
+        "raise SystemExit(0 if actual == expected else 1)"
+    )
+    result = subprocess.run(
+        _conda_wrap(["python", "-c", package_check],
+                    conda_exe=args.conda_exe, env_path=args.snakemake_env_path),
+        check=False,
+    )
+    if result.returncode:
+        raise RuntimeError(
+            f"Install the patched peptonizer package from {args.peptonizer_home} "
+            "in the Snakemake environment before running organism identification."
+        )
 
     taxid_blocks = load_taxid_blocks(args.taxid_blocks_file)
     print(
@@ -1449,7 +1490,7 @@ def main():
     pride_taxids = load_pride_organism_taxids(pride_metadata_path)
     print(f"PRIDE taxids appended to each Peptonizer2000 block: {pride_taxids}")
 
-    use_cascadia = determine_use_cascadia(args.input_dir)
+    use_cascadia = determine_use_cascadia(args.input_dir, args.detected_params)
 
     # ---------------------------------------------------------------
     # Decide representative-file vs all-files mode
@@ -1460,8 +1501,9 @@ def main():
 
     # Load NCBI taxonomy for species-level deduplication
     # (script_dir/repo_root already computed near the top of main(), reused here.)
-    nodes_dmp_path = os.path.join(repo_root, "assets", "taxonomy", "nodes.dmp")
-    names_dmp_path = os.path.join(repo_root, "assets", "taxonomy", "names.dmp")
+    taxonomy_dir = args.taxonomy_dir or os.path.join(repo_root, "assets", "taxonomy")
+    nodes_dmp_path = os.path.join(taxonomy_dir, "nodes.dmp")
+    names_dmp_path = os.path.join(taxonomy_dir, "names.dmp")
     
     ncbi_taxonomy = {}
     if os.path.exists(nodes_dmp_path) and os.path.exists(names_dmp_path):
@@ -1529,6 +1571,7 @@ def main():
         src_dir=args.src_dir,
         file_subset=file_subset,
         use_cascadia=use_cascadia,
+        force=args.force,
     )
     print(f"Finished running de novo sequencing on input directory: {args.input_dir}")
     print(f"Generated de novo sequencing output files: {denovo_files}")
@@ -1540,6 +1583,7 @@ def main():
         contaminants_fasta=args.contaminants_fasta,
         denovo_threshold_pct=denovo_threshold_pct,
         human_sample="9606" in pride_taxids,
+        skin_contaminants_fasta=args.skin_contaminants_fasta,
     )
     print(f"Filtered files: {filtered_files}")
     slim_files = [f for f in filtered_files if f.endswith('_slim.tsv')]
@@ -1556,6 +1600,8 @@ def main():
         snakemake_env_path=args.snakemake_env_path,
         peptonizer_container=args.peptonizer_container,
         peptonizer_home=args.peptonizer_home,
+        cores=args.cores,
+        force=args.force,
     )
     print(f"Generated Peptonizer2000 output files: {peptonizer_result_files} {len(peptonizer_result_files)}")
 
@@ -1601,6 +1647,7 @@ def main():
         filtered_output_count=len(filtered_files),
         usable_result_count=len(usable_results),
         usable_result_files=usable_results,
+        engine_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     )
 
     # Log completion

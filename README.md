@@ -290,6 +290,26 @@ There's also a hidden, deprecated `--casanovo_thresholds` alias for `--denovo_th
 string and uses the first value) — kept only for backwards compatibility with older call sites; use
 `--denovo_threshold` instead.
 
+### Workflow integration options
+
+For HAMLET v3.0.1, `FetchPXD.py --assessor_threads N` runs assessment with the
+allocated threads; `--force_run_assessor` refreshes an existing assessment.
+`OrganismID.py` also accepts:
+
+- `--detected_params FILE`: use a workflow-supplied acquisition JSON rather than
+  the preliminary JSON inside the input directory. Boolean strings are parsed
+  explicitly, and invalid acquisition values fail.
+- `--skin_contaminants_fasta FILE` and `--taxonomy_dir DIR`: explicit reference
+  locations, independent of the task's current directory.
+- `--cores N`: Snakemake CPU limit.
+- `--force`: bypass prior prediction and taxonomy caches when the workflow
+  requests a rerun.
+
+The Snakemake environment must import `peptonizer` from the checkout selected by
+`--peptonizer_home`; mismatched installations fail explicitly.
+The legacy Cascadia wrapper honors `UNIMOD_XML` for offline Unimod lookup.
+These options do not change the existing taxid-block or search-selection policy.
+
 #### Representative-file mode
 
 If PRIDE project metadata (and/or `--llm_results`) implies the whole PXD contains only a single organism (after

@@ -338,12 +338,13 @@ def main():
                         help='PXD accession ID')
     parser.add_argument('--llm_results_dir',
                         help='Directory containing GPT_Extraction output (llm_results/)')
+    parser.add_argument('--force', action='store_true', help='Refresh cached acquisition parameters')
     args = parser.parse_args()
 
     # ---- Skip-if-exists: reuse persistent copy from spectral_files ----
     if args.central_mzml_dir and args.pxd:
         central_output = os.path.join(args.central_mzml_dir, args.pxd, 'detected_params.json')
-        if os.path.exists(central_output):
+        if os.path.exists(central_output) and not args.force:
             print(f"✓ Using cached detected_params.json from spectral_files: {central_output}")
             if os.path.abspath(central_output) != os.path.abspath(args.output):
                 import shutil

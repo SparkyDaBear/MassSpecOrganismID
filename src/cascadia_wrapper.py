@@ -7,14 +7,15 @@ to prevent network entity loading failures in lxml.
 import os
 import sys
 import shutil
+from pathlib import Path
 
 # First, find and pre-populate the Unimod cache BEFORE cascadia imports pyteomics
 def setup_unimod_cache():
     """Set up local Unimod database in pyteomics cache location."""
     # Find the local unimod file
     base_dir = os.path.dirname(os.path.abspath(__file__))
-    repo_root = os.path.dirname(os.path.dirname(base_dir))
-    local_unimod = os.path.join(repo_root, 'assets', 'unimod', 'unimod_tables.xml')
+    repo_root = os.path.dirname(base_dir)
+    local_unimod = os.environ.get('UNIMOD_XML') or os.path.join(repo_root, 'assets', 'unimod', 'unimod_tables.xml')
     
     if not os.path.exists(local_unimod):
         print(f"WARNING: Local Unimod file not found at {local_unimod}", file=sys.stderr)
@@ -59,6 +60,8 @@ def monkeypatch_pyteomics():
         # Get cache location
         cache_home = os.environ.get('XDG_CACHE_HOME', os.path.expanduser('~/.cache'))
         local_cache = os.path.join(cache_home, 'pyteomics', 'unimod_tables.xml')
+        if os.path.isfile(local_cache):
+            unimod_module._unimod_xml_download_url = Path(local_cache).resolve().as_uri()
         
         def patched_load(doc_path, *args, **kwargs):
             """Try to load from local cache first, fall back to original load."""
