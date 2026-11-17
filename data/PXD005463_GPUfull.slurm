@@ -24,7 +24,7 @@ CONDA_EXE=/storage/group/epo2/default/ims86/miniconda3/condabin/conda
 mkdir -p "$RUN_DIR"
 cd "$RUN_DIR"
 
-echo "=== Stage 0: StudyTypeCheck.py (skip study types this pipeline does not cover) ==="
+echo "=== Stage 0: Studytypecheck.py (skip study types this pipeline does not cover) ==="
 if [[ "${SKIP_STUDY_CHECK:-0}" == 1 ]]; then
     echo "study type check switched off (SKIP_STUDY_CHECK=1)"
 else
