@@ -29,7 +29,7 @@ if [[ "${SKIP_STUDY_CHECK:-0}" == 1 ]]; then
     echo "study type check switched off (SKIP_STUDY_CHECK=1)"
 else
     rc=0
-    "$META_ENV/bin/python" "$REPO/src/StudyTypeCheck.py" --PXD "$PXD" \
+    "$META_ENV/bin/python" "$REPO/src/Studytypecheck.py" --PXD "$PXD" \
         --output "$RUN_DIR/results/$PXD/study_type.json" || rc=$?
     if [[ $rc -eq 3 ]]; then
         echo "=== $PXD skipped: study type not covered (see $RUN_DIR/results/$PXD/study_type.json) ==="
