@@ -3,6 +3,7 @@ import datetime
 import json
 import os
 import sys
+import time
 
 import requests
 
@@ -41,15 +42,45 @@ EXCLUDED = [
     "Lc Ms Metabolomics",
 ]
 
+PRIDE_TERMS = {
+    "Crosslinking": ["crosslinking", "crosslink", "xlms", "clms", "crosslinkingmassspectrometry",
+                     "chemicalcrosslinkingcoupledwithmassspectrometryproteomics"],
+    "Metaproteomics": ["metaproteomics", "metaproteome"],
+    "Soil": ["soil"],
+    "Water": ["water", "seawater", "wastewater", "freshwater"],
+    "Human Gut": ["humangut", "humangutmicrobiome", "humangutmicrobiota"],
+    "Affinity Proteomics": ["affinityproteomics", "olink", "somascan", "olinkaffinityproteomics",
+                            "somascanaffinityproteomics"],
+}
+
 FIELDS = ["title", "keywords", "projectTags", "experimentTypes", "organisms", "organismParts", "diseases",
           "instruments", "quantificationMethods", "sampleAttributes", "projectDescription",
           "sampleProcessingProtocol", "dataProcessingProtocol"]
 
 
-def fetch_project(pxd):
-    r = requests.get(f"https://www.ebi.ac.uk/pride/ws/archive/v3/projects/{pxd}", timeout=60)
-    r.raise_for_status()
-    return r.json()
+def fetch_project(pxd, attempts=3):
+    for i in range(attempts):
+        try:
+            r = requests.get(f"https://www.ebi.ac.uk/pride/ws/archive/v3/projects/{pxd}", timeout=60)
+            if r.status_code < 500 or i == attempts - 1:
+                r.raise_for_status()
+                return r.json()
+        except (requests.ConnectionError, requests.Timeout):
+            if i == attempts - 1:
+                raise
+        time.sleep(10 * (i + 1))
+
+
+def pride_terms(project):
+    terms = list(project.get("keywords") or [])
+    terms += [x.get("name", "") for x in project.get("experimentTypes") or [] if isinstance(x, dict)]
+    found = {}
+    for term in terms:
+        norm = "".join(c for c in str(term).lower() if c.isalnum())
+        for study_type, names in PRIDE_TERMS.items():
+            if norm in names:
+                found.setdefault(study_type, term)
+    return found
 
 
 def describe(project, max_chars):
@@ -64,7 +95,7 @@ def describe(project, max_chars):
     return "\n".join(lines)
 
 
-def classify(pxd, text, model, api_key):
+def classify(pxd, text, model, api_key, temperature):
     system = ("You classify PRIDE mass spectrometry datasets. Choose every study type from the list that "
               "describes the deposited dataset, using only the metadata given. If the metadata is not enough "
               "to decide, return an empty list and say why in the reason. Do not guess. Study types:\n"
@@ -85,8 +116,8 @@ def classify(pxd, text, model, api_key):
         "response_format": {"type": "json_schema",
                             "json_schema": {"name": "study_types", "strict": True, "schema": schema}},
     }
-    if not model.startswith(("gpt-5", "o")):
-        body["temperature"] = 0
+    if temperature != "default":
+        body["temperature"] = float(temperature)
     r = requests.post("https://api.openai.com/v1/chat/completions", json=body, timeout=120,
                       headers={"Authorization": f"Bearer {api_key}"})
     if not r.ok:
@@ -94,8 +125,8 @@ def classify(pxd, text, model, api_key):
     return json.loads(r.json()["choices"][0]["message"]["content"])
 
 
-def check_study(pxd, model, max_chars=3000):
-    result = {"pxd": pxd, "model": model, "date": datetime.datetime.now().isoformat(timespec="seconds"),
+def check_study(pxd, model, max_chars=3000, temperature=os.environ.get("OPENAI_TEMPERATURE", "default")):
+    result = {"pxd": pxd, "model": model, "temperature": temperature, "date": datetime.datetime.now().isoformat(timespec="seconds"),
               "title": "", "study_types": [], "excluded_types": []}
     try:
         api_key = os.environ.get("OPENAI_API_KEY")
@@ -108,10 +139,15 @@ def check_study(pxd, model, max_chars=3000):
         result["title"] = project.get("title") or ""
         if not any(project.get(f) for f in ("title", "projectDescription", "sampleProcessingProtocol", "keywords")):
             raise RuntimeError(f"PRIDE metadata for {pxd} has no title, description, protocol or keywords")
-        answer = classify(pxd, describe(project, max_chars), model, api_key)
-        excluded = [t for t in answer["study_types"] if t in EXCLUDED]
-        result.update(study_types=answer["study_types"], excluded_types=excluded, reason=answer["reason"],
-                      decision="skip" if excluded else "run" if answer["study_types"] else "unknown")
+        answer = classify(pxd, describe(project, max_chars), model, api_key, temperature)
+        found = pride_terms(project)
+        types = answer["study_types"] + [t for t in found if t not in answer["study_types"]]
+        excluded = [t for t in types if t in EXCLUDED]
+        reason = answer["reason"]
+        if found:
+            reason += " PRIDE keywords/experiment types: " + "; ".join(f"{t} ({v})" for t, v in found.items()) + "."
+        result.update(study_types=types, excluded_types=excluded, pride_terms=found, reason=reason,
+                      decision="skip" if excluded else "run" if types else "unknown")
     except Exception as e:
         result.update(reason=f"check failed: {e}", decision="unknown")
     return result
@@ -121,12 +157,13 @@ def main():
     p = argparse.ArgumentParser(description="Decide from the PRIDE metadata whether a PXD is a study type this pipeline covers")
     p.add_argument("--PXD", required=True)
     p.add_argument("--output", default=None)
-    p.add_argument("--model", default=os.environ.get("OPENAI_MODEL", "gpt-4.1-mini"))
+    p.add_argument("--model", default=os.environ.get("OPENAI_MODEL", "gpt-6-luna"))
+    p.add_argument("--temperature", default=os.environ.get("OPENAI_TEMPERATURE", "default"))
     p.add_argument("--max_chars", type=int, default=3000)
     p.add_argument("--if_unknown", choices=["run", "skip"], default=os.environ.get("STUDY_CHECK_IF_UNKNOWN", "run"))
     a = p.parse_args()
 
-    result = check_study(a.PXD, a.model, a.max_chars)
+    result = check_study(a.PXD, a.model, a.max_chars, a.temperature)
     result["if_unknown"] = a.if_unknown
 
     if a.output:
