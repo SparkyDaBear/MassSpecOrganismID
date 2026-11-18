@@ -8,14 +8,14 @@ import time
 import requests
 
 STUDY_TYPES = {
-    "Affinity Proteomics": "protein measurements with antibody or aptamer panels such as Olink or SomaScan instead of mass spectrometry; choose it for these datasets even though they are not MS. Not for co-immunoprecipitation, pull-down, affinity purification MS, BioID or chemical proteomics, which are Ms Proteomics",
+    "Affinity Proteomics": "the deposited data are protein measurements with antibody or aptamer panels such as Olink or SomaScan instead of mass spectrometry; choose it for these datasets even though they are not MS. If the deposited data are mass spectrometry and Olink or SomaScan is only mentioned, for example as a comparison, do not choose it. Not for co-immunoprecipitation, pull-down, affinity purification MS, BioID or chemical proteomics, which are Ms Proteomics",
     "Ms Metabolomics": "the deposited data are mass spectrometry measurements of metabolites, not proteins or peptides",
     "Ms Proteomics": "mass spectrometry based proteomics of proteins or peptides, including co-IP, pull-down, AP-MS, BioID and chemical proteomics",
     "Clinical Metadata": "human clinical samples with patient level metadata",
     "Human": "samples from humans or human tissues or body fluids",
     "Human Gut": "a mixed microbial community from the human gut, such as stool or intestinal microbiome samples",
     "Invertebrates": "samples from invertebrate animals such as insects, nematodes, molluscs or worms (not bacteria, archaea, fungi or protists)",
-    "Metaproteomics": "proteins from a mixed community of many different microorganisms analysed together, such as a microbiome, biofilm community or environmental sample. Not a single species or strain grown in pure culture, even if it was isolated from the environment",
+    "Metaproteomics": "proteins from a mixed community of many different microorganisms analysed together, such as a microbiome, biofilm community or environmental sample. Not a single species or strain grown in pure culture, even if it was isolated from the environment. Not a human or animal tissue, cell or body fluid sample such as plasma, bile, urine or saliva, even if microbial proteins are also searched or mentioned",
     "Oncology Metadata": "cancer or tumour samples",
     "Plants": "samples from plants or algae",
     "Soil": "a soil, sediment or rhizosphere sample analysed as a whole, not a single organism isolated from soil",
@@ -115,23 +115,30 @@ def classify(pxd, text, model, api_key, temperature):
                      {"role": "user", "content": f"Dataset {pxd}\n{text}"}],
         "response_format": {"type": "json_schema",
                             "json_schema": {"name": "study_types", "strict": True, "schema": schema}},
+        "provider": {"require_parameters": True},
     }
     if temperature != "default":
         body["temperature"] = float(temperature)
-    r = requests.post("https://api.openai.com/v1/chat/completions", json=body, timeout=120,
+    r = requests.post("https://openrouter.ai/api/v1/chat/completions", json=body, timeout=180,
                       headers={"Authorization": f"Bearer {api_key}"})
-    if not r.ok:
-        raise RuntimeError(f"OpenAI API {r.status_code}: {r.text[:300]}")
-    return json.loads(r.json()["choices"][0]["message"]["content"])
+    data = r.json() if r.headers.get("content-type", "").startswith("application/json") else {}
+    if not r.ok or "choices" not in data:
+        raise RuntimeError(f"OpenRouter API {r.status_code}: {r.text[:300]}")
+    content = (data["choices"][0]["message"].get("content") or "").strip()
+    content = content.removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+    answer = json.loads(content)
+    answer["study_types"] = [t for t in answer.get("study_types", []) if t in STUDY_TYPES]
+    answer["reason"] = answer.get("reason", "")
+    return answer
 
 
-def check_study(pxd, model, max_chars=3000, temperature=os.environ.get("OPENAI_TEMPERATURE", "default")):
+def check_study(pxd, model, max_chars=3000, temperature=os.environ.get("STUDY_CHECK_TEMPERATURE", "0")):
     result = {"pxd": pxd, "model": model, "temperature": temperature, "date": datetime.datetime.now().isoformat(timespec="seconds"),
               "title": "", "study_types": [], "excluded_types": []}
     try:
-        api_key = os.environ.get("OPENAI_API_KEY")
+        api_key = os.environ.get("OPENROUTER_API_KEY")
         if not api_key:
-            raise RuntimeError("OPENAI_API_KEY is not set")
+            raise RuntimeError("OPENROUTER_API_KEY is not set")
         try:
             project = fetch_project(pxd)
         except requests.HTTPError as e:
@@ -157,8 +164,8 @@ def main():
     p = argparse.ArgumentParser(description="Decide from the PRIDE metadata whether a PXD is a study type this pipeline covers")
     p.add_argument("--PXD", required=True)
     p.add_argument("--output", default=None)
-    p.add_argument("--model", default=os.environ.get("OPENAI_MODEL", "gpt-6-luna"))
-    p.add_argument("--temperature", default=os.environ.get("OPENAI_TEMPERATURE", "default"))
+    p.add_argument("--model", default=os.environ.get("STUDY_CHECK_MODEL", "google/gemma-4-31b-it"))
+    p.add_argument("--temperature", default=os.environ.get("STUDY_CHECK_TEMPERATURE", "0"))
     p.add_argument("--max_chars", type=int, default=3000)
     p.add_argument("--if_unknown", choices=["run", "skip"], default=os.environ.get("STUDY_CHECK_IF_UNKNOWN", "run"))
     a = p.parse_args()
