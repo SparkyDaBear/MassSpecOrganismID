@@ -24,6 +24,21 @@ CONDA_EXE=/storage/group/epo2/default/ims86/miniconda3/condabin/conda
 mkdir -p "$RUN_DIR"
 cd "$RUN_DIR"
 
+echo "=== Stage 0: Studytypecheck.py (skip study types this pipeline does not cover) ==="
+if [[ "${SKIP_STUDY_CHECK:-0}" == 1 ]]; then
+    echo "study type check switched off (SKIP_STUDY_CHECK=1)"
+else
+    rc=0
+    "$META_ENV/bin/python" "$REPO/src/Studytypecheck.py" --PXD "$PXD" \
+        --output "$RUN_DIR/results/$PXD/study_type.json" || rc=$?
+    if [[ $rc -eq 3 ]]; then
+        echo "=== $PXD skipped: study type not covered (see $RUN_DIR/results/$PXD/study_type.json) ==="
+        exit 0
+    elif [[ $rc -ne 0 ]]; then
+        echo "WARNING: study type check exited with $rc, running the pipeline anyway"
+    fi
+fi
+
 echo "=== Stage 1: FetchPXD.py (fetch, convert, RunAssessor, DIA/DDA detection) ==="
 "$CONDA_EXE" run -p "$META_ENV" --no-capture-output python "$REPO/src/FetchPXD.py" \
     --PXD "$PXD" \
